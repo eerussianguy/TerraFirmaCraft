@@ -1,7 +1,14 @@
 {
-  "variants": {
-    "": {
-      "model": "minecraft:block/dead_bush"
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "minecraft:block/dead_bush"
+        },
+		{
+          "model": "tfc:block/plant/dead_bush_large"
+        }
+      ]
     }
-  }
+  ]
 }

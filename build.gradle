@@ -39,7 +39,7 @@ minecraft {
     // See the project README page for how to generate the mapping set.
     // Otherwise, we use official mappings in a build script version
     def officialVersion = System.getenv("OFFICIAL_MAPPINGS")
-    if (officialVersion == null) {
+    if (false) {
         mappings channel: 'snapshot', version: mappings_version
     } else {
         mappings channel: 'official', version: minecraft_version

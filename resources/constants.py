@@ -223,12 +223,14 @@ WOODS = ('acacia', 'ash', 'aspen', 'birch', 'blackwood', 'chestnut', 'douglas_fi
 
 PLANTS: Dict[str, Plant] = {
     'allium': Plant(False, 10, 18, 150, 400, 'standard'),
+    'arrowhead': Plant(False, 25, 40, 200, 500, 'emergent_fresh'),
     'athyrium_fern': Plant(True, 20, 30, 200, 500, 'standard'),
     'badderlocks': Plant(False, -20, 20, 150, 500, 'emergent'),
     'barrel_cactus': Plant(False, -6, 50, 0, 85, 'cactus'),
     'black_orchid': Plant(False, 30, 41, 290, 410, 'standard'),
     'blood_lily': Plant(False, 33, 45, 200, 500, 'standard'),
     'blue_orchid': Plant(False, 8, 16, 250, 390, 'standard'),
+    'bur_reed': Plant(False, -30, 25, 150, 500, 'emergent_fresh'),
     'butterfly_milkweed': Plant(False, -40, 25, 75, 300, 'standard'),
     'calendula': Plant(False, -5, 15, 130, 300, 'standard'),
     'canna': Plant(True, 30, 50, 270, 500, 'standard'),
@@ -263,6 +265,8 @@ PLANTS: Dict[str, Plant] = {
     'oxeye_daisy': Plant(False, 10, 40, 120, 300, 'standard'),
     'pampas_grass': Plant(True, 20, 50, 0, 200, 'tall_grass'),
     'perovskia': Plant(True, -50, 20, 0, 200, 'dry'),
+    'phragmite': Plant(False, -20, 35, 100, 500, 'emergent_fresh'),
+    'pickerelweed': Plant(False, -30, 25, 150, 500, 'emergent_fresh'),
     'pistia': Plant(False, 10, 45, 0, 400, 'floating_fresh'),
     'poppy': Plant(False, -40, 36, 150, 250, 'standard'),
     'primrose': Plant(False, -34, 33, 150, 300, 'standard'),
@@ -298,6 +302,7 @@ PLANTS: Dict[str, Plant] = {
     'vriesea': Plant(False, 22, 31, 200, 400, 'epiphyte'),
     'water_canna': Plant(True, 0, 36, 150, 500, 'floating_fresh'),
     'water_lily': Plant(False, -5, 38, 0, 500, 'floating_fresh'),
+    'water_taro': Plant(False, 30, 50, 200, 500, 'emergent_fresh'),
     'yucca': Plant(False, -34, 36, 0, 75, 'dry')
 }
 
