@@ -6,6 +6,7 @@
 
 package net.dries007.tfc.common.items;
 
+import java.rmi.registry.Registry;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -19,10 +20,7 @@ import net.dries007.tfc.common.blocks.Gem;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.plant.coral.Coral;
 import net.dries007.tfc.common.fluids.TFCFluids;
-import net.dries007.tfc.common.types.Metal;
-import net.dries007.tfc.common.types.Ore;
-import net.dries007.tfc.common.types.Rock;
-import net.dries007.tfc.common.types.RockCategory;
+import net.dries007.tfc.common.types.*;
 import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
@@ -88,6 +86,10 @@ public final class TFCItems
         Helpers.mapOfKeys(HideItemType.Size.class, size ->
             register((size.name() + '_' + type.name() + "_hide").toLowerCase(), () -> new Item(new Item.Properties().tab(MISC)))
         )
+    );
+
+    public static final Map<Wood.Default, RegistryObject<Item>> BOATS = Helpers.mapOfKeys(Wood.Default.class, wood ->
+        register(wood.name().toLowerCase() + "_boat", () -> new TFCBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), wood))
     );
 
     public static final Map<Gem, RegistryObject<Item>> GEM_DUST = Helpers.mapOfKeys(Gem.class, gem ->
