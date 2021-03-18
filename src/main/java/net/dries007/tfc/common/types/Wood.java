@@ -77,6 +77,13 @@ public class Wood
             this.maxDecayDistance = maxDecayDistance;
         }
 
+        private static final Default[] VALUES = values();
+
+        public static Default valueOf(int i)
+        {
+            return i >= 0 && i < VALUES.length ? VALUES[i] : ACACIA;
+        }
+
         public boolean isConifer()
         {
             return conifer;

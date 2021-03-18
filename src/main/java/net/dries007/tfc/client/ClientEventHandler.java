@@ -104,9 +104,7 @@ public final class ClientEventHandler
 
         // Entity Rendering
         RenderingRegistry.registerEntityRenderingHandler(TFCEntities.FALLING_BLOCK.get(), FallingBlockRenderer::new);
-        TFCEntities.BOATS.forEach((wood, type) ->
-            RenderingRegistry.registerEntityRenderingHandler(type.get(), manager -> new TFCBoatRenderer(manager, new ResourceLocation("minecraft", "textures/entity/boat/oak.png")))
-        );
+        RenderingRegistry.registerEntityRenderingHandler(TFCEntities.BOAT.get(), TFCBoatRenderer::new);
 
         // Misc
         BiomeColorsAccessor.accessor$setWaterColorResolver(TFCColors.FRESH_WATER);

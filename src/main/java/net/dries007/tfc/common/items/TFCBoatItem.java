@@ -59,7 +59,9 @@ public class TFCBoatItem extends Item
 
             if (raytraceresult.getType() == RayTraceResult.Type.BLOCK)
             {
-                TFCBoatEntity boat = new TFCBoatEntity(worldIn, raytraceresult.getLocation().x, raytraceresult.getLocation().y, raytraceresult.getLocation().z, wood);
+                Vector3d location = raytraceresult.getLocation();
+                TFCBoatEntity boat = new TFCBoatEntity(worldIn, location.x, location.y, location.z);
+                boat.setWood(wood);
                 boat.yRot = playerIn.yRot;
                 if (!worldIn.noCollision(boat, boat.getBoundingBox().inflate(-0.1D)))
                 {
