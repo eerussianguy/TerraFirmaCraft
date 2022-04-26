@@ -17,6 +17,7 @@ public class StreamGenerator extends AbstractStreamGenerator
     @Override
     protected BlockPos findValidDrainPos(ChunkPos pos)
     {
+        // todo: respect rivers
         return new BlockPos(pos.getMinBlockX() + random.nextInt(16), getSeaLevel(), pos.getMinBlockZ() + random.nextInt(16));
     }
 

@@ -73,8 +73,8 @@ public class StreamPiece
                         Flow flowNE = template.getFlow((int) px + 1, (int) pz);
                         Flow flowSW = template.getFlow((int) px, (int) pz + 1);
                         Flow flowSE = template.getFlow((int) px + 1, (int) pz + 1);
-                        Flow mixed = Flow.combine(flowNE, flowSE, flowNW, flowSW, px % 1f, 1 - (pz % 1f));
-                        Flow.combine(flowNE, flowSE, flowNW, flowSW, px % 1f, 1 - (pz % 1f));
+                        Flow mixed = Flow.lerp(flowNE, flowSE, flowNW, flowSW, px % 1f, 1 - (pz % 1f));
+                        Flow.lerp(flowNE, flowSE, flowNW, flowSW, px % 1f, 1 - (pz % 1f));
                         flows[ix + width * iz] = mixed;
                     }
                 }

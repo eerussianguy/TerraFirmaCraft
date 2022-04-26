@@ -15,48 +15,50 @@ import net.dries007.tfc.util.Helpers;
 
 public abstract class AbstractStreamGenerator
 {
-    public static final int RIVER_CHUNK_RADIUS = 16; // The maximum bounding box of a river generation
-    public static final float RIVER_START_WEIGHT = 1f;
+    public static final int STREAM_CHUNK_RADIUS = 8; // The maximum bounding box of a stream generation
+    public static final float STREAM_START_WEIGHT = 1f;
     public static final float BRANCH_CHANCE = 0.7f;
-    public static final int DRAIN_RIVER_WIDTH = 20; // The width of each river at the drain element (plus or minus a range)
+    public static final int DRAIN_STREAM_WIDTH = 20; // The width of each stream at the drain element (plus or minus a range)
     public static final int SOURCE_CUTOFF_WIDTH = 8; // The width at which a branch must end with a source element
     public static final int SOURCE_MAX_WIDTH = 12; // The width at which a branch *may* end with a source element
     public static final int BRANCH_DECREASE_WIDTH = 2; // How much branch with decreases relative to the main branch
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    protected final Map<ChunkPos, IStreamStructure> generatedRiverStructures; // Positions and rivers that have been generated, cached here for efficiency
+    protected final Map<ChunkPos, StreamStructure> generatedStreamStructures; // Positions and streams that have been generated, cached here for efficiency
+    protected final Set<ChunkPos> failedStreamStructures; // Positions and streams that have been generated, cached here for efficiency
     protected final Random random;
     protected final long seed;
 
     public AbstractStreamGenerator(long seed)
     {
         this.seed = seed;
-        this.generatedRiverStructures = new HashMap<>();
+        this.generatedStreamStructures = new HashMap<>();
+        this.failedStreamStructures = new HashSet<>();
         this.random = new Random();
     }
 
     /**
-     * Generates rivers starting at a given chunk
+     * Generates streams starting at a given chunk
      * This method is not completely deterministic - it can be influenced by the order chunks are explored, since
-     * it takes into account existing generated rivers and avoids intersections
+     * it takes into account existing generated streams and avoids intersections
      *
-     * @param posAt The position of the origin of the river.
-     * @return the river that was generated, or null if not
+     * @param posAt The position of the origin of the stream.
+     * @return the stream that was generated, or null if not
      */
     @Nullable
-    public IStreamStructure generateRiverAtChunk(ChunkPos posAt)
+    public StreamStructure generateStreamAtChunk(ChunkPos posAt)
     {
         random.setSeed(Helpers.hash(seed, posAt.x, 0, posAt.z));
 
         // todo weighting
         // noinspection ConstantConditions
-        if (!(random.nextFloat() > RIVER_START_WEIGHT))
+        if (!(random.nextFloat() > STREAM_START_WEIGHT))
         {
-            // River structure
-            StreamStructure river = new StreamStructure(posAt.getMinBlockX(), posAt.getMinBlockZ());
+            // stream structure
+            StreamStructure stream = new StreamStructure(posAt.getMinBlockX(), posAt.getMinBlockZ());
             List<StreamBranch> branches = new ArrayList<>(); // track possible branches
-            List<StreamBranch> potentialBranches = new ArrayList<>(); // potential branches off an uncommitted river branch
+            List<StreamBranch> potentialBranches = new ArrayList<>(); // potential branches off an uncommitted stream branch
 
             // Drain piece
             StreamPiece drainPiece = generateDrainPiece(posAt);
@@ -70,9 +72,9 @@ public abstract class AbstractStreamGenerator
                     // Generate a branch to completion, or to end
                     StreamBranch branch = branches.remove(0);
                     potentialBranches.clear();
-                    if (generateBranch(river, branch, potentialBranches))
+                    if (generateBranch(stream, branch, potentialBranches))
                     {
-                        river.addBranch(branch);
+                        stream.addBranch(branch);
                         branches.addAll(potentialBranches);
                         validBranchesAdded = true;
                     }
@@ -80,20 +82,49 @@ public abstract class AbstractStreamGenerator
 
                 if (validBranchesAdded)
                 {
-                    LOGGER.info("Generated river at {}", posAt);
-                    river.markGenerated();
-                    generatedRiverStructures.put(posAt, river);
-                    return river;
+                    LOGGER.info("Generated stream at {}", posAt);
+                    stream.markGenerated();
+                    generatedStreamStructures.put(posAt, stream);
+                    return stream;
                 }
             }
         }
         return null;
     }
 
+    public List<StreamStructure> generateStreamsAroundChunk(ChunkPos chunkPos)
+    {
+        List<StreamStructure> streams = new ArrayList<>();
+        for (int x = chunkPos.x - STREAM_CHUNK_RADIUS; x <= chunkPos.x + STREAM_CHUNK_RADIUS; x++)
+        {
+            for (int z = chunkPos.z - STREAM_CHUNK_RADIUS; z <= chunkPos.z + STREAM_CHUNK_RADIUS; z++)
+            {
+                ChunkPos posAt = new ChunkPos(x, z);
+                if (generatedStreamStructures.containsKey(posAt))
+                {
+                    streams.add(generatedStreamStructures.get(posAt));
+                }
+                else if (!failedStreamStructures.contains(posAt))
+                {
+                    StreamStructure stream = generateStreamAtChunk(new ChunkPos(x, z));
+                    if (stream != null)
+                    {
+                        streams.add(stream);
+                    }
+                    else
+                    {
+                        failedStreamStructures.add(posAt);
+                    }
+                }
+            }
+        }
+        return streams;
+    }
+
     /**
-     * Tries to generate a valid river starting point
-     * @param posAt The chunk pos of the river start
-     * @return A template for the river start if valid, null if not
+     * Tries to generate a valid stream starting point
+     * @param posAt The chunk pos of the stream start
+     * @return A template for the stream start if valid, null if not
      */
     @Nullable
     protected StreamPiece generateDrainPiece(ChunkPos posAt)
@@ -103,12 +134,12 @@ public abstract class AbstractStreamGenerator
         {
             List<StreamTemplate> drainTemplates = StreamTemplate.DRAIN_TEMPLATES.get(Direction.Plane.HORIZONTAL.getRandomDirection(random));
             StreamTemplate drainTemplate = drainTemplates.get(random.nextInt(drainTemplates.size()));
-            StreamPiece drainPiece = new StreamPiece(drainTemplate, pos.getX() - drainTemplate.getDownstreamX(), pos.getZ() - drainTemplate.getDownstreamZ(), DRAIN_RIVER_WIDTH, getSeaLevel());
+            StreamPiece drainPiece = new StreamPiece(drainTemplate, pos.getX() - drainTemplate.getDownstreamX(), pos.getZ() - drainTemplate.getDownstreamZ(), DRAIN_STREAM_WIDTH, getSeaLevel());
 
-            // Check that drain does not intersect other rivers
-            for (IStreamStructure otherRiver : generatedRiverStructures.values())
+            // Check that drain does not intersect other streams
+            for (IStreamStructure otherstream : generatedStreamStructures.values())
             {
-                if (otherRiver.intersectsBox(drainPiece.getBox()))
+                if (otherstream.intersectsBox(drainPiece.getBox()))
                 {
                     return null;
                 }
@@ -125,10 +156,10 @@ public abstract class AbstractStreamGenerator
     protected abstract BlockPos findValidDrainPos(ChunkPos pos);
 
     /**
-     * Generates a single river branch
+     * Generates a single stream branch
      * Returns if the branch is valid once generated
      */
-    protected boolean generateBranch(StreamStructure river, StreamBranch branch, List<StreamBranch> otherBranches)
+    protected boolean generateBranch(StreamStructure stream, StreamBranch branch, List<StreamBranch> otherBranches)
     {
         StreamPiece downstreamPiece = branch.getJoinPiece();
         while (downstreamPiece.getWidth() > SOURCE_CUTOFF_WIDTH)
@@ -137,7 +168,7 @@ public abstract class AbstractStreamGenerator
             if (nextWidth == SOURCE_CUTOFF_WIDTH)
             {
                 // Must generate a source piece
-                StreamPiece sourcePiece = generateSourcePiece(river, branch, downstreamPiece, SOURCE_CUTOFF_WIDTH);
+                StreamPiece sourcePiece = generateSourcePiece(stream, branch, downstreamPiece, SOURCE_CUTOFF_WIDTH);
                 if (sourcePiece != null && !branch.intersectsBoxIgnoringPiece(sourcePiece.getBox(), downstreamPiece))
                 {
                     // Valid source piece
@@ -145,19 +176,19 @@ public abstract class AbstractStreamGenerator
                     return true;
                 }
                 // Can't generate a source piece, so instead try and replace the previous piece with a source instead
-                return replaceLastPieceWithSource(river, branch, downstreamPiece);
+                return replaceLastPieceWithSource(stream, branch, downstreamPiece);
             }
             else
             {
                 // Generate possible straight and branch pieces
-                StreamPiece straightPiece = generateStraightPiece(river, branch, downstreamPiece, nextWidth);
+                StreamPiece straightPiece = generateStraightPiece(stream, branch, downstreamPiece, nextWidth);
                 if (straightPiece != null)
                 {
 
                     // Optionally, generate a tributary
                     if (random.nextFloat() < BRANCH_CHANCE)
                     {
-                        StreamPiece branchPiece = generateBranchPiece(river, branch, downstreamPiece, nextWidth - BRANCH_DECREASE_WIDTH, straightPiece.getUpstreamDirection());
+                        StreamPiece branchPiece = generateBranchPiece(stream, branch, downstreamPiece, nextWidth - BRANCH_DECREASE_WIDTH, straightPiece.getUpstreamDirection());
                         if (branchPiece != null && branchPiece.getTemplate() != straightPiece.getTemplate() && branchPiece.getUpstreamDirection() != straightPiece.getUpstreamDirection())
                         {
                             // Branch is valid: can't be the same piece as the normal, or have the same direction upstream
@@ -172,7 +203,7 @@ public abstract class AbstractStreamGenerator
                 else
                 {
                     // this piece doesn't fit for some reason - try and turn this branch into a source by replacing the last piece (which was valid)
-                    return replaceLastPieceWithSource(river, branch, downstreamPiece);
+                    return replaceLastPieceWithSource(stream, branch, downstreamPiece);
                 }
             }
         }
@@ -182,15 +213,15 @@ public abstract class AbstractStreamGenerator
     protected abstract int getSeaLevel();
 
     /**
-     * When a river branch fails to generate next pieces, it tries to replace the last added piece with a source piece
-     * Returns true if it succeeds and the river has a valid source piece
+     * When a stream branch fails to generate next pieces, it tries to replace the last added piece with a source piece
+     * Returns true if it succeeds and the stream has a valid source piece
      */
-    protected boolean replaceLastPieceWithSource(StreamStructure river, StreamBranch branch, StreamPiece downstreamPiece)
+    protected boolean replaceLastPieceWithSource(StreamStructure stream, StreamBranch branch, StreamPiece downstreamPiece)
     {
         // piece to be replaced must be at most the max width for a source piece
         if (downstreamPiece.getWidth() <= SOURCE_MAX_WIDTH && downstreamPiece.getDownstream() != null && branch.getPieces().size() > 1)
         {
-            StreamPiece sourcePiece = generateSourcePiece(river, branch, downstreamPiece.getDownstream(), downstreamPiece.getWidth());
+            StreamPiece sourcePiece = generateSourcePiece(stream, branch, downstreamPiece.getDownstream(), downstreamPiece.getWidth());
             if (sourcePiece != null)
             {
                 // Source is valid, so replace the previous piece
@@ -203,36 +234,36 @@ public abstract class AbstractStreamGenerator
     }
 
     @Nullable
-    protected StreamPiece generateBranchPiece(StreamStructure river, StreamBranch branch, StreamPiece previousPiece, int riverWidth, Direction excludedDirection)
+    protected StreamPiece generateBranchPiece(StreamStructure stream, StreamBranch branch, StreamPiece previousPiece, int streamWidth, Direction excludedDirection)
     {
-        return generatePiece(river, branch, previousPiece, riverWidth, StreamTemplate.CONNECTOR_TEMPLATES.get(previousPiece.getUpstreamDirection()).stream().filter(template -> template.getUpstreamDirection() != excludedDirection).collect(Collectors.toList()));
+        return generatePiece(stream, branch, previousPiece, streamWidth, StreamTemplate.CONNECTOR_TEMPLATES.get(previousPiece.getUpstreamDirection()).stream().filter(template -> template.getUpstreamDirection() != excludedDirection).collect(Collectors.toList()));
     }
 
     @Nullable
-    protected StreamPiece generateStraightPiece(StreamStructure river, StreamBranch branch, StreamPiece previousPiece, int riverWidth)
+    protected StreamPiece generateStraightPiece(StreamStructure stream, StreamBranch branch, StreamPiece previousPiece, int streamWidth)
     {
-        return generatePiece(river, branch, previousPiece, riverWidth, StreamTemplate.CONNECTOR_TEMPLATES.get(previousPiece.getUpstreamDirection()));
+        return generatePiece(stream, branch, previousPiece, streamWidth, StreamTemplate.CONNECTOR_TEMPLATES.get(previousPiece.getUpstreamDirection()));
     }
 
     @Nullable
-    protected StreamPiece generateSourcePiece(StreamStructure river, StreamBranch branch, StreamPiece previousPiece, int riverWidth)
+    protected StreamPiece generateSourcePiece(StreamStructure stream, StreamBranch branch, StreamPiece previousPiece, int streamWidth)
     {
-        return generatePiece(river, branch, previousPiece, riverWidth, StreamTemplate.SOURCE_TEMPLATES.get(previousPiece.getUpstreamDirection()));
+        return generatePiece(stream, branch, previousPiece, streamWidth, StreamTemplate.SOURCE_TEMPLATES.get(previousPiece.getUpstreamDirection()));
     }
 
     @Nullable
-    protected StreamPiece generatePiece(StreamStructure river, StreamBranch branch, StreamPiece previousPiece, int riverWidth, List<StreamTemplate> templates)
+    protected StreamPiece generatePiece(StreamStructure stream, StreamBranch branch, StreamPiece previousPiece, int streamWidth, List<StreamTemplate> templates)
     {
         StreamTemplate template = templates.get(random.nextInt(templates.size()));
-        StreamPiece piece = new StreamPiece(template, previousPiece, riverWidth, previousPiece.getHeight() + 1);
+        StreamPiece piece = new StreamPiece(template, previousPiece, streamWidth, previousPiece.getHeight() + 1);
 
-        // check bounding box doesn't intersect this river, and the branch doesn't intersect itself, and that the piece is withing the generation range for the river
-        if (!river.intersectsBoxIgnoringPiece(piece.getBox(), previousPiece) && !branch.intersectsBoxIgnoringPiece(piece.getBox(), previousPiece) && piece.getBox().containedIn(river.getBoundingBox()))
+        // check bounding box doesn't intersect this stream, and the branch doesn't intersect itself, and that the piece is withing the generation range for the stream
+        if (!stream.intersectsBoxIgnoringPiece(piece.getBox(), previousPiece) && !branch.intersectsBoxIgnoringPiece(piece.getBox(), previousPiece) && piece.getBox().containedIn(stream.getBoundingBox()))
         {
-            // Check all other possible river intersections that have been generated
-            for (IStreamStructure otherRiver : generatedRiverStructures.values())
+            // Check all other possible stream intersections that have been generated
+            for (IStreamStructure otherStream : generatedStreamStructures.values())
             {
-                if (otherRiver.intersectsBox(piece.getBox()))
+                if (otherStream.intersectsBox(piece.getBox()))
                 {
                     return null;
                 }

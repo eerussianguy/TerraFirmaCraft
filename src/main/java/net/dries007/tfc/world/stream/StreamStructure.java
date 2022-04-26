@@ -9,7 +9,7 @@ import net.minecraft.nbt.Tag;
 
 public class StreamStructure implements IStreamStructure
 {
-    public static final int RADIUS = (AbstractStreamGenerator.RIVER_CHUNK_RADIUS - 1) * 16;
+    public static final int RADIUS = (AbstractStreamGenerator.STREAM_CHUNK_RADIUS - 1) * 16;
 
     final List<StreamPiece> pieces;
     private final XZRange box;
@@ -71,7 +71,7 @@ public class StreamStructure implements IStreamStructure
     @Override
     public boolean intersectsBox(XZRange box)
     {
-        // Don't directly query the pieces, query the boxes instead as after the river is generated they are larger
+        // Don't directly query the pieces, query the boxes instead as after the stream is generated they are larger
         for (XZRange pieceBox : piecesBoundingBoxes)
         {
             if (pieceBox.intersects(box))
@@ -84,8 +84,8 @@ public class StreamStructure implements IStreamStructure
 
     public void markGenerated()
     {
-        // This tells the river that it, in its entirety, has now been "generated".
-        // In order to avoid conflicts with other rivers, we expand the bounding box by 16 blocks in all directions
+        // This tells the stream that it, in its entirety, has now been "generated".
+        // In order to avoid conflicts with other streams, we expand the bounding box by 16 blocks in all directions
         piecesBoundingBoxes.clear();
         for (StreamPiece piece : pieces)
         {
