@@ -41,6 +41,38 @@ public enum Flow implements StringRepresentable
         return i >= 0 && i < VALUES.length ? VALUES[i] : NONE;
     }
 
+    public static Flow rotateCW(Flow original)
+    {
+        // Rotates by ordinal
+        if (original == NONE)
+        {
+            return original;
+        }
+        else
+        {
+            int newOrdinal = (original.ordinal() + 4) % MODULUS;
+            return VALUES[newOrdinal];
+        }
+    }
+
+    public static Flow mirrorX(Flow original)
+    {
+        if (original == NONE || original == NNN || original == SSS)
+        {
+            return original;
+        }
+        else
+        {
+            int newOrdinal = -original.ordinal() + MODULUS;
+            return VALUES[newOrdinal];
+        }
+    }
+
+    public static float toAngle(Flow flow)
+    {
+        return (float) flow.ordinal() / 8 * Mth.PI;
+    }
+
     /**
      * @return The closest flow to the polar coordinate angle, between [-pi, pi].
      */
