@@ -6,9 +6,9 @@ import net.minecraft.world.level.ChunkPos;
 import net.dries007.tfc.world.TFCChunkGenerator;
 import org.jetbrains.annotations.Nullable;
 
-public class RiverGenerator extends AbstractRiverGenerator
+public class StreamGenerator extends AbstractStreamGenerator
 {
-    public RiverGenerator(long seed)
+    public StreamGenerator(long seed)
     {
         super(seed);
     }
@@ -27,7 +27,7 @@ public class RiverGenerator extends AbstractRiverGenerator
     }
 
     @Override
-    protected boolean isValidPiece(RiverPiece piece)
+    protected boolean isValidPiece(StreamPiece piece)
     {
         return true;
     }

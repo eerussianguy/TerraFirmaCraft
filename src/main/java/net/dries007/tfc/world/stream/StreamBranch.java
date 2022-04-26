@@ -8,19 +8,19 @@ import java.util.Stack;
  * In order to be committed, a branch must have a valid source piece at it's end
  * If such a piece is unable to be found, the branch is rejected, discarding all potential pieces it has generated
  */
-public class RiverBranch implements IRiverStructure
+public class StreamBranch implements IStreamStructure
 {
-    private final RiverPiece joinPiece;
-    private final Stack<RiverPiece> pieces;
+    private final StreamPiece joinPiece;
+    private final Stack<StreamPiece> pieces;
 
-    public RiverBranch(RiverPiece joinPiece)
+    public StreamBranch(StreamPiece joinPiece)
     {
         this.joinPiece = joinPiece;
         this.pieces = new Stack<>();
         this.pieces.push(joinPiece);
     }
 
-    public void push(RiverPiece piece)
+    public void push(StreamPiece piece)
     {
         this.pieces.push(piece);
     }
@@ -30,13 +30,13 @@ public class RiverBranch implements IRiverStructure
         this.pieces.pop();
     }
 
-    public RiverPiece getJoinPiece()
+    public StreamPiece getJoinPiece()
     {
         return joinPiece;
     }
 
     @Override
-    public List<RiverPiece> getPieces()
+    public List<StreamPiece> getPieces()
     {
         return pieces;
     }

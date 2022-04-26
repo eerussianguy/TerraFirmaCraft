@@ -1,7 +1,7 @@
 package net.dries007.tfc.world.stream;
 
 /**
- * todo: this should just be replaced with {@link net.minecraft.util.math.MutableBoundingBox}
+ * todo: this should just be replaced with {@link net.minecraft.world.level.levelgen.structure.BoundingBox}
  */
 public class XZRange
 {

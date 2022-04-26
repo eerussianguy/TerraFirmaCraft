@@ -6,46 +6,46 @@ import net.minecraft.nbt.CompoundTag;
 import net.dries007.tfc.world.river.Flow;
 import org.jetbrains.annotations.Nullable;
 
-public class RiverPiece
+public class StreamPiece
 {
     public final float upstreamX;
     public final float upstreamZ;
     public final float downstreamX;
     public final float downstreamZ;
-    private final RiverTemplate template;
+    private final StreamTemplate template;
     private final int width;
     private final int height;
     private final Flow[] flows;
     private final Direction upstreamDirection;
     private final Direction downstreamDirection;
     private final XZRange box;
-    private final RiverPiece downstreamPiece;
+    private final StreamPiece downstreamPiece;
     private final float x;
     private final float z;
 
-    public RiverPiece(RiverTemplate template, float x, float z, int width, int height)
+    public StreamPiece(StreamTemplate template, float x, float z, int width, int height)
     {
         this(template, null, width, height, x, z);
     }
 
-    public RiverPiece(RiverTemplate template, RiverPiece downstreamPiece, int width, int height)
+    public StreamPiece(StreamTemplate template, StreamPiece downstreamPiece, int width, int height)
     {
         this(template, downstreamPiece, width, height, 0, 0);
     }
 
-    public RiverPiece(CompoundTag nbt, @Nullable RiverPiece downstreamPiece)
+    public StreamPiece(CompoundTag nbt, @Nullable StreamPiece downstreamPiece)
     {
-        this(RiverTemplate.get(nbt.getInt("template")), downstreamPiece, nbt.getInt("width"), nbt.getInt("height"), nbt.getFloat("x"), nbt.getFloat("z"));
+        this(StreamTemplate.get(nbt.getInt("template")), downstreamPiece, nbt.getInt("width"), nbt.getInt("height"), nbt.getFloat("x"), nbt.getFloat("z"));
     }
 
-    private RiverPiece(RiverTemplate template, @Nullable RiverPiece downstreamPiece, int width, int height, float xIn, float zIn)
+    private StreamPiece(StreamTemplate template, @Nullable StreamPiece downstreamPiece, int width, int height, float xIn, float zIn)
     {
         this.template = template;
         this.flows = new Flow[width * width];
         this.width = width;
         this.height = height;
 
-        if (width == RiverTemplate.SIZE)
+        if (width == StreamTemplate.SIZE)
         {
             // skip the complex flow copy, just use the existing array
             System.arraycopy(template.getFlows(), 0, flows, 0, flows.length);
@@ -54,7 +54,7 @@ public class RiverPiece
         {
             // Create the flow plan for this piece by scaling the template outwards
             // This scale factor is so the template flows are stretched to match at the edges
-            float flowScaleFactor = (float) (RiverTemplate.SIZE - 1) / (width - 1);
+            float flowScaleFactor = (float) (StreamTemplate.SIZE - 1) / (width - 1);
             for (int ix = 0; ix < width; ix++)
             {
                 for (int iz = 0; iz < width; iz++)
@@ -81,7 +81,7 @@ public class RiverPiece
             }
         }
 
-        float sizeScaleFactor = (float) width / RiverTemplate.SIZE;
+        float sizeScaleFactor = (float) width / StreamTemplate.SIZE;
         this.upstreamX = template.getUpstreamX() * sizeScaleFactor;
         this.upstreamZ = template.getUpstreamZ() * sizeScaleFactor;
         this.downstreamX = template.getDownstreamX() * sizeScaleFactor;
@@ -109,7 +109,7 @@ public class RiverPiece
         this.box = new XZRange(x, z, width, width);
     }
 
-    public RiverTemplate getTemplate()
+    public StreamTemplate getTemplate()
     {
         return template;
     }
@@ -140,7 +140,7 @@ public class RiverPiece
     }
 
     @Nullable
-    public RiverPiece getDownstream()
+    public StreamPiece getDownstream()
     {
         return downstreamPiece;
     }

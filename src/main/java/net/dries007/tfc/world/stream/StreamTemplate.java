@@ -10,9 +10,9 @@ import net.dries007.tfc.world.river.Flow;
 
 import static net.dries007.tfc.world.river.Flow.*;
 
-public class RiverTemplate
+public class StreamTemplate
 {
-    public static final RiverTemplate STRAIGHT_1 = new RiverTemplate(Direction.NORTH, 6, 8, Direction.NORTH, 3, 0,
+    public static final StreamTemplate STRAIGHT_1 = new StreamTemplate(Direction.NORTH, 6, 8, Direction.NORTH, 3, 0,
         ___, ___, NNN, NNN, ___, ___, ___, ___,
         ___, ___, NNW, NNW, ___, ___, ___, ___,
         ___, ___, N_W, NNW, N_W, ___, ___, ___,
@@ -23,7 +23,7 @@ public class RiverTemplate
         ___, ___, ___, ___, ___, NNN, NNN, ___
     );
 
-    public static final RiverTemplate STRAIGHT_2 = new RiverTemplate(Direction.NORTH, 5, 8, Direction.NORTH, 3, 0,
+    public static final StreamTemplate STRAIGHT_2 = new StreamTemplate(Direction.NORTH, 5, 8, Direction.NORTH, 3, 0,
         ___, ___, NNN, NNN, ___, ___, ___, ___,
         ___, ___, N_E, NNE, ___, ___, ___, ___,
         ___, N_E, NNN, ___, ___, ___, ___, ___,
@@ -34,7 +34,7 @@ public class RiverTemplate
         ___, ___, ___, ___, N_E, N_E, ___, ___
     );
 
-    public static final RiverTemplate CURVE_1 = new RiverTemplate(Direction.WEST, 8, 6, Direction.NORTH, 3, 0,
+    public static final StreamTemplate CURVE_1 = new StreamTemplate(Direction.WEST, 8, 6, Direction.NORTH, 3, 0,
         ___, ___, NNN, NNN, ___, ___, ___, ___,
         ___, ___, N_W, NNW, ___, ___, ___, ___,
         ___, ___, ___, N_W, N_W, ___, ___, ___,
@@ -45,7 +45,7 @@ public class RiverTemplate
         ___, ___, ___, ___, ___, ___, ___, ___
     );
 
-    public static final RiverTemplate SOURCE_1 = new RiverTemplate(Direction.NORTH, 0, 0, Direction.NORTH, 3, 0,
+    public static final StreamTemplate SOURCE_1 = new StreamTemplate(Direction.NORTH, 0, 0, Direction.NORTH, 3, 0,
         ___, ___, NNN, NNN, ___, ___, ___, ___,
         ___, ___, N_W, NNW, ___, ___, ___, ___,
         ___, ___, ___, N_W, N_W, ___, ___, ___,
@@ -56,7 +56,7 @@ public class RiverTemplate
         ___, ___, ___, ___, ___, ___, NNN, ___
     );
 
-    public static final RiverTemplate SOURCE_2 = new RiverTemplate(Direction.NORTH, 0, 0, Direction.NORTH, 3, 0,
+    public static final StreamTemplate SOURCE_2 = new StreamTemplate(Direction.NORTH, 0, 0, Direction.NORTH, 3, 0,
         ___, ___, NNN, NNN, ___, ___, ___, ___,
         ___, ___, NNE, NNW, ___, ___, ___, ___,
         ___, N_E, N_E, N_W, N_W, ___, ___, ___,
@@ -67,7 +67,7 @@ public class RiverTemplate
         ___, ___, NNN, ___, ___, ___, NNN, ___
     );
 
-    public static final RiverTemplate DRAIN_1 = new RiverTemplate(Direction.NORTH, 4, 8, Direction.NORTH, 4, 0,
+    public static final StreamTemplate DRAIN_1 = new StreamTemplate(Direction.NORTH, 4, 8, Direction.NORTH, 4, 0,
         ___, ___, N_W, NNN, NNN, NNE, N_E, ___,
         ___, ___, N_W, NNN, NNN, N_E, ___, ___,
         ___, ___, ___, NNW, NNN, NNE, ___, ___,
@@ -78,7 +78,7 @@ public class RiverTemplate
         ___, ___, ___, NNN, NNN, ___, ___, ___
     );
 
-    public static final RiverTemplate DRAIN_2 = new RiverTemplate(Direction.NORTH, 4, 8, Direction.NORTH, 4, 0,
+    public static final StreamTemplate DRAIN_2 = new StreamTemplate(Direction.NORTH, 4, 8, Direction.NORTH, 4, 0,
         ___, ___, NNN, NNN, NNN, NNN, N_E, ___,
         ___, ___, NNN, NNN, NNN, N_E, NNE, ___,
         ___, ___, NNW, NNN, N_W, NNE, N_E, ___,
@@ -93,26 +93,26 @@ public class RiverTemplate
 
     // These are indexed by their downstream direction, so we can easily search for templates that can be attached to a given piece
 
-    public static final Map<Direction, List<RiverTemplate>> DRAIN_TEMPLATES = makeVariants(DRAIN_1, DRAIN_2);
-    public static final Map<Direction, List<RiverTemplate>> SOURCE_TEMPLATES = makeVariants(SOURCE_1, SOURCE_2);
-    public static final Map<Direction, List<RiverTemplate>> CONNECTOR_TEMPLATES = makeVariants(STRAIGHT_1, STRAIGHT_2, CURVE_1);
+    public static final Map<Direction, List<StreamTemplate>> DRAIN_TEMPLATES = makeVariants(DRAIN_1, DRAIN_2);
+    public static final Map<Direction, List<StreamTemplate>> SOURCE_TEMPLATES = makeVariants(SOURCE_1, SOURCE_2);
+    public static final Map<Direction, List<StreamTemplate>> CONNECTOR_TEMPLATES = makeVariants(STRAIGHT_1, STRAIGHT_2, CURVE_1);
 
-    private static final List<RiverTemplate> ALL_TEMPLATES = Stream.of(DRAIN_TEMPLATES, SOURCE_TEMPLATES, CONNECTOR_TEMPLATES).flatMap(map -> map.values().stream()).flatMap(Collection::stream).collect(Collectors.toList());
+    private static final List<StreamTemplate> ALL_TEMPLATES = Stream.of(DRAIN_TEMPLATES, SOURCE_TEMPLATES, CONNECTOR_TEMPLATES).flatMap(map -> map.values().stream()).flatMap(Collection::stream).collect(Collectors.toList());
 
-    public static RiverTemplate get(int id)
+    public static StreamTemplate get(int id)
     {
         return ALL_TEMPLATES.get(id);
     }
 
-    public static Map<Direction, List<RiverTemplate>> makeVariants(RiverTemplate... templates)
+    public static Map<Direction, List<StreamTemplate>> makeVariants(StreamTemplate... templates)
     {
-        Map<Direction, List<RiverTemplate>> map = new HashMap<>();
-        for (RiverTemplate template : templates)
+        Map<Direction, List<StreamTemplate>> map = new HashMap<>();
+        for (StreamTemplate template : templates)
         {
             for (int i = 0; i < 4; i++)
             {
                 map.computeIfAbsent(template.downstreamDirection, key -> new ArrayList<>()).add(template);
-                RiverTemplate mirrored = mirror(template);
+                StreamTemplate mirrored = mirror(template);
                 map.computeIfAbsent(mirrored.downstreamDirection, key -> new ArrayList<>()).add(mirrored);
                 template = rotateCW(template);
             }
@@ -120,7 +120,7 @@ public class RiverTemplate
         return map;
     }
 
-    public static RiverTemplate mirror(RiverTemplate template)
+    public static StreamTemplate mirror(StreamTemplate template)
     {
         // Mirrors the template across the line x = TEMPLATE_SIZE / 2. Only this mirror is needed as mirrors about x can be created by rotations and this mirror
         // (x, z) -> (t - x, z)
@@ -136,11 +136,11 @@ public class RiverTemplate
                 newFlows[x + SIZE * z] = Flow.mirrorX(template.flows[(SIZE - 1 - x) + SIZE * z]);
             }
         }
-        return new RiverTemplate(newUpstreamDirection, newUpstreamX, template.upstreamZ, newDownstreamDirection, newDownstreamX, template.downstreamZ, newFlows);
+        return new StreamTemplate(newUpstreamDirection, newUpstreamX, template.upstreamZ, newDownstreamDirection, newDownstreamX, template.downstreamZ, newFlows);
     }
 
     @SuppressWarnings("UnnecessaryLocalVariable")
-    public static RiverTemplate rotateCW(RiverTemplate template)
+    public static StreamTemplate rotateCW(StreamTemplate template)
     {
         // Shift's all points to the origin, (by -TEMPLATE_SIZE / 2), rotates by (x, z) -> (z, -x), then shifts back
         // (x, z) -> (x - t / 2, z - t / 2) -> (t / 2 - z, x - t / 2) -> (t - z, x)
@@ -160,7 +160,7 @@ public class RiverTemplate
                 newFlows[x + SIZE * z] = Flow.rotateCW(template.flows[z + SIZE * (SIZE - 1 - x)]);
             }
         }
-        return new RiverTemplate(newUpstreamDirection, newUpstreamX, newUpstreamZ, newDownstreamDirection, newDownstreamX, newDownstreamZ, newFlows);
+        return new StreamTemplate(newUpstreamDirection, newUpstreamX, newUpstreamZ, newDownstreamDirection, newDownstreamX, newDownstreamZ, newFlows);
     }
 
     private final Direction upstreamDirection;
@@ -171,7 +171,7 @@ public class RiverTemplate
     private final float downstreamZ;
     private final Flow[] flows;
 
-    public RiverTemplate(Direction upstreamDirection, float upstreamX, float upstreamZ, Direction downstreamDirection, float downstreamX, float downstreamZ, Flow... flows)
+    public StreamTemplate(Direction upstreamDirection, float upstreamX, float upstreamZ, Direction downstreamDirection, float downstreamX, float downstreamZ, Flow... flows)
     {
         this.upstreamDirection = upstreamDirection;
         this.upstreamX = upstreamX;

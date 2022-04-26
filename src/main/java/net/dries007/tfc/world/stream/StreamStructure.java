@@ -7,15 +7,15 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 
-public class RiverStructure implements IRiverStructure
+public class StreamStructure implements IStreamStructure
 {
-    public static final int RADIUS = (AbstractRiverGenerator.RIVER_CHUNK_RADIUS - 1) * 16;
+    public static final int RADIUS = (AbstractStreamGenerator.RIVER_CHUNK_RADIUS - 1) * 16;
 
-    final List<RiverPiece> pieces;
+    final List<StreamPiece> pieces;
     private final XZRange box;
     private final List<XZRange> piecesBoundingBoxes;
 
-    public RiverStructure(int x, int z)
+    public StreamStructure(int x, int z)
     {
         this.pieces = new ArrayList<>();
         this.piecesBoundingBoxes = new ArrayList<>();
@@ -23,16 +23,16 @@ public class RiverStructure implements IRiverStructure
         this.box = new XZRange(x - RADIUS, z - RADIUS, 2 * RADIUS, 2 * RADIUS);
     }
 
-    public RiverStructure(CompoundTag nbt)
+    public StreamStructure(CompoundTag nbt)
     {
         this.pieces = new ArrayList<>();
         this.piecesBoundingBoxes = new ArrayList<>();
 
         ListTag list = nbt.getList("pieces", Tag.TAG_COMPOUND);
-        RiverPiece downstream = null;
+        StreamPiece downstream = null;
         for (int i = 0; i < list.size(); i++)
         {
-            RiverPiece current = new RiverPiece(list.getCompound(i), downstream);
+            StreamPiece current = new StreamPiece(list.getCompound(i), downstream);
             add(current);
             downstream = current;
         }
@@ -42,16 +42,16 @@ public class RiverStructure implements IRiverStructure
         this.box = new XZRange(x - RADIUS, z - RADIUS, 2 * RADIUS, 2 * RADIUS);
     }
 
-    public void add(RiverPiece piece)
+    public void add(StreamPiece piece)
     {
         pieces.add(piece);
         piecesBoundingBoxes.add(piece.getBox());
     }
 
-    public void addBranch(RiverBranch branch)
+    public void addBranch(StreamBranch branch)
     {
         // Add all pieces from the branch
-        for (RiverPiece piece : branch.getPieces())
+        for (StreamPiece piece : branch.getPieces())
         {
             add(piece);
         }
@@ -63,7 +63,7 @@ public class RiverStructure implements IRiverStructure
     }
 
     @Override
-    public List<RiverPiece> getPieces()
+    public List<StreamPiece> getPieces()
     {
         return pieces;
     }
@@ -87,7 +87,7 @@ public class RiverStructure implements IRiverStructure
         // This tells the river that it, in its entirety, has now been "generated".
         // In order to avoid conflicts with other rivers, we expand the bounding box by 16 blocks in all directions
         piecesBoundingBoxes.clear();
-        for (RiverPiece piece : pieces)
+        for (StreamPiece piece : pieces)
         {
             piecesBoundingBoxes.add(piece.getBox().expand(16));
         }
@@ -97,7 +97,7 @@ public class RiverStructure implements IRiverStructure
     {
         CompoundTag nbt = new CompoundTag();
         ListTag listNbt = new ListTag();
-        for (RiverPiece piece : pieces)
+        for (StreamPiece piece : pieces)
         {
             listNbt.add(piece.serializeNBT());
         }

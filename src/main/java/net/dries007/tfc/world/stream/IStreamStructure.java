@@ -7,18 +7,18 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Anything that holds multiple river pieces at a time
  */
-public interface IRiverStructure
+public interface IStreamStructure
 {
-    List<RiverPiece> getPieces();
+    List<StreamPiece> getPieces();
 
     default boolean intersectsBox(XZRange box)
     {
         return intersectsBoxIgnoringPiece(box, null);
     }
 
-    default boolean intersectsBoxIgnoringPiece(XZRange box, @Nullable RiverPiece pieceToIgnore)
+    default boolean intersectsBoxIgnoringPiece(XZRange box, @Nullable StreamPiece pieceToIgnore)
     {
-        for (RiverPiece piece : getPieces())
+        for (StreamPiece piece : getPieces())
         {
             if (piece != pieceToIgnore && piece.getBox().intersects(box))
             {
