@@ -79,6 +79,7 @@ public class ChunkData implements ICapabilitySerializable<CompoundTag>
     @Nullable private LerpFloatLayer rainfallLayer;
     @Nullable private LerpFloatLayer temperatureLayer;
     @Nullable private int[] aquiferSurfaceHeight;
+    @Nullable private int[] terrainSurfaceHeight;
     private ForestType forestType;
     private float forestWeirdness;
     private float forestDensity;
@@ -92,6 +93,7 @@ public class ChunkData implements ICapabilitySerializable<CompoundTag>
         this.status = Status.EMPTY;
         this.forestType = ForestType.NONE;
         this.plateTectonicsInfo = PlateTectonicsClassification.OCEANIC;
+        this.terrainSurfaceHeight = new int[16 * 16];
     }
 
     public ChunkPos getPos()
@@ -208,6 +210,16 @@ public class ChunkData implements ICapabilitySerializable<CompoundTag>
         this.status = status;
     }
 
+    public int[] getTerrainSurfaceHeight()
+    {
+        return terrainSurfaceHeight;
+    }
+
+    public void setTerrainSurfaceHeight(int[] heights)
+    {
+        terrainSurfaceHeight = heights;
+    }
+
     /**
      * Create an update packet to send to client with necessary information
      */
@@ -269,6 +281,10 @@ public class ChunkData implements ICapabilitySerializable<CompoundTag>
             {
                 nbt.putIntArray("aquiferSurfaceHeight", aquiferSurfaceHeight);
             }
+            if (terrainSurfaceHeight != null)
+            {
+                nbt.putIntArray("terrainSurfaceHeight", terrainSurfaceHeight);
+            }
         }
         return nbt;
     }
@@ -284,6 +300,7 @@ public class ChunkData implements ICapabilitySerializable<CompoundTag>
             temperatureLayer = nbt.contains("temperature") ? new LerpFloatLayer(nbt.getCompound("temperature")) : null;
             rockData = nbt.contains("rockData", Tag.TAG_COMPOUND) ? new RockData(nbt.getCompound("rockData"), rockLayerSettings) : null;
             aquiferSurfaceHeight = nbt.contains("aquiferSurfaceHeight") ? nbt.getIntArray("aquiferSurfaceHeight") : null;
+            terrainSurfaceHeight = nbt.contains("terrainSurfaceHeight") ? nbt.getIntArray("terrainSurfaceHeight") : null;
             forestType = ForestType.valueOf(nbt.getByte("forestType"));
             forestWeirdness = nbt.getFloat("forestWeirdness");
             forestDensity = nbt.getFloat("forestDensity");
@@ -295,6 +312,7 @@ public class ChunkData implements ICapabilitySerializable<CompoundTag>
             temperatureLayer = null;
             rockData = null;
             aquiferSurfaceHeight = null;
+            terrainSurfaceHeight = null;
             forestType = ForestType.NONE;
             forestWeirdness = 0.5f;
             forestDensity = 0.5f;
@@ -340,6 +358,12 @@ public class ChunkData implements ICapabilitySerializable<CompoundTag>
 
         @Override
         public void setAquiferSurfaceHeight(int[] aquiferSurfaceHeight)
+        {
+            throw new UnsupportedOperationException("Tried to modify immutable chunk data");
+        }
+
+        @Override
+        public void setTerrainSurfaceHeight(int[] aquiferSurfaceHeight)
         {
             throw new UnsupportedOperationException("Tried to modify immutable chunk data");
         }

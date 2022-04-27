@@ -7,7 +7,6 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 
 import net.dries007.tfc.common.blocks.RiverWaterBlock;
 import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.world.IExtendedChunk;
 import net.dries007.tfc.world.TFCChunkGenerator;
 import net.dries007.tfc.world.river.Flow;
 import org.jetbrains.annotations.Nullable;
@@ -39,14 +38,14 @@ public class StreamGenerator extends AbstractStreamGenerator
         return true;
     }
 
-    public void buildHeightDependentRivers(ChunkAccess chunk, ChunkPos chunkPos, IExtendedChunk extension)
+    public void buildHeightDependentRivers(ChunkAccess chunk, ChunkPos chunkPos, @Nullable TFCChunkGenerator.IntArray256 data)
     {
-        double[] samples = extension.getWeights();
-        if (samples.length == 0)
+        if (data == null)
         {
             //TerraFirmaCraft.LOGGER.info("Failed to get sample for {}", chunkPos);
             return;
         }
+        int[] samples = data.values();
         BlockState water = TFCBlocks.RIVER_WATER.get().defaultBlockState();
         for (StreamStructure stream : generateStreamsAroundChunk(chunkPos))
         {
@@ -66,7 +65,7 @@ public class StreamGenerator extends AbstractStreamGenerator
                             if (flow != Flow.NONE)
                             {
                                 // todo: this is not quite the right assumption
-                                final int y = (int) samples[x + 16 * z];
+                                final int y = samples[x + 16 * z];
                                 chunk.setBlockState(new BlockPos(xPos + x, y, zPos + z), water.setValue(RiverWaterBlock.FLOW, flow), false);
                             }
                         }

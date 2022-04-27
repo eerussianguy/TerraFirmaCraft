@@ -15,7 +15,7 @@ import net.dries007.tfc.world.noise.ChunkNoiseSamplingSettings;
 
 public class ChunkNoiseFillerLite
 {
-    private final double[] sample; // the actual sampled heights;
+    private final int[] sample; // the actual sampled heights;
 
     private final LevelAccessor level;
     private final Map<BiomeVariants, BiomeNoiseSampler> biomeNoiseSamplers; // Biome -> Noise Samplers
@@ -38,10 +38,10 @@ public class ChunkNoiseFillerLite
         this.settings = settings;
         this.chunkMinX = chunk.getPos().getMinBlockX();
         this.chunkMinZ = chunk.getPos().getMinBlockZ();
-        this.sample = new double[16 * 16];
+        this.sample = new int[16 * 16];
     }
 
-    public double[] getSample()
+    public int[] getSample()
     {
         return sample;
     }
@@ -75,7 +75,7 @@ public class ChunkNoiseFillerLite
      * For a given (x, z) position, samples the provided biome weight map to calculate the height at that location, and the biome
      * @return The maximum height at this location
      */
-    private double sampleColumnHeightAndBiome()
+    private int sampleColumnHeightAndBiome()
     {
         prepareColumnBiomeWeights();
         columnBiomeNoiseSamplers.clear();
@@ -200,7 +200,7 @@ public class ChunkNoiseFillerLite
         }
 
         assert biomeAt != null;
-        return actualHeight;
+        return (int) actualHeight;
     }
 
     private void prepareColumnBiomeWeights()

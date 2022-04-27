@@ -6,7 +6,6 @@
   "mixins": [
     "AbstractContainerMenuMixin",
     "BiomeMixin",
-    "ChunkAccessMixin",
     "DedicatedServerPropertiesMixin",
     "FallingBlockMixin",
     "FlowingFluidMixin",
