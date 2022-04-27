@@ -47,6 +47,7 @@ import net.dries007.tfc.world.chunkdata.RockData;
 import net.dries007.tfc.world.noise.Kernel;
 import net.dries007.tfc.world.noise.NoiseSampler;
 import net.dries007.tfc.world.noise.ChunkNoiseSamplingSettings;
+import net.dries007.tfc.world.stream.StreamGenerator;
 import net.dries007.tfc.world.surface.SurfaceManager;
 
 import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
@@ -276,6 +277,7 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
     private final ChunkDataProvider chunkDataProvider;
     private final SurfaceManager surfaceManager;
     private final NoiseSampler noiseSampler;
+    private final StreamGenerator streamGenerator;
 
     public TFCChunkGenerator(Registry<StructureSet> structures, Registry<NormalNoise.NoiseParameters> parameters, TFCBiomeSource biomeSource, Holder<NoiseGeneratorSettings> settings, boolean flatBedrock, long seed)
     {
@@ -295,6 +297,7 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
         this.chunkDataProvider = customBiomeSource.getChunkDataProvider();
         this.surfaceManager = new SurfaceManager(seed);
         this.noiseSampler = new NoiseSampler(this.settings.value().noiseSettings(), seed, parameters);
+        this.streamGenerator = new StreamGenerator(seed);
     }
 
     @Override
@@ -438,6 +441,13 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
     public void createReferences(WorldGenLevel level, StructureFeatureManager structureFeatureManager, ChunkAccess chunk)
     {
         // todo: structures?
+        ChunkPos chunkPos = chunk.getPos();
+        final Object2DoubleMap<Biome>[] biomeWeights = sampleBiomes(chunkPos, this::sampleBiomeIgnoreClimate, biome -> TFCBiomes.getExtensionOrThrow(level, biome).variants().getGroup());
+        final ChunkNoiseFillerLite filler = new ChunkNoiseFillerLite(level, chunk, biomeWeights, createBiomeSamplersForChunk(), createNoiseSamplingSettingsForChunk(chunk));
+        filler.fillFromNoise();
+
+        IExtendedChunk extension = (IExtendedChunk) chunk;
+        extension.setWeights(filler.getSample());
     }
 
     @Override
@@ -475,6 +485,7 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
         filler.fillFromNoise();
 
         aquiferCache.set(chunkPos.x, chunkPos.z, filler.aquifer());
+        streamGenerator.buildHeightDependentRivers(chunk, chunkPos, (IExtendedChunk) chunk);
 
         // Unlock before surfaces are built, as they use locks directly
         sections.forEach(LevelChunkSection::release);
