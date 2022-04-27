@@ -309,7 +309,7 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
 
         this.stupidMojangChunkGenerator = new NoiseBasedChunkGenerator(structures, parameters, biomeSource, seed, settings);
         this.aquiferCache = new FastConcurrentCache<>(256);
-        this.terrainCache = new FastConcurrentCache<>(256);
+        this.terrainCache = new FastConcurrentCache<>(289);
 
         this.biomeNoiseSamplers = collectBiomeNoiseSamplers(seed);
         this.chunkDataProvider = customBiomeSource.getChunkDataProvider();
@@ -474,14 +474,6 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
                 final ChunkPos chunkPos = new ChunkPos(x, z);
                 final ChunkAccess chunk = level.getChunk(x, z);
 
-                // Lock sections
-                final Set<LevelChunkSection> sections = new HashSet<>();
-                for (LevelChunkSection section : chunk.getSections())
-                {
-                    section.acquire();
-                    sections.add(section);
-                }
-
                 // set just the cache, and only if we don't have it already
                 if (terrainCache.getIfPresent(x, z) == null)
                 {
@@ -490,9 +482,6 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
                     filler.fillFromNoise();
                     terrainCache.set(x, z, new IntArray256(filler.getSample()));
                 }
-
-                // Unlock sections
-                sections.forEach(LevelChunkSection::release);
             }
         }
 
