@@ -65,6 +65,11 @@ public class BiomeVariants
         return group == Group.RIVER;
     }
 
+    public boolean isLakeOrRiver()
+    {
+        return group == Group.RIVER || group == Group.LAKE;
+    }
+
     public boolean isShore()
     {
         return this == TFCBiomes.SHORE;

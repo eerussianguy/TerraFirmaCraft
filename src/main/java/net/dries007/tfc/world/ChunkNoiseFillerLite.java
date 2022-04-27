@@ -1,8 +1,15 @@
+/*
+ * Licensed under the EUPL, Version 1.2.
+ * You may obtain a copy of the Licence at:
+ * https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ */
+
 package net.dries007.tfc.world;
 
 import java.util.Map;
 
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.ChunkAccess;
@@ -28,7 +35,7 @@ public class ChunkNoiseFillerLite
     private int blockX, blockZ; // Absolute x/z positions
     private int localX, localZ; // Chunk-local x/z
 
-    public ChunkNoiseFillerLite(LevelAccessor level, ChunkAccess chunk, Object2DoubleMap<Biome>[] sampledBiomeWeights, Map<BiomeVariants, BiomeNoiseSampler> biomeNoiseSamplers, ChunkNoiseSamplingSettings settings)
+    public ChunkNoiseFillerLite(LevelAccessor level, ChunkPos chunkPos, Object2DoubleMap<Biome>[] sampledBiomeWeights, Map<BiomeVariants, BiomeNoiseSampler> biomeNoiseSamplers, ChunkNoiseSamplingSettings settings)
     {
         this.level = level;
         this.biomeNoiseSamplers = biomeNoiseSamplers;
@@ -36,8 +43,8 @@ public class ChunkNoiseFillerLite
         this.biomeWeights1 = new Object2DoubleOpenHashMap<>();
         this.sampledBiomeWeights = sampledBiomeWeights;
         this.settings = settings;
-        this.chunkMinX = chunk.getPos().getMinBlockX();
-        this.chunkMinZ = chunk.getPos().getMinBlockZ();
+        this.chunkMinX = chunkPos.getMinBlockX();
+        this.chunkMinZ = chunkPos.getMinBlockZ();
         this.sample = new int[16 * 16];
     }
 

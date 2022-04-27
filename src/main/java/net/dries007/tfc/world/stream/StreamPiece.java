@@ -1,3 +1,9 @@
+/*
+ * Licensed under the EUPL, Version 1.2.
+ * You may obtain a copy of the Licence at:
+ * https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ */
+
 package net.dries007.tfc.world.stream;
 
 import net.minecraft.core.Direction;
@@ -22,28 +28,30 @@ public class StreamPiece
     private final StreamPiece downstreamPiece;
     private final float x;
     private final float z;
+    private final int surfaceHeight;
 
-    public StreamPiece(StreamTemplate template, float x, float z, int width, int height)
+    public StreamPiece(StreamTemplate template, float x, float z, int width, int height, int surfaceHeight)
     {
-        this(template, null, width, height, x, z);
+        this(template, null, width, height, x, z, surfaceHeight);
     }
 
-    public StreamPiece(StreamTemplate template, StreamPiece downstreamPiece, int width, int height)
+    public StreamPiece(StreamTemplate template, StreamPiece downstreamPiece, int width, int height, int surfaceHeight)
     {
-        this(template, downstreamPiece, width, height, 0, 0);
+        this(template, downstreamPiece, width, height, 0, 0, surfaceHeight);
     }
 
     public StreamPiece(CompoundTag nbt, @Nullable StreamPiece downstreamPiece)
     {
-        this(StreamTemplate.get(nbt.getInt("template")), downstreamPiece, nbt.getInt("width"), nbt.getInt("height"), nbt.getFloat("x"), nbt.getFloat("z"));
+        this(StreamTemplate.get(nbt.getInt("template")), downstreamPiece, nbt.getInt("width"), nbt.getInt("height"), nbt.getFloat("x"), nbt.getFloat("z"), nbt.getInt("surfaceHeight"));
     }
 
-    private StreamPiece(StreamTemplate template, @Nullable StreamPiece downstreamPiece, int width, int height, float xIn, float zIn)
+    private StreamPiece(StreamTemplate template, @Nullable StreamPiece downstreamPiece, int width, int height, float xIn, float zIn, int surfaceHeight)
     {
         this.template = template;
         this.flows = new Flow[width * width];
         this.width = width;
         this.height = height;
+        this.surfaceHeight = surfaceHeight;
 
         if (width == StreamTemplate.SIZE)
         {
@@ -160,6 +168,11 @@ public class StreamPiece
         return upstreamDirection;
     }
 
+    public int getSurfaceHeight()
+    {
+        return surfaceHeight;
+    }
+
     public Flow getFlow(int x, int z)
     {
         if (x < 0 || z < 0 || x >= width || z >= width)
@@ -179,6 +192,7 @@ public class StreamPiece
 
     public CompoundTag serializeNBT()
     {
+        // todo
         CompoundTag nbt = new CompoundTag();
         return nbt;
     }
