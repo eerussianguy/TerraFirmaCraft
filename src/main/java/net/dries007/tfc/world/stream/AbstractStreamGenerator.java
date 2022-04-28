@@ -20,7 +20,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.ChunkStatus;
 
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.world.TFCChunkGenerator;
 import net.dries007.tfc.world.chunkdata.ChunkData;
 
 
@@ -56,7 +55,7 @@ public abstract class AbstractStreamGenerator
      *
      * @param level the level
      * @param posAt The position of the origin of the stream.
-     * @param biomes the local biome array, 16x16
+     * @param biomes the fuzzy local biome array, 4x4
      * @return the stream that was generated, or null if not
      */
     @Nullable
@@ -149,7 +148,7 @@ public abstract class AbstractStreamGenerator
         {
             List<StreamTemplate> drainTemplates = StreamTemplate.DRAIN_TEMPLATES.get(Direction.Plane.HORIZONTAL.getRandomDirection(random));
             StreamTemplate drainTemplate = drainTemplates.get(random.nextInt(drainTemplates.size()));
-            StreamPiece drainPiece = new StreamPiece(drainTemplate, pos.getX() - drainTemplate.getDownstreamX(), pos.getZ() - drainTemplate.getDownstreamZ(), DRAIN_STREAM_WIDTH, getSeaLevel(), TFCChunkGenerator.fuzzyMax(heights));
+            StreamPiece drainPiece = new StreamPiece(drainTemplate, pos.getX() - drainTemplate.getDownstreamX(), pos.getZ() - drainTemplate.getDownstreamZ(), DRAIN_STREAM_WIDTH, getSeaLevel(), heights);
 
             // Check that drain does not intersect other streams
             for (StreamStructure other : generatedStreamStructures.values())
@@ -183,8 +182,8 @@ public abstract class AbstractStreamGenerator
             if (nextWidth == SOURCE_CUTOFF_WIDTH)
             {
                 // Must generate a source piece
-                StreamPiece sourcePiece = generateSourcePiece(stream, branch, downstreamPiece, SOURCE_CUTOFF_WIDTH, TFCChunkGenerator.fuzzyMax(heights));
-                if (sourcePiece != null && !branch.intersectsBoxIgnoringPiece(sourcePiece.getBox(), downstreamPiece) && branch.getMaxSurfaceHeight() <= sourcePiece.getSurfaceHeight())
+                StreamPiece sourcePiece = generateSourcePiece(stream, branch, downstreamPiece, SOURCE_CUTOFF_WIDTH, heights);
+                if (sourcePiece != null && !branch.intersectsBoxIgnoringPiece(sourcePiece.getBox(), downstreamPiece) && downstreamPiece.getSurfaceMaxHeight() <= sourcePiece.getSurfaceMaxHeight())
                 {
                     // Valid source piece
                     branch.push(sourcePiece);
@@ -196,15 +195,15 @@ public abstract class AbstractStreamGenerator
             else
             {
                 // Generate possible straight and branch pieces
-                StreamPiece straightPiece = generateStraightPiece(stream, branch, downstreamPiece, nextWidth, TFCChunkGenerator.fuzzyMax(heights));
-                if (straightPiece != null && branch.getMaxSurfaceHeight() <= straightPiece.getSurfaceHeight())
+                StreamPiece straightPiece = generateStraightPiece(stream, branch, downstreamPiece, nextWidth, heights);
+                if (straightPiece != null && branch.getMaxSurfaceHeight() <= straightPiece.getSurfaceMaxHeight())
                 {
 
                     // Optionally, generate a tributary
                     if (random.nextFloat() < BRANCH_CHANCE)
                     {
-                        StreamPiece branchPiece = generateBranchPiece(stream, branch, downstreamPiece, nextWidth - BRANCH_DECREASE_WIDTH, straightPiece.getUpstreamDirection(), TFCChunkGenerator.fuzzyMax(heights));
-                        if (branchPiece != null && branchPiece.getTemplate() != straightPiece.getTemplate() && branchPiece.getUpstreamDirection() != straightPiece.getUpstreamDirection() && straightPiece.getSurfaceHeight() <= branchPiece.getSurfaceHeight())
+                        StreamPiece branchPiece = generateBranchPiece(stream, branch, downstreamPiece, nextWidth - BRANCH_DECREASE_WIDTH, straightPiece.getUpstreamDirection(), heights);
+                        if (branchPiece != null && branchPiece.getTemplate() != straightPiece.getTemplate() && branchPiece.getUpstreamDirection() != straightPiece.getUpstreamDirection() && straightPiece.getSurfaceMaxHeight() <= branchPiece.getSurfaceMaxHeight())
                         {
                             // Branch is valid: can't be the same piece as the normal, or have the same direction upstream
                             StreamBranch newBranch = new StreamBranch(branchPiece);
@@ -236,7 +235,7 @@ public abstract class AbstractStreamGenerator
         // piece to be replaced must be at most the max width for a source piece
         if (downstreamPiece.getWidth() <= SOURCE_MAX_WIDTH && downstreamPiece.getDownstream() != null && branch.getPieces().size() > 1)
         {
-            StreamPiece sourcePiece = generateSourcePiece(stream, branch, downstreamPiece.getDownstream(), downstreamPiece.getWidth(), downstreamPiece.getSurfaceHeight());
+            StreamPiece sourcePiece = generateSourcePiece(stream, branch, downstreamPiece.getDownstream(), downstreamPiece.getWidth(), downstreamPiece.getHeightInfo());
             if (sourcePiece != null)
             {
                 // Source is valid, so replace the previous piece
@@ -249,25 +248,25 @@ public abstract class AbstractStreamGenerator
     }
 
     @Nullable
-    protected StreamPiece generateBranchPiece(StreamStructure stream, StreamBranch branch, StreamPiece previousPiece, int streamWidth, Direction excludedDirection, int surfaceHeight)
+    protected StreamPiece generateBranchPiece(StreamStructure stream, StreamBranch branch, StreamPiece previousPiece, int streamWidth, Direction excludedDirection, int[] surfaceHeight)
     {
         return generatePiece(stream, branch, previousPiece, streamWidth, StreamTemplate.CONNECTOR_TEMPLATES.get(previousPiece.getUpstreamDirection()).stream().filter(template -> template.getUpstreamDirection() != excludedDirection).collect(Collectors.toList()), surfaceHeight);
     }
 
     @Nullable
-    protected StreamPiece generateStraightPiece(StreamStructure stream, StreamBranch branch, StreamPiece previousPiece, int streamWidth, int surfaceHeight)
+    protected StreamPiece generateStraightPiece(StreamStructure stream, StreamBranch branch, StreamPiece previousPiece, int streamWidth, int[] surfaceHeight)
     {
         return generatePiece(stream, branch, previousPiece, streamWidth, StreamTemplate.CONNECTOR_TEMPLATES.get(previousPiece.getUpstreamDirection()), surfaceHeight);
     }
 
     @Nullable
-    protected StreamPiece generateSourcePiece(StreamStructure stream, StreamBranch branch, StreamPiece previousPiece, int streamWidth, int surfaceHeight)
+    protected StreamPiece generateSourcePiece(StreamStructure stream, StreamBranch branch, StreamPiece previousPiece, int streamWidth, int[] surfaceHeight)
     {
         return generatePiece(stream, branch, previousPiece, streamWidth, StreamTemplate.SOURCE_TEMPLATES.get(previousPiece.getUpstreamDirection()), surfaceHeight);
     }
 
     @Nullable
-    protected StreamPiece generatePiece(StreamStructure stream, StreamBranch branch, StreamPiece previousPiece, int streamWidth, List<StreamTemplate> templates, int surfaceHeight)
+    protected StreamPiece generatePiece(StreamStructure stream, StreamBranch branch, StreamPiece previousPiece, int streamWidth, List<StreamTemplate> templates, int[] surfaceHeight)
     {
         StreamTemplate template = templates.get(random.nextInt(templates.size()));
         StreamPiece piece = new StreamPiece(template, previousPiece, streamWidth, previousPiece.getHeight() + 1, surfaceHeight);

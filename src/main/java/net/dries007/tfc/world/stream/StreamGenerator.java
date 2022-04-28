@@ -54,15 +54,9 @@ public class StreamGenerator extends AbstractStreamGenerator
         return true;
     }
 
-    public void buildHeightDependentStreams(LevelAccessor level, ChunkAccess chunk, ChunkPos chunkPos, Biome[] biomes, @Nullable TFCChunkGenerator.IntArray256 data, ChunkData chunkData)
+    public void buildHeightDependentStreams(LevelAccessor level, ChunkAccess chunk, ChunkPos chunkPos, Biome[] biomes, int[] currentSurfaceHeight, ChunkData chunkData)
     {
-        if (data == null)
-        {
-            //TerraFirmaCraft.LOGGER.info("Failed to get sample for {}", chunkPos);
-            return;
-        }
         final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
-        final int[] samples = data.values();
         final BlockState water = TFCBlocks.RIVER_WATER.get().defaultBlockState();
         final RockData rock = chunkData.getRockData();
         for (StreamStructure stream : generateStreamsAroundChunk(level, chunkPos, biomes, chunkData))
@@ -84,7 +78,7 @@ public class StreamGenerator extends AbstractStreamGenerator
                             Flow flow = piece.getFlow(x, z);
                             if (flow != Flow.NONE)
                             {
-                                final int surfaceHeight = samples[(actualX & 15) + 16 * (actualZ & 15)];
+                                final int surfaceHeight = currentSurfaceHeight[(actualX & 15) + 16 * (actualZ & 15)];
                                 mutablePos.set(actualX, surfaceHeight, actualZ);
                                 final BlockState flowing = water.setValue(RiverWaterBlock.FLOW, flow);
                                 chunk.setBlockState(mutablePos, flowing, false);

@@ -38,7 +38,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.mixin.accessor.ChunkAccessAccessor;
 import net.dries007.tfc.world.biome.*;
 import net.dries007.tfc.world.chunkdata.ChunkData;
@@ -146,20 +145,6 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
                 accumulator.mergeDouble(entry.getKey(), entry.getDoubleValue() * t, Double::sum);
             }
         }
-    }
-
-    public static int fuzzyMax(int[] values)
-    {
-        int max = -1;
-        final int skip = 2;
-        for (int array = 0; array < 256; array += skip)
-        {
-            if (values[array] > max)
-            {
-                max = values[array];
-            }
-        }
-        return max;
     }
 
     private static Map<BiomeVariants, Supplier<BiomeNoiseSampler>> collectBiomeNoiseSamplers(long seed)
@@ -288,7 +273,7 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
 
     private final NoiseBasedChunkGenerator stupidMojangChunkGenerator; // Mojang fix your god awful deprecated carver nonsense
     private final FastConcurrentCache<TFCAquifer> aquiferCache;
-    private final FastConcurrentCache<IntArray256> terrainCache;
+    private final FastConcurrentCache<IntArray16> terrainCache;
 
     private final Map<BiomeVariants, Supplier<BiomeNoiseSampler>> biomeNoiseSamplers;
     private final ChunkDataProvider chunkDataProvider;
@@ -434,7 +419,7 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
     @Override
     public void spawnOriginalMobs(WorldGenRegion level)
     {
-        // todo: what on earth?
+        // todo: what on earth? this might actually be useful wrt using our own spawning system over vanilla's.
     }
 
     @Override
@@ -475,12 +460,13 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
                 final ChunkAccess chunk = level.getChunk(x, z);
 
                 // set just the cache, and only if we don't have it already
-                if (terrainCache.getIfPresent(x, z) == null)
+                IntArray16 cached = terrainCache.getIfPresent(x, z);
+                if (cached == null)
                 {
                     final Object2DoubleMap<Biome>[] biomeWeights = sampleBiomes(chunkPos, this::sampleBiomeIgnoreClimate, biome -> TFCBiomes.getExtensionOrThrow(level, biome).variants().getGroup());
                     final ChunkNoiseFillerLite filler = new ChunkNoiseFillerLite(level, chunkPos, biomeWeights, createBiomeSamplersForChunk(), createNoiseSamplingSettingsForChunk(chunk));
-                    filler.fillFromNoise();
-                    terrainCache.set(x, z, new IntArray256(filler.getSample()));
+                    filler.fillFromNoiseLowRes();
+                    terrainCache.set(x, z, new IntArray16(filler.getLowResSample()));
                 }
             }
         }
@@ -494,12 +480,12 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
             sections.add(section);
         }
 
-        int[][] complete = new int[289][256];
+        int[][] complete = new int[289][16];
         for(int x = chunkX - range; x <= chunkX + range; ++x)
         {
             for (int z = chunkZ - range; z <= chunkZ + range; ++z)
             {
-                final IntArray256 cached = terrainCache.getIfPresent(x, z);
+                final IntArray16 cached = terrainCache.getIfPresent(x, z);
                 if (cached != null)
                 {
                     complete[(x - chunkX + range) + 17 * (z - chunkZ + range)] = cached.values;
@@ -547,12 +533,11 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
         filler.fillFromNoise();
 
         aquiferCache.set(chunkPos.x, chunkPos.z, filler.aquifer());
-        getOrCreateTerrainHeight(chunk);
 
         // Unlock before surfaces are built, as they use locks directly
         sections.forEach(LevelChunkSection::release);
 
-        streamGenerator.buildHeightDependentStreams(actualLevel, chunk, chunkPos, filler.getLocalBiomes(), getOrCreateTerrainHeight(chunk), chunkData);
+        streamGenerator.buildHeightDependentStreams(actualLevel, chunk, chunkPos, filler.getLocalBiomes(), filler.getSurfaceHeight(), chunkData);
         surfaceManager.buildSurface(actualLevel, chunk, getRockLayerSettings(), chunkData, filler.getLocalBiomes(), filler.getLocalBiomeWeights(), filler.getSlopeMap(), random, getSeaLevel(), settings.minY());
 
         return CompletableFuture.completedFuture(chunk);
@@ -677,19 +662,5 @@ public class TFCChunkGenerator extends ChunkGenerator implements ChunkGeneratorE
         return aquifer;
     }
 
-    private IntArray256 getOrCreateTerrainHeight(ChunkAccess chunk)
-    {
-        final ChunkPos chunkPos = chunk.getPos();
-        IntArray256 array = terrainCache.getIfPresent(chunkPos.x, chunkPos.z);
-        if (array == null)
-        {
-            final ChunkData chunkData = chunkDataProvider.get(chunk);
-            array = new IntArray256(chunkData.getTerrainSurfaceHeight()[9 + (17 * 9)]);
-
-            terrainCache.set(chunkPos.x, chunkPos.z, array);
-        }
-        return array;
-    }
-
-    public record IntArray256(int[] values) {}
+    public record IntArray16(int[] values) {}
 }

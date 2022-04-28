@@ -12,7 +12,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.chunk.ChunkAccess;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -22,7 +21,8 @@ import net.dries007.tfc.world.noise.ChunkNoiseSamplingSettings;
 
 public class ChunkNoiseFillerLite
 {
-    private final int[] sample; // the actual sampled heights;
+    private final int[] sample; // the actual sampled heights
+    private final int[] lowResSample; // a less accurate sample
 
     private final LevelAccessor level;
     private final Map<BiomeVariants, BiomeNoiseSampler> biomeNoiseSamplers; // Biome -> Noise Samplers
@@ -46,11 +46,42 @@ public class ChunkNoiseFillerLite
         this.chunkMinX = chunkPos.getMinBlockX();
         this.chunkMinZ = chunkPos.getMinBlockZ();
         this.sample = new int[16 * 16];
+        this.lowResSample = new int[4 * 4];
+    }
+
+    public int[] getLowResSample()
+    {
+        return lowResSample;
     }
 
     public int[] getSample()
     {
         return sample;
+    }
+
+    public void fillFromNoiseLowRes()
+    {
+        for (int cellX = 0; cellX < settings.cellCountXZ(); cellX += 4)
+        {
+            for (int cellZ = 0; cellZ < settings.cellCountXZ(); cellZ += 4)
+            {
+                // skip cell Y
+                for (int localCellX = 0; localCellX < settings.cellWidth(); localCellX++)
+                {
+                    blockX = chunkMinX + cellX * settings.cellWidth() + localCellX;
+                    localX = blockX & 15;
+
+                    // cannot update for x here because we first need to update for yz. So we do all three each time per cell
+                    for (int localCellZ = 0; localCellZ < settings.cellWidth(); localCellZ++)
+                    {
+                        blockZ = chunkMinZ + cellZ * settings.cellWidth() + localCellZ;
+                        localZ = blockZ & 15;
+
+                        lowResSample[(cellX / 4) + cellZ] = sampleColumnHeightAndBiome();
+                    }
+                }
+            }
+        }
     }
 
     public void fillFromNoise()
@@ -115,7 +146,7 @@ public class ChunkNoiseFillerLite
             double height = weight * sampler.height();
             totalHeight += height;
 
-            // Partition into river / shore / normal for standard biome transformations
+            /*// Partition into river / shore / normal for standard biome transformations
             if (variants.isRiver())
             {
                 riverHeight += height;
@@ -135,6 +166,10 @@ public class ChunkNoiseFillerLite
                     shoreBiomeAt = entry.getKey();
                     maxShoreWeight = weight;
                 }
+            }*/
+            if (variants.isLakeOrRiver() || variants.isShore())
+            {
+                return 63; // todo bad ? necessary?
             }
             else if (maxNormalWeight < weight)
             {

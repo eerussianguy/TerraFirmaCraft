@@ -1090,6 +1090,16 @@ public final class Helpers
         return Mth.map(noise.getValue(x, y, z), -1, 1, min, max);
     }
 
+    public static int max(int[] values)
+    {
+        int max = Integer.MIN_VALUE;
+        for(int value : values)
+        {
+            if (value > max) max = value;
+        }
+        return max;
+    }
+
     public static ResourceLocation animalTexture(String name)
     {
         return identifier("textures/entity/animal/" + name + ".png");

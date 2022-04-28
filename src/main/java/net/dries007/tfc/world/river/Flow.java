@@ -41,7 +41,6 @@ public enum Flow implements StringRepresentable
         return i >= 0 && i < VALUES.length ? VALUES[i] : NONE;
     }
 
-    // todo: the assumptions herein may not be accurate
     public static Flow rotateCW(Flow original)
     {
         // Rotates by ordinal
@@ -51,7 +50,7 @@ public enum Flow implements StringRepresentable
         }
         else
         {
-            int newOrdinal = (original.ordinal() + 4) % MODULUS;
+            int newOrdinal = (original.ordinal() + 12) % MODULUS;
             return VALUES[newOrdinal];
         }
     }
@@ -65,7 +64,7 @@ public enum Flow implements StringRepresentable
         }
         else
         {
-            int newOrdinal = -original.ordinal() + MODULUS;
+            int newOrdinal = (24 - original.ordinal()) % MODULUS;
             return VALUES[newOrdinal];
         }
     }

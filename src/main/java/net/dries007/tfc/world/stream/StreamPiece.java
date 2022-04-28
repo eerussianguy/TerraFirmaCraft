@@ -9,6 +9,8 @@ package net.dries007.tfc.world.stream;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 
+import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.world.TFCChunkGenerator;
 import net.dries007.tfc.world.river.Flow;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,30 +30,32 @@ public class StreamPiece
     private final StreamPiece downstreamPiece;
     private final float x;
     private final float z;
-    private final int surfaceHeight;
+    private final int[] surfaceHeight;
+    private final int surfaceMaxHeight;
 
-    public StreamPiece(StreamTemplate template, float x, float z, int width, int height, int surfaceHeight)
+    public StreamPiece(StreamTemplate template, float x, float z, int width, int height, int[] surfaceHeight)
     {
         this(template, null, width, height, x, z, surfaceHeight);
     }
 
-    public StreamPiece(StreamTemplate template, StreamPiece downstreamPiece, int width, int height, int surfaceHeight)
+    public StreamPiece(StreamTemplate template, StreamPiece downstreamPiece, int width, int height, int[] surfaceHeight)
     {
         this(template, downstreamPiece, width, height, 0, 0, surfaceHeight);
     }
 
     public StreamPiece(CompoundTag nbt, @Nullable StreamPiece downstreamPiece)
     {
-        this(StreamTemplate.get(nbt.getInt("template")), downstreamPiece, nbt.getInt("width"), nbt.getInt("height"), nbt.getFloat("x"), nbt.getFloat("z"), nbt.getInt("surfaceHeight"));
+        this(StreamTemplate.get(nbt.getInt("template")), downstreamPiece, nbt.getInt("width"), nbt.getInt("height"), nbt.getFloat("x"), nbt.getFloat("z"), nbt.getIntArray("surfaceHeights"));
     }
 
-    private StreamPiece(StreamTemplate template, @Nullable StreamPiece downstreamPiece, int width, int height, float xIn, float zIn, int surfaceHeight)
+    private StreamPiece(StreamTemplate template, @Nullable StreamPiece downstreamPiece, int width, int height, float xIn, float zIn, int[] surfaceHeight)
     {
         this.template = template;
         this.flows = new Flow[width * width];
         this.width = width;
         this.height = height;
         this.surfaceHeight = surfaceHeight;
+        this.surfaceMaxHeight = Helpers.max(surfaceHeight);
 
         if (width == StreamTemplate.SIZE)
         {
@@ -168,9 +172,14 @@ public class StreamPiece
         return upstreamDirection;
     }
 
-    public int getSurfaceHeight()
+    public int[] getHeightInfo()
     {
         return surfaceHeight;
+    }
+
+    public int getSurfaceMaxHeight()
+    {
+        return surfaceMaxHeight;
     }
 
     public Flow getFlow(int x, int z)

@@ -80,6 +80,7 @@ public class ChunkData implements ICapabilitySerializable<CompoundTag>
     @Nullable private LerpFloatLayer temperatureLayer;
     @Nullable private int[] aquiferSurfaceHeight;
     @Nullable private int[][] terrainSurfaceHeight;
+    @Nullable private int[] localTerrainSurfaceHeight;
     private ForestType forestType;
     private float forestWeirdness;
     private float forestDensity;
@@ -219,6 +220,16 @@ public class ChunkData implements ICapabilitySerializable<CompoundTag>
         terrainSurfaceHeight = heights;
     }
 
+    public int[] getLocalTerrainSurfaceHeight()
+    {
+        return localTerrainSurfaceHeight;
+    }
+
+    public void setLocalTerrainSurfaceHeight(int[] heights)
+    {
+        localTerrainSurfaceHeight = heights;
+    }
+
     /**
      * Create an update packet to send to client with necessary information
      */
@@ -280,6 +291,10 @@ public class ChunkData implements ICapabilitySerializable<CompoundTag>
             {
                 nbt.putIntArray("aquiferSurfaceHeight", aquiferSurfaceHeight);
             }
+            if (localTerrainSurfaceHeight != null)
+            {
+                nbt.putIntArray("localTerrainSurfaceHeight", aquiferSurfaceHeight);
+            }
             if (terrainSurfaceHeight != null)
             {
                 for (int i = 0; i < 289; i++)
@@ -302,6 +317,7 @@ public class ChunkData implements ICapabilitySerializable<CompoundTag>
             temperatureLayer = nbt.contains("temperature") ? new LerpFloatLayer(nbt.getCompound("temperature")) : null;
             rockData = nbt.contains("rockData", Tag.TAG_COMPOUND) ? new RockData(nbt.getCompound("rockData"), rockLayerSettings) : null;
             aquiferSurfaceHeight = nbt.contains("aquiferSurfaceHeight") ? nbt.getIntArray("aquiferSurfaceHeight") : null;
+            localTerrainSurfaceHeight = nbt.contains("localTerrainSurfaceHeight") ? nbt.getIntArray("localTerrainSurfaceHeight") : null;
             if (terrainSurfaceHeight == null) terrainSurfaceHeight = new int[289][256];
             for (int i = 0; i < 289; i++)
             {

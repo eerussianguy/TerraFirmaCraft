@@ -39,9 +39,9 @@ public interface IStreamStructure
         int max = -1;
         for (StreamPiece piece : getPieces())
         {
-            if (piece.getSurfaceHeight() > max)
+            if (piece.getSurfaceMaxHeight() > max)
             {
-                max = piece.getSurfaceHeight();
+                max = piece.getSurfaceMaxHeight();
             }
         }
         return max;
