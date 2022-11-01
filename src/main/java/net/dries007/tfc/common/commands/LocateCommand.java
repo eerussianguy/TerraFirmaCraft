@@ -8,7 +8,6 @@ package net.dries007.tfc.common.commands;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Random;
 import java.util.function.Function;
 
 import net.minecraft.ChatFormatting;
@@ -165,7 +164,6 @@ public class LocateCommand
         final ConfiguredFeature<?, ? extends VeinFeature<?, ?>> vein = optionalVeinFeature.get();
 
         final ArrayList<? extends Vein> veins = new ArrayList<>();
-        final Random random = new Random();
         final BiomeSource source = level.getChunkSource().getGenerator().getBiomeSource();
         final Climate.Sampler sampler = level.getChunkSource().getGenerator().climateSampler();
         final BiomeManager biomeManager = level.getBiomeManager().withDifferentSource((x, y, z) -> source.getNoiseBiome(x, y, z, sampler));

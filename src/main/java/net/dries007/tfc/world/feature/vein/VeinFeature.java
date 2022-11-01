@@ -29,6 +29,8 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import com.mojang.serialization.Codec;
 import net.dries007.tfc.common.fluids.FluidHelpers;
 import net.dries007.tfc.util.EnvironmentHelpers;
+import net.dries007.tfc.util.VeinAuditor;
+
 import org.jetbrains.annotations.Nullable;
 
 public abstract class VeinFeature<C extends VeinConfig, V extends Vein> extends Feature<C>
@@ -48,6 +50,7 @@ public abstract class VeinFeature<C extends VeinConfig, V extends Vein> extends 
         final WorldGenerationContext generationContext = new WorldGenerationContext(context.chunkGenerator(), level);
 
         final ChunkPos chunkPos = new ChunkPos(pos);
+        VeinAuditor.markChunkGenerated();
         final List<V> veins = getNearbyVeins(level, generationContext, chunkPos, config.getChunkRadius(), config, level::getBiome);
         if (!veins.isEmpty())
         {
@@ -63,7 +66,6 @@ public abstract class VeinFeature<C extends VeinConfig, V extends Vein> extends 
     public final List<V> getNearbyVeins(WorldGenLevel level, WorldGenerationContext context, ChunkPos pos, int radius, C config, Function<BlockPos, Holder<Biome>> biomeQuery)
     {
         final List<V> veins = new ArrayList<>();
-        final Random random = new Random();
         for (int x = pos.x - radius; x <= pos.x + radius; x++)
         {
             for (int z = pos.z - radius; z <= pos.z + radius; z++)
@@ -101,6 +103,7 @@ public abstract class VeinFeature<C extends VeinConfig, V extends Vein> extends 
         int minY = Math.max(config.getMinY(context), box.minY()), maxY = Math.min(config.getMaxY(context), box.maxY());
         int minZ = Math.max(blockZ, box.minZ()), maxZ = Math.min(blockZ + 15, box.maxZ());
 
+        boolean generated = false;
         for (int x = minX; x <= maxX; x++)
         {
             for (int z = minZ; z <= maxZ; z++)
@@ -118,9 +121,15 @@ public abstract class VeinFeature<C extends VeinConfig, V extends Vein> extends 
                         {
                             level.setBlock(mutablePos, oreState, 3);
                             maxVeinY = y;
+                            if (!generated)
+                            {
+                                generated = true;
+                                VeinAuditor.markVeinGenerated(oreState);
+                            }
                         }
                     }
                 }
+
 
                 final Indicator indicator = config.getIndicator();
                 if (indicator != null && maxVeinY != -1 && random.nextInt(indicator.rarity()) == 0)
