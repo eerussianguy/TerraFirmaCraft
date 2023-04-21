@@ -87,14 +87,12 @@ public class SodaStrawsBakedModel implements BasicBakedModel
 
     private void buildModels(Random random)
     {
-        int i = 0;
         for (int x = 0; x < 16; x++)
         {
             for (int z = 0; z < 16; z++)
             {
-                shortStraws.set(i, buildStraw(x, Mth.nextInt(random, 5, 15), z));
-                longStraws.set(i, buildStraw(x, 0, z));
-                i++;
+                shortStraws.add(buildStraw(x, Mth.nextInt(random, 5, 15), z));
+                longStraws.add(buildStraw(x, 0, z));
             }
         }
     }
