@@ -1616,6 +1616,10 @@ def generate(rm: ResourceManager):
         rm.block_model(variant, textures={'0': texture, 'particle': texture}, parent='tfc:block/thin_spike')
         rm.block_model(variant + '_tip', textures={'0': texture, 'particle': texture}, parent='tfc:block/thin_spike_tip')
 
+    rm.blockstate('soda_straws').with_lang(lang('soda straws')).with_tag('minecraft:mineable/pickaxe')
+    rm.custom_block_model('soda_straws', 'tfc:soda_straws', {'textures': {'all': 'tfc:block/calcite'}})
+    rm.item_model('soda_straws', 'tfc:item/calcite')
+
     for color in ('tube', 'brain', 'bubble', 'fire', 'horn'):
         corals(rm, color, False)
         corals(rm, color, True)

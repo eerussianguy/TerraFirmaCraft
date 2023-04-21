@@ -171,6 +171,7 @@ public final class TFCBlocks
     public static final RegistryObject<ThinSpikeBlock> ICICLE = register("icicle", () -> new IcicleBlock(Properties.of(Material.ICE).noDrops().strength(0.4f).sound(SoundType.GLASS).noOcclusion().randomTicks()), EARTH);
 
     public static final RegistryObject<ThinSpikeBlock> CALCITE = register("calcite", () -> new ThinSpikeBlock(Properties.of(Material.GLASS).noDrops().strength(0.2f).sound(TFCSounds.THIN)), EARTH);
+    public static final RegistryObject<ThinSpikeBlock> SODA_STRAWS = register("soda_straws", () -> new ThinSpikeBlock(Properties.of(Material.GLASS).noDrops().strength(0.2f).sound(TFCSounds.THIN)), EARTH);
 
     // Ores
 

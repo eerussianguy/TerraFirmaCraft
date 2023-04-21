@@ -1,0 +1,7 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "loader": "tfc:soda_straws",
+  "textures": {
+    "all": "tfc:block/calcite"
+  }
+}

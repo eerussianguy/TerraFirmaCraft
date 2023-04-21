@@ -59,6 +59,7 @@ import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
@@ -70,6 +71,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import net.dries007.tfc.client.model.ContainedFluidModel;
+import net.dries007.tfc.client.model.block.SodaStrawsBakedModel;
 import net.dries007.tfc.client.model.entity.AlpacaModel;
 import net.dries007.tfc.client.model.entity.BearModel;
 import net.dries007.tfc.client.model.entity.BluegillModel;
@@ -202,6 +204,7 @@ public final class ClientEventHandler
         bus.addListener(ClientEventHandler::clientSetup);
         bus.addListener(ClientEventHandler::onConfigReload);
         bus.addListener(ClientEventHandler::registerModelLoaders);
+        bus.addListener(ClientEventHandler::onModelBake);
         bus.addListener(ClientEventHandler::registerColorHandlerBlocks);
         bus.addListener(ClientEventHandler::registerColorHandlerItems);
         bus.addListener(ClientEventHandler::registerParticleFactories);
@@ -587,6 +590,12 @@ public final class ClientEventHandler
     public static void registerModelLoaders(ModelRegistryEvent event)
     {
         ModelLoaderRegistry.registerLoader(Helpers.identifier("contained_fluid"), new ContainedFluidModel.Loader());
+        ModelLoaderRegistry.registerLoader(Helpers.identifier("soda_straws"), new SodaStrawsBakedModel.Loader());
+    }
+
+    public static void onModelBake(ModelBakeEvent event)
+    {
+        SodaStrawsBakedModel.INSTANCES.forEach(SodaStrawsBakedModel::init);
     }
 
     public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event)
