@@ -573,8 +573,6 @@ public final class RenderHelpers
         return Arrays.stream(textures).map(texture -> new Material(BLOCKS_ATLAS, texture)).toList();
     }
 
-    public static final BlockFaceUV UV_DEFAULT = new BlockFaceUV(new float[] {0f, 0f, 16f, 16f}, 0);;
-
     public static boolean isInside(int mouseX, int mouseY, int leftX, int topY, int width, int height)
     {
         return mouseX >= leftX && mouseX <= leftX + width && mouseY >= topY && mouseY <= mouseY + height;

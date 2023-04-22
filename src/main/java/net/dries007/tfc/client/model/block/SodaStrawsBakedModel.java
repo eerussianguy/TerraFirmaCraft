@@ -25,6 +25,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockElement;
 import net.minecraft.client.renderer.block.model.BlockElementFace;
+import net.minecraft.client.renderer.block.model.BlockFaceUV;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -103,15 +104,22 @@ public class SodaStrawsBakedModel implements BasicBakedModel
         final Map<Direction, BlockElementFace> faces = Maps.newEnumMap(Direction.class);
         for (Direction d : Helpers.DIRECTIONS)
         {
-            faces.put(d, RenderHelpers.makeFace(RenderHelpers.UV_DEFAULT));
+            faces.put(d, RenderHelpers.makeFace(new BlockFaceUV(new float[] {x, 0, x + 1, 16}, 0)));
         }
-        final BlockElement part = new BlockElement(new Vector3f(x, y, z), new Vector3f(x + 1, 0, z + 1), faces, null, true);
+        final BlockElement part = new BlockElement(new Vector3f(x, y, z), new Vector3f(x + 1, 16, z + 1), faces, null, true);
         final var builder = new SimpleBakedModel.Builder(blockModel, ItemOverrides.EMPTY, false).particle(texture);
 
         for (var entry : part.faces.entrySet())
         {
             final Direction d = entry.getKey();
-            builder.addCulledFace(d, RenderHelpers.makeBakedQuad(part, entry.getValue(), texture, d, BlockModelRotation.X0_Y0, modelLocation));
+            if (d == Direction.UP)
+            {
+                builder.addCulledFace(d, RenderHelpers.makeBakedQuad(part, entry.getValue(), texture, d, BlockModelRotation.X0_Y0, modelLocation));
+            }
+            else
+            {
+                builder.addUnculledFace(RenderHelpers.makeBakedQuad(part, entry.getValue(), texture, d, BlockModelRotation.X0_Y0, modelLocation));
+            }
         }
 
         return builder.build();
@@ -148,20 +156,20 @@ public class SodaStrawsBakedModel implements BasicBakedModel
 
     public static class ModelData implements BlankModelData
     {
+        private static final Random RANDOM = new Random();
         private final List<BakedModel> models;
 
         public ModelData(BlockState state, BlockPos pos, List<BakedModel> shortStraws, List<BakedModel> longStraws)
         {
-            final Random rand = new Random();
             pos = new BlockPos(pos.getX(), 0, pos.getY());
-            rand.setSeed(pos.asLong() * 654321L);
+            RANDOM.setSeed(Helpers.hash(836494186029734123L, pos));
             if (state.getValue(ThinSpikeBlock.TIP))
             {
-                models = uniqueRandomSample(shortStraws, longStraws, 64, rand).list1;
+                models = uniqueRandomSample(shortStraws, longStraws, 64, RANDOM).list1;
             }
             else
             {
-                models = uniqueRandomSample(shortStraws, longStraws, 64, rand).list2;
+                models = uniqueRandomSample(shortStraws, longStraws, 64, RANDOM).list2;
             }
         }
 
