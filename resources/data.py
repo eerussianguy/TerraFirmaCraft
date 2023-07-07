@@ -646,7 +646,10 @@ def generate(rm: ResourceManager):
         'tfc:aggregate',
         'tfc:fire_clay_block',
         'tfc:charcoal_pile',
-        'tfc:charcoal_forge'
+        'tfc:charcoal_forge',
+        'tfc:sand/orange_microbial_mat',
+        'tfc:sand/yellow_microbial_mat',
+        'tfc:sand/blue_microbial_mat',
     ])
     rm.block_tag('minecraft:mineable/pickaxe', *[
         *['tfc:%s_sandstone/%s' % (variant, sand) for variant in SANDSTONE_BLOCK_TYPES for sand in SAND_BLOCK_TYPES],

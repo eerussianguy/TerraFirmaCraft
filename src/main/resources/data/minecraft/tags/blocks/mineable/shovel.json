@@ -167,6 +167,9 @@
     "tfc:aggregate",
     "tfc:fire_clay_block",
     "tfc:charcoal_pile",
-    "tfc:charcoal_forge"
+    "tfc:charcoal_forge",
+    "tfc:sand/orange_microbial_mat",
+    "tfc:sand/yellow_microbial_mat",
+    "tfc:sand/blue_microbial_mat"
   ]
 }

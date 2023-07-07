@@ -6,6 +6,7 @@
 
 package net.dries007.tfc.common.blocks;
 
+import java.awt.Color;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -97,6 +98,7 @@ import net.dries007.tfc.common.blocks.rock.RockCategory;
 import net.dries007.tfc.common.blocks.soil.ConnectedGrassBlock;
 import net.dries007.tfc.common.blocks.soil.SandBlockType;
 import net.dries007.tfc.common.blocks.soil.SoilBlockType;
+import net.dries007.tfc.common.blocks.soil.TFCSandBlock;
 import net.dries007.tfc.common.blocks.wood.TFCSlabBlock;
 import net.dries007.tfc.common.blocks.wood.TFCStairBlock;
 import net.dries007.tfc.common.blocks.wood.Wood;
@@ -140,6 +142,10 @@ public final class TFCBlocks
 
     public static final RegistryObject<Block> PEAT = register("peat", () -> new Block(Properties.of().mapColor(MapColor.TERRACOTTA_BLACK).strength(3.0F).sound(TFCSounds.PEAT)));
     public static final RegistryObject<Block> PEAT_GRASS = register("peat_grass", () -> new ConnectedGrassBlock(Properties.of().mapColor(MapColor.GRASS).randomTicks().strength(3.0F).sound(TFCSounds.PEAT), PEAT, null, null));
+
+    public static final RegistryObject<Block> ORANGE_MICROBIAL_MAT = register("sand/orange_microbial_mat", () -> new TFCSandBlock(new Color(235, 158, 52).getRGB(), BlockBehaviour.Properties.copy(Blocks.SAND).mapColor(MapColor.COLOR_ORANGE).strength(0.5F).sound(SoundType.SAND)));
+    public static final RegistryObject<Block> YELLOW_MICROBIAL_MAT = register("sand/yellow_microbial_mat", () -> new TFCSandBlock(new Color(235, 201, 52).getRGB(), BlockBehaviour.Properties.copy(Blocks.SAND).mapColor(MapColor.COLOR_YELLOW).strength(0.5F).sound(SoundType.SAND)));
+    public static final RegistryObject<Block> BLUE_MICROBIAL_MAT = register("sand/blue_microbial_mat", () -> new TFCSandBlock(new Color(52, 235, 229).getRGB(), BlockBehaviour.Properties.copy(Blocks.SAND).mapColor(MapColor.COLOR_BLUE).strength(0.5F).sound(SoundType.SAND)));
 
     public static final Map<SandBlockType, RegistryObject<Block>> SAND = Helpers.mapOfKeys(SandBlockType.class, type ->
         register(("sand/" + type.name()), type::create)

@@ -242,6 +242,8 @@ def generate(rm: ResourceManager):
     for block in SIMPLE_BLOCKS:
         rm.blockstate(block).with_block_model().with_item_model().with_block_loot('tfc:%s' % block).with_lang(lang(block))
     rm.blockstate('thatch').with_block_model({'texture': 'tfc:block/thatch'}, parent='block/powder_snow').with_item_model().with_block_loot('tfc:thatch').with_lang(lang('thatch'))
+    for color in ('orange', 'yellow', 'blue'):
+        rm.blockstate(('sand', '%s_microbial_mat' % color)).with_block_model().with_item_model().with_block_loot('tfc:sand/%s_microbial_mat' % color).with_lang(lang('%s microbial mat', color))
 
     for name in ('pumpkin', 'melon'):
         # Loot table for the non-rotten block is done via code, as we need to select rotten/not via tile entity

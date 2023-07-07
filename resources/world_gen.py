@@ -115,6 +115,7 @@ def generate(rm: ResourceManager):
     biome(rm, 'old_mountains', 'extreme_hills', 'mountains_all', hot_spring_features=True)
     biome(rm, 'oceanic_mountains', 'extreme_hills', 'mountains_all', ocean_features='both')
     biome(rm, 'volcanic_oceanic_mountains', 'extreme_hills', 'mountains_all', spawnable=False, ocean_features='both', volcano_features=True)
+    biome(rm, 'geothermal_mountains', 'extreme_hills', 'mountains_all', spawnable=False, ocean_features='both', volcano_features=True)
     biome(rm, 'ocean', 'ocean', 'water', spawnable=False, ocean_features=True)
     biome(rm, 'ocean_reef', 'ocean', 'water', spawnable=False, ocean_features=True, reef_features=True)
     biome(rm, 'deep_ocean', 'ocean', 'water', spawnable=False, ocean_features=True)

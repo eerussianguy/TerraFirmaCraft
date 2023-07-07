@@ -38,6 +38,10 @@ public final class SurfaceStates
     public static final SurfaceState SHORE_SANDSTONE = context -> context.getBottomRock().sandstone().defaultBlockState();
     public static final SurfaceState SHORE_MUD = context -> TFCBlocks.SOIL.get(SoilBlockType.MUD).get(SoilBlockType.Variant.SANDY_LOAM).get().defaultBlockState();
 
+    public static final SurfaceState ORANGE_MICROBIAL_MAT = context -> TFCBlocks.ORANGE_MICROBIAL_MAT.get().defaultBlockState();
+    public static final SurfaceState BLUE_MICROBIAL_MAT = context -> TFCBlocks.BLUE_MICROBIAL_MAT.get().defaultBlockState();
+    public static final SurfaceState YELLOW_MICROBIAL_MAT = context -> TFCBlocks.YELLOW_MICROBIAL_MAT.get().defaultBlockState();
+
     public static final SurfaceState RARE_SHORE_SAND = new SurfaceState()
     {
         private final Supplier<Block> pinkSand = TFCBlocks.SAND.get(SandBlockType.PINK);

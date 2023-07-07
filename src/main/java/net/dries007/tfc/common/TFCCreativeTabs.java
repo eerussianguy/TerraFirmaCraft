@@ -90,6 +90,10 @@ public final class TFCCreativeTabs
             TFCBlocks.SANDSTONE_DECORATIONS.get(type).values().forEach(reg -> accept(out, reg));
         }
 
+        accept(out, TFCBlocks.ORANGE_MICROBIAL_MAT);
+        accept(out, TFCBlocks.YELLOW_MICROBIAL_MAT);
+        accept(out, TFCBlocks.BLUE_MICROBIAL_MAT);
+
         out.accept(Blocks.ICE);
         accept(out, TFCBlocks.SEA_ICE);
         out.accept(Blocks.PACKED_ICE);

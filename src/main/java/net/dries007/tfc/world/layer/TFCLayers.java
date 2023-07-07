@@ -54,6 +54,7 @@ public class TFCLayers
     public static final int VOLCANIC_MOUNTAINS;
     public static final int OCEANIC_MOUNTAINS;
     public static final int VOLCANIC_OCEANIC_MOUNTAINS;
+    public static final int GEOTHERMAL_MOUNTAINS;
     public static final int CANYONS;
     public static final int SHORE;
     public static final int LAKE;
@@ -87,6 +88,7 @@ public class TFCLayers
         VOLCANIC_MOUNTAINS = register(() -> TFCBiomes.VOLCANIC_MOUNTAINS);
         OCEANIC_MOUNTAINS = register(() -> TFCBiomes.OCEANIC_MOUNTAINS);
         VOLCANIC_OCEANIC_MOUNTAINS = register(() -> TFCBiomes.VOLCANIC_OCEANIC_MOUNTAINS);
+        GEOTHERMAL_MOUNTAINS = register(() -> TFCBiomes.GEOTHERMAL_MOUNTAINS);
         CANYONS = register(() -> TFCBiomes.CANYONS);
         SHORE = register(() -> TFCBiomes.SHORE);
         LAKE = register(() -> TFCBiomes.LAKE);
@@ -276,7 +278,7 @@ public class TFCLayers
 
     public static boolean isMountains(int value)
     {
-        return value == MOUNTAINS || value == OCEANIC_MOUNTAINS || value == OLD_MOUNTAINS || value == VOLCANIC_MOUNTAINS || value == VOLCANIC_OCEANIC_MOUNTAINS;
+        return value == MOUNTAINS || value == OCEANIC_MOUNTAINS || value == OLD_MOUNTAINS || value == VOLCANIC_MOUNTAINS || value == VOLCANIC_OCEANIC_MOUNTAINS || value == GEOTHERMAL_MOUNTAINS;
     }
 
     public static boolean isLow(int value)
