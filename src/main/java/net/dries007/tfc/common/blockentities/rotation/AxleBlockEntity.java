@@ -6,13 +6,11 @@
 
 package net.dries007.tfc.common.blockentities.rotation;
 
-import java.util.EnumSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blockentities.TFCBlockEntity;
@@ -23,7 +21,7 @@ import net.dries007.tfc.util.rotation.Rotation;
 
 public class AxleBlockEntity extends TFCBlockEntity implements RotatingBlockEntity
 {
-    private final Node node;
+    protected final Node node;
     private boolean invalid;
 
     public AxleBlockEntity(BlockPos pos, BlockState state)
@@ -35,7 +33,6 @@ public class AxleBlockEntity extends TFCBlockEntity implements RotatingBlockEnti
     {
         super(type, pos, state);
 
-        // Axles translate along a single axis, and continue the input rotation out exactly
         final Direction.Axis axis = state.getValue(AxleBlock.AXIS);
 
         this.invalid = false;
