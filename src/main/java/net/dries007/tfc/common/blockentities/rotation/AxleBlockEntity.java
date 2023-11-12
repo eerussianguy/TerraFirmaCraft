@@ -37,11 +37,9 @@ public class AxleBlockEntity extends TFCBlockEntity implements RotatingBlockEnti
 
         // Axles translate along a single axis, and continue the input rotation out exactly
         final Direction.Axis axis = state.getValue(AxleBlock.AXIS);
-        final Direction forward = Direction.fromAxisAndDirection(axis, Direction.AxisDirection.POSITIVE);
-        final Direction backwards = Direction.fromAxisAndDirection(axis, Direction.AxisDirection.NEGATIVE);
 
         this.invalid = false;
-        this.node = new Node(pos, EnumSet.of(forward, backwards)) {
+        this.node = new Node(pos, Node.ofAxis(axis)) {
             @Override
             public Rotation rotation(Rotation sourceRotation, Direction sourceDirection, Direction exitDirection)
             {
