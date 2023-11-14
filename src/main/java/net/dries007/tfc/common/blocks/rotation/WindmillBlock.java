@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -35,7 +36,7 @@ import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
 import net.dries007.tfc.common.items.TFCItems;
 
-public class WindmillBlock extends ExtendedBlock implements EntityBlockExtension
+public class WindmillBlock extends ExtendedBlock implements EntityBlockExtension, ConnectedAxleBlock
 {
     public static final IntegerProperty COUNT = TFCBlockStateProperties.COUNT_1_5;
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
@@ -51,6 +52,7 @@ public class WindmillBlock extends ExtendedBlock implements EntityBlockExtension
         registerDefaultState(getStateDefinition().any().setValue(COUNT, 1));
     }
 
+    @Override
     public AxleBlock getAxle()
     {
         return axle.get();
@@ -108,5 +110,11 @@ public class WindmillBlock extends ExtendedBlock implements EntityBlockExtension
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
         return state.getValue(AXIS) == Direction.Axis.X ? AxleBlock.SHAPE_X : AxleBlock.SHAPE_Z;
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player)
+    {
+        return new ItemStack(TFCItems.WINDMILL_BLADE.get());
     }
 }
