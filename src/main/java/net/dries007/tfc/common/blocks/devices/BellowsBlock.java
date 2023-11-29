@@ -16,14 +16,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -36,7 +30,7 @@ import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.util.Helpers;
 
-public class BellowsBlock extends DeviceBlock
+public class BellowsBlock extends HorizontalDirectionalDeviceBlock
 {
     private static VoxelShape createShapeFor(Direction direction, float extension)
     {
@@ -58,23 +52,13 @@ public class BellowsBlock extends DeviceBlock
         return Helpers.rotateShape(direction, 0, 0, extension * 16, 16, 16, extension * 16 + 2);
     }
 
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private static final VoxelShape[] COMPLETE_SHAPES = Helpers.computeHorizontalShapes(d -> createShapeFor(d, 0.875f));
-
-    private final ExtendedProperties properties;
 
     public BellowsBlock(ExtendedProperties properties)
     {
         super(properties, InventoryRemoveBehavior.NOOP);
-        this.properties = properties;
 
         registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));
-    }
-
-    @Override
-    public ExtendedProperties getExtendedProperties()
-    {
-        return properties;
     }
 
     @Override
@@ -115,12 +99,6 @@ public class BellowsBlock extends DeviceBlock
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
-    {
-        builder.add(FACING);
-    }
-
-    @Override
     public PushReaction getPistonPushReaction(BlockState state)
     {
         return PushReaction.DESTROY;
@@ -138,19 +116,5 @@ public class BellowsBlock extends DeviceBlock
     public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type)
     {
         return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public BlockState rotate(BlockState state, Rotation rot)
-    {
-        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public BlockState mirror(BlockState state, Mirror mirror)
-    {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 }

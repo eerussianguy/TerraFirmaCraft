@@ -8,12 +8,14 @@ package net.dries007.tfc.common.blocks.rotation;
 
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
@@ -22,6 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blockentities.TFCBlockEntities;
@@ -74,6 +77,28 @@ public class GearBoxBlock extends DeviceBlock implements DirectionPropertyBlock,
             }
         }
         return InteractionResult.PASS;
+    }
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context)
+    {
+        BlockState state = defaultBlockState();
+        final Level level = context.getLevel();
+        final BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
+        for (Direction dir : context.getNearestLookingDirections())
+        {
+            cursor.setWithOffset(context.getClickedPos(), dir);
+            if (level.getBlockEntity(cursor) instanceof RotatingBlockEntity entity)
+            {
+                final BooleanProperty prop = DirectionPropertyBlock.getProperty(dir);
+                if (entity.getRotationNode().connections().contains(dir.getOpposite()) && canEnable(state, prop))
+                {
+                    state = state.setValue(prop, true);
+                }
+            }
+        }
+        return state;
     }
 
     /**

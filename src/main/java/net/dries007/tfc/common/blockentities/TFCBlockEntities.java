@@ -25,6 +25,7 @@ import net.dries007.tfc.common.blockentities.rotation.EncasedAxleBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.CrankshaftBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.GearBoxBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.HandWheelBlockEntity;
+import net.dries007.tfc.common.blockentities.rotation.PowerLoomBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.PumpBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.TripHammerBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.WaterWheelBlockEntity;
@@ -133,6 +134,7 @@ public final class TFCBlockEntities
     public static final RegistryObject<BlockEntityType<CrankshaftBlockEntity>> CRANKSHAFT = register("crankshaft", CrankshaftBlockEntity::new, TFCBlocks.CRANKSHAFT);
     public static final RegistryObject<BlockEntityType<TripHammerBlockEntity>> TRIP_HAMMER = register("trip_hammer", TripHammerBlockEntity::new, TFCBlocks.TRIP_HAMMER);
     public static final RegistryObject<BlockEntityType<PumpBlockEntity>> PUMP = register("pump", PumpBlockEntity::new, TFCBlocks.STEEL_PUMP);
+    public static final RegistryObject<BlockEntityType<PowerLoomBlockEntity>> POWER_LOOM = register("power_loom", PowerLoomBlockEntity::new, TFCBlocks.POWER_LOOM);
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, BlockEntityType.BlockEntitySupplier<T> factory, Supplier<? extends Block> block)
     {

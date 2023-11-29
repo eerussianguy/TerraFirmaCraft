@@ -71,6 +71,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -121,6 +122,7 @@ import org.slf4j.Logger;
 import net.dries007.tfc.client.ClientHelpers;
 import net.dries007.tfc.common.TFCEffects;
 import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.blockentities.rotation.RotatingBlockEntity;
 import net.dries007.tfc.common.blocks.ISlowEntities;
 import net.dries007.tfc.common.capabilities.Capabilities;
 import net.dries007.tfc.common.capabilities.food.FoodCapability;
@@ -1106,6 +1108,25 @@ public final class Helpers
     public static VoxelShape[] computeHorizontalShapes(Function<Direction, VoxelShape> shapeGetter)
     {
         return new VoxelShape[] {shapeGetter.apply(Direction.SOUTH), shapeGetter.apply(Direction.WEST), shapeGetter.apply(Direction.NORTH), shapeGetter.apply(Direction.EAST)};
+    }
+
+    @Nullable
+    public static Direction getRotationConnection(BlockPlaceContext context)
+    {
+        final Level level = context.getLevel();
+        final BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
+        for (Direction dir : context.getNearestLookingDirections())
+        {
+            cursor.setWithOffset(context.getClickedPos(), dir);
+            if (level.getBlockEntity(cursor) instanceof RotatingBlockEntity entity)
+            {
+                if (entity.getRotationNode().connections().contains(dir.getOpposite()))
+                {
+                    return dir;
+                }
+            }
+        }
+        return null;
     }
 
     /**

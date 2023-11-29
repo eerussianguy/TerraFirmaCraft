@@ -40,13 +40,13 @@ import net.dries007.tfc.common.blocks.ExtendedBlock;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.IForgeBlockExtension;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
+import net.dries007.tfc.common.blocks.devices.HorizontalDirectionalDeviceBlock;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.Metal;
 
-public class CrankshaftBlock extends HorizontalDirectionalBlock implements IForgeBlockExtension, EntityBlockExtension
+public class CrankshaftBlock extends HorizontalDirectionalDeviceBlock
 {
-    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final EnumProperty<Part> PART = TFCBlockStateProperties.CRANKSHAFT_PART;
 
     private static final VoxelShape[] BASE_SHAPES = Helpers.computeHorizontalShapes(dir -> Shapes.or(
@@ -57,12 +57,9 @@ public class CrankshaftBlock extends HorizontalDirectionalBlock implements IForg
     private static final VoxelShape[] SHAFT_SHAPES = Helpers.computeHorizontalShapes(dir -> Helpers.rotateShape(dir, 0, 7, 8, 16, 9, 10));
     private static final TagKey<Item> STEEL_RODS = TagKey.create(Registries.ITEM, new ResourceLocation("forge", "rods/steel"));
 
-    private final ExtendedProperties properties;
-
     public CrankshaftBlock(ExtendedProperties properties)
     {
-        super(properties.properties());
-        this.properties = properties;
+        super(properties, InventoryRemoveBehavior.NOOP);
 
         registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(PART, Part.BASE));
     }
@@ -113,15 +110,9 @@ public class CrankshaftBlock extends HorizontalDirectionalBlock implements IForg
     }
 
     @Override
-    public ExtendedProperties getExtendedProperties()
-    {
-        return properties;
-    }
-
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
-        builder.add(FACING, PART);
+        super.createBlockStateDefinition(builder.add(PART));
     }
 
     private BlockPos getPartnerPos(BlockPos pos, BlockState state)

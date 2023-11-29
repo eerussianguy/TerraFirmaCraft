@@ -26,6 +26,7 @@ import net.dries007.tfc.common.blockentities.rotation.ClutchBlockEntity;
 import net.dries007.tfc.common.blocks.EntityBlockExtension;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.wood.ExtendedRotatedPillarBlock;
+import net.dries007.tfc.util.Helpers;
 
 public class ClutchBlock extends ExtendedRotatedPillarBlock implements EntityBlockExtension, ConnectedAxleBlock
 {
@@ -73,9 +74,14 @@ public class ClutchBlock extends ExtendedRotatedPillarBlock implements EntityBlo
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        final BlockState state = super.getStateForPlacement(context);
+        BlockState state = super.getStateForPlacement(context);
         if (state != null)
         {
+            final Direction connection = Helpers.getRotationConnection(context);
+            if (connection != null)
+            {
+                state = state.setValue(AXIS, connection.getAxis());
+            }
             return state.setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos()));
         }
         return null;

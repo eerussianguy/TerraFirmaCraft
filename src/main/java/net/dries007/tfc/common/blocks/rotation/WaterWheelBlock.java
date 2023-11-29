@@ -74,7 +74,13 @@ public class WaterWheelBlock extends ExtendedBlock implements EntityBlockExtensi
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        return defaultBlockState().setValue(AXIS, context.getHorizontalDirection().getAxis());
+        BlockState state = defaultBlockState().setValue(AXIS, context.getHorizontalDirection().getAxis());
+        final Direction connection = Helpers.getRotationConnection(context);
+        if (connection != null)
+        {
+            state = state.setValue(AXIS, connection.getAxis());
+        }
+        return state;
     }
 
     @Override

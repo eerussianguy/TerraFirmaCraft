@@ -1954,6 +1954,11 @@ def generate(rm: ResourceManager):
     block.with_lang(lang('steel pump'))
     rm.item_model('steel_pump', parent='tfc:block/pump', no_textures=True)
 
+    # Power Loom
+    block = rm.blockstate('power_loom', variants=four_rotations('tfc:block/power_loom', (270, 180, None, 90)))
+    block.with_block_model(textures='tfc:block/metal/block/steel')
+    block.with_block_loot('tfc:power_loom').with_lang(lang('power loom')).with_item_model()
+
     # Hand Wheel
     rm.blockstate('hand_wheel_base', variants=four_rotations('tfc:block/hand_wheel_base', (90, None, 180, 270))).with_lang(lang('hand wheel base')).with_tag('minecraft:mineable/pickaxe').with_block_loot('tfc:hand_wheel_base')
     rm.item_model('hand_wheel_base', no_textures=True, parent='tfc:block/hand_wheel_base')

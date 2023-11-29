@@ -638,7 +638,8 @@ def generate(rm: ResourceManager):
         'tfc:crankshaft',
         'tfc:steel_pipe',
         'tfc:steel_pump',
-        'tfc:trip_hammer'
+        'tfc:trip_hammer',
+        'tfc:power_loom',
     ])
     rm.block_tag('minecraft:mineable/axe', *[
         *[

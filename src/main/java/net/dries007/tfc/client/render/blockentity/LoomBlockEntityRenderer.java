@@ -9,7 +9,6 @@ package net.dries007.tfc.client.render.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -34,7 +33,7 @@ public class LoomBlockEntityRenderer implements BlockEntityRenderer<LoomBlockEnt
         poseStack.mulPose(Axis.YP.rotationDegrees((float) meta));
         poseStack.popPose();
 
-        final TextureAtlasSprite planksSprite = Minecraft.getInstance().getTextureAtlas(RenderHelpers.BLOCKS_ATLAS).apply(loomBlock.getTextureLocation());
+        final TextureAtlasSprite planksSprite = RenderHelpers.blockTexture(loomBlock.getTextureLocation());
 
         float tileZ = (float) loom.getAnimPos();
 
@@ -60,14 +59,14 @@ public class LoomBlockEntityRenderer implements BlockEntityRenderer<LoomBlockEnt
             poseStack.translate(-0.5D, 0.0D, -0.5D);
             if (recipe != null)
             {
-                final TextureAtlasSprite progressSprite = Minecraft.getInstance().getTextureAtlas(RenderHelpers.BLOCKS_ATLAS).apply(recipe.getInProgressTexture());
+                final TextureAtlasSprite progressSprite = RenderHelpers.blockTexture(recipe.getInProgressTexture());
 
                 drawMaterial(builder, poseStack, progressSprite, loom, recipe, tileZ * 2F / 3F, combinedOverlay, combinedLight);
                 drawProduct(builder, poseStack, progressSprite, loom, recipe, combinedOverlay, combinedLight);
             }
             else
             {
-                final TextureAtlasSprite progressSprite = Minecraft.getInstance().getTextureAtlas(RenderHelpers.BLOCKS_ATLAS).apply(lastTex);
+                final TextureAtlasSprite progressSprite = RenderHelpers.blockTexture(lastTex);
                 drawProduct(builder, poseStack, progressSprite, 1f, combinedOverlay, combinedLight);
             }
 

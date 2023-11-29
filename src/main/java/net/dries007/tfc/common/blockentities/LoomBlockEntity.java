@@ -17,6 +17,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
@@ -34,8 +35,8 @@ import static net.dries007.tfc.TerraFirmaCraft.MOD_ID;
 public class LoomBlockEntity extends TickableInventoryBlockEntity<ItemStackHandler>
 {
     private static final Component NAME = Component.translatable(MOD_ID + ".block_entity.loom");
-    private static final int SLOT_RECIPE = 0;
-    private static final int SLOT_OUTPUT = 1;
+    public static final int SLOT_RECIPE = 0;
+    public static final int SLOT_OUTPUT = 1;
 
     public static void tick(Level level, BlockPos pos, BlockState state, LoomBlockEntity loom)
     {
@@ -74,13 +75,18 @@ public class LoomBlockEntity extends TickableInventoryBlockEntity<ItemStackHandl
         }
     }
 
-    @Nullable private LoomRecipe recipe = null;
+    @Nullable protected LoomRecipe recipe = null;
     @Nullable private ResourceLocation lastTexture;
 
-    private int progress = 0;
-    private long lastPushed = 0L;
-    private boolean needsProgressUpdate = false;
+    protected int progress = 0;
+    protected long lastPushed = 0L;
+    protected boolean needsProgressUpdate = false;
     private boolean needsRecipeUpdate = false;
+
+    public LoomBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, InventoryFactory<ItemStackHandler> inventory, Component defaultName)
+    {
+        super(type, pos, state, inventory, defaultName);
+    }
 
     public LoomBlockEntity(BlockPos pos, BlockState state)
     {
@@ -139,7 +145,7 @@ public class LoomBlockEntity extends TickableInventoryBlockEntity<ItemStackHandl
         }
 
         // Push the loom
-        if (recipe != null && heldItem.isEmpty() && recipe.getInputCount() == inventory.getStackInSlot(SLOT_RECIPE).getCount() && progress < recipe.getStepCount() && !needsProgressUpdate)
+        if (canPushManually() && recipe != null && heldItem.isEmpty() && recipe.getInputCount() == inventory.getStackInSlot(SLOT_RECIPE).getCount() && progress < recipe.getStepCount() && !needsProgressUpdate)
         {
             final long time = level.getGameTime() - lastPushed;
             // This acts strangely when set to just 'time < 20', for some reason
@@ -155,6 +161,11 @@ public class LoomBlockEntity extends TickableInventoryBlockEntity<ItemStackHandl
             return InteractionResult.sidedSuccess(level.isClientSide); // we want to swing the player's arm
         }
         return InteractionResult.PASS;
+    }
+
+    protected boolean canPushManually()
+    {
+        return true;
     }
 
     public boolean currentBoolean()
