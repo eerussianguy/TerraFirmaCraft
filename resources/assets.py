@@ -1956,7 +1956,6 @@ def generate(rm: ResourceManager):
 
     # Power Loom
     block = rm.blockstate('power_loom', variants=four_rotations('tfc:block/power_loom', (270, 180, None, 90)))
-    block.with_block_model(textures='tfc:block/metal/block/steel')
     block.with_block_loot('tfc:power_loom').with_lang(lang('power loom')).with_item_model()
 
     # Hand Wheel

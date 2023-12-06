@@ -147,6 +147,7 @@ import net.dries007.tfc.client.render.blockentity.PitKilnBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.PlacedItemBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.PotBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.BowlBlockEntityRenderer;
+import net.dries007.tfc.client.render.blockentity.PowerLoomBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.QuernBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.SluiceBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.TFCBellBlockEntityRenderer;
@@ -568,6 +569,7 @@ public final class ClientEventHandler
         event.registerBlockEntityRenderer(TFCBlockEntities.CHEST.get(), TFCChestBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(TFCBlockEntities.TRAPPED_CHEST.get(), TFCChestBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(TFCBlockEntities.LOOM.get(), ctx -> new LoomBlockEntityRenderer());
+        event.registerBlockEntityRenderer(TFCBlockEntities.POWER_LOOM.get(), ctx -> new PowerLoomBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.SLUICE.get(), ctx -> new SluiceBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.BELLOWS.get(), ctx -> new BellowsBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.TOOL_RACK.get(), ctx -> new ToolRackBlockEntityRenderer());
