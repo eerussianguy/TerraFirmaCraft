@@ -6,12 +6,15 @@
 
 package net.dries007.tfc.common.entities;
 
+import java.util.HashMap;
+import java.util.Map;
 import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 
+import net.dries007.tfc.util.DataManager;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.JsonHelpers;
-import net.dries007.tfc.util.RegisteredDataManager;
 import net.dries007.tfc.world.chunkdata.ForestType;
 import net.dries007.tfc.world.placement.ClimatePlacement;
 
@@ -20,7 +23,8 @@ import net.dries007.tfc.world.placement.ClimatePlacement;
  */
 public class Fauna
 {
-    public static final RegisteredDataManager<Fauna> MANAGER = new RegisteredDataManager<>(Fauna::new, Fauna::new, Helpers.identifier("fauna"), "fauna");
+    public static final DataManager<Fauna> MANAGER = new DataManager<>(Helpers.identifier("fauna"), "fauna", Fauna::new);
+    public static final Map<EntityType<?>, Fauna> PREDICATES = new HashMap<>();
 
     private static final ClimatePlacement DEFAULT_CLIMATE = new ClimatePlacement(Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, ForestType.NONE, ForestType.OLD_GROWTH, false);
 
@@ -30,16 +34,6 @@ public class Fauna
     private final ClimatePlacement climate;
     private final boolean solidGround;
     private final int maxBrightness;
-
-    public Fauna(ResourceLocation id)
-    {
-        this.id = id;
-        this.chance = 1;
-        this.distanceBelowSeaLevel = -1;
-        this.climate = DEFAULT_CLIMATE;
-        this.solidGround = false;
-        this.maxBrightness = -1;
-    }
 
     public Fauna(ResourceLocation id, JsonObject json)
     {

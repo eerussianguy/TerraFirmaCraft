@@ -14,6 +14,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.PlayerRespawnLogic;
 import net.minecraft.server.level.ServerChunkCache;
@@ -60,6 +61,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.AbstractCandleBlock;
 import net.minecraft.world.level.block.BambooStalkBlock;
 import net.minecraft.world.level.block.Block;
@@ -177,6 +179,7 @@ import net.dries007.tfc.common.container.BlockEntityContainer;
 import net.dries007.tfc.common.container.Container;
 import net.dries007.tfc.common.container.PestContainer;
 import net.dries007.tfc.common.entities.Fauna;
+import net.dries007.tfc.common.entities.Faunas;
 import net.dries007.tfc.common.entities.misc.HoldingMinecart;
 import net.dries007.tfc.common.entities.predator.Predator;
 import net.dries007.tfc.common.fluids.FluidHelpers;
@@ -1077,6 +1080,19 @@ public final class ForgeEventHandler
                 {
                     event.setSpawnCancelled(true);
                     event.setCanceled(true);
+                }
+            }
+            if (!event.isCanceled() && level instanceof ServerLevelAccessor server)
+            {
+                final ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType());
+                if (id != null && !id.getNamespace().equals(TerraFirmaCraft.MOD_ID))
+                {
+                    final Fauna fauna = Fauna.MANAGER.get(id);
+                    if (fauna != null && !Faunas.canSpawn(entity.getType(), server, entity.blockPosition(), entity.getRandom(), fauna))
+                    {
+                        event.setSpawnCancelled(true);
+                        event.setCanceled(true);
+                    }
                 }
             }
         }
