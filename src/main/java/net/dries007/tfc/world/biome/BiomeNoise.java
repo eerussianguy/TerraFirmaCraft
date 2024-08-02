@@ -257,6 +257,12 @@ public final class BiomeNoise
         return (x, z) -> volcanoes.modifyHeight(x, z, baseNoise.noise(x, z), rarity, baseVolcanoHeight, scaleVolcanoHeight);
     }
 
+    public static Noise2D addAtolls(long seed, Noise2D baseNoise, int rarity)
+    {
+        final VolcanoNoise volcanoes = new VolcanoNoise(seed);
+        return (x, z) -> volcanoes.atollHeight(x, z, baseNoise.noise(x, z), rarity);
+    }
+
     public static BiomeNoiseSampler undergroundLakes(long seed, Noise2D heightNoise)
     {
         final Noise2D blobsNoise = new OpenSimplex2D(seed + 1).spread(0.04f).abs();

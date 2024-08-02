@@ -166,6 +166,20 @@ public class BiomeBuilder
         return this;
     }
 
+    public BiomeBuilder atolls(int frequency)
+    {
+        this.volcanic = true;
+        this.volcanoFrequency = frequency;
+
+        assert heightNoiseFactory != null : "volcanoes must be called after setting a heightmap";
+        assert surfaceBuilderFactory != null : "volcanoes must be called after setting a surface builder";
+
+        final LongFunction<Noise2D> baseHeightNoiseFactory = this.heightNoiseFactory;
+        this.heightNoiseFactory = seed -> BiomeNoise.addAtolls(seed, baseHeightNoiseFactory.apply(seed), frequency);
+        this.noiseFactory = seed -> BiomeNoiseSampler.fromHeightNoise(heightNoiseFactory.apply(seed));
+
+        return this;
+    }
 
     public BiomeExtension build(ResourceKey<Biome> key)
     {

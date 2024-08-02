@@ -71,6 +71,19 @@ public final class VolcanoNoise
         return baseHeight;
     }
 
+    public double atollHeight(double x, double z, double baseHeight, int rarity)
+    {
+        final Cellular2D.Cell cell = sampleCell(x, z, rarity);
+        if (cell != null)
+        {
+            final float easing = Mth.clamp(VolcanoNoise.calculateEasing((float) cell.f1()) + (float) jitterNoise.noise(x, z), 0, 1);
+            final float shape = -1 * Mth.square(12 * easing - 6) + 12;
+            final float volcanoHeight = SEA_LEVEL_Y + shape;
+            return Mth.lerp(easing, baseHeight, Math.max(volcanoHeight, baseHeight));
+        }
+        return baseHeight;
+    }
+
     /**
      * Calculate the closeness value to a volcano, in the range [0, 1]. 1 = Center of a volcano, 0 = Nowhere near.
      */
@@ -105,7 +118,7 @@ public final class VolcanoNoise
     @Nullable
     private Cellular2D.Cell sampleCell(double x, double z, int rarity)
     {
-        final Cellular2D.Cell cell = cellNoise.cell(x, z);
+        final Cellular2D.Cell cell = cellNoise.cell(x * 0.7, z * 0.7);
         if (Math.abs(cell.noise()) <= 1f / rarity)
         {
             return cell;
