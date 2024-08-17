@@ -14,13 +14,15 @@ import net.dries007.tfc.common.blocks.ExtendedProperties;
 public class AxleBlock extends AbstractShaftAxleBlock
 {
     private final Supplier<? extends WindmillBlock> windmill;
+    private final Supplier<? extends BeltBlock> belt;
     private final ResourceLocation textureLocation;
 
-    public AxleBlock(ExtendedProperties properties, Supplier<? extends WindmillBlock> windmill, ResourceLocation textureLocation)
+    public AxleBlock(ExtendedProperties properties, Supplier<? extends WindmillBlock> windmill, Supplier<? extends BeltBlock> belt, ResourceLocation textureLocation)
     {
         super(properties);
 
         this.windmill = windmill;
+        this.belt = belt;
         this.textureLocation = textureLocation;
     }
 
@@ -41,4 +43,8 @@ public class AxleBlock extends AbstractShaftAxleBlock
         return windmill.get();
     }
 
+    public Supplier<? extends BeltBlock> getBelt()
+    {
+        return belt;
+    }
 }

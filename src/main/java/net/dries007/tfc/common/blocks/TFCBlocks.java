@@ -104,6 +104,7 @@ import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.blocks.rock.Rock;
 import net.dries007.tfc.common.blocks.rock.RockAnvilBlock;
 import net.dries007.tfc.common.blocks.rock.RockCategory;
+import net.dries007.tfc.common.blocks.rotation.BeltSectionBlock;
 import net.dries007.tfc.common.blocks.rotation.CrankshaftBlock;
 import net.dries007.tfc.common.blocks.rotation.FluidPipeBlock;
 import net.dries007.tfc.common.blocks.rotation.FluidPumpBlock;
@@ -119,6 +120,7 @@ import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.common.fluids.IFluidLoggable;
 import net.dries007.tfc.common.fluids.SimpleFluid;
 import net.dries007.tfc.common.fluids.TFCFluids;
+import net.dries007.tfc.common.items.BeltBlockItem;
 import net.dries007.tfc.common.items.CandleBlockItem;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.common.items.TooltipBlockItem;
@@ -450,6 +452,7 @@ public final class TFCBlocks
     public static final Id<Block> TRIP_HAMMER = register("trip_hammer", () -> new TripHammerBlock(ExtendedProperties.of().sound(SoundType.METAL).strength(3f).noOcclusion().pushReaction(PushReaction.DESTROY).blockEntity(TFCBlockEntities.TRIP_HAMMER).serverTicks(TripHammerBlockEntity::serverTick)));
     public static final Id<Block> STEEL_PIPE = register("steel_pipe", () -> new FluidPipeBlock(ExtendedProperties.of().strength(5f).sound(SoundType.METAL)));
     public static final Id<Block> STEEL_PUMP = register("steel_pump", () -> new FluidPumpBlock(ExtendedProperties.of().strength(5f).sound(SoundType.METAL).blockEntity(TFCBlockEntities.PUMP).serverTicks(PumpBlockEntity::serverTick).forceSolidOn()));
+    public static final Id<Block> BELT = register("belt", () -> new BeltSectionBlock(ExtendedProperties.of().strength(2f).sound(SoundType.WOOL).noOcclusion().blockEntity(TFCBlockEntities.BELT_SECTION)), b -> new BeltBlockItem(b, new Item.Properties()));
 
     public static final Map<DyeColor, Id<Block>> DYED_CANDLE_CAKES = Helpers.mapOf(DyeColor.class, color ->
         registerNoItem("candle_cake/" + color.getName(), () -> new TFCCandleCakeBlock(ExtendedProperties.of(MapColor.SAND).randomTicks().noOcclusion().strength(0.5F).sound(SoundType.WOOL).lightLevel(litBlockEmission(3)).blockEntity(TFCBlockEntities.TICK_COUNTER).cloneItem(Blocks.CAKE)))

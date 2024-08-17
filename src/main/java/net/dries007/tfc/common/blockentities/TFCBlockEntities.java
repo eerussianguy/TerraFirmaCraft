@@ -20,6 +20,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import net.dries007.tfc.common.blockentities.rotation.AxleBlockEntity;
+import net.dries007.tfc.common.blockentities.rotation.BeltBlockEntity;
+import net.dries007.tfc.common.blockentities.rotation.BeltSectionBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.BladedAxleBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.ClutchBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.CrankshaftBlockEntity;
@@ -132,6 +134,8 @@ public final class TFCBlockEntities
     public static final Id<AxleBlockEntity> AXLE = register("axle", AxleBlockEntity::new, woodBlocks(Wood.BlockType.AXLE));
     public static final Id<BladedAxleBlockEntity> BLADED_AXLE = register("bladed_axle", BladedAxleBlockEntity::new, woodBlocks(Wood.BlockType.BLADED_AXLE));
     public static final Id<AxleBlockEntity> CLUTCH = register("clutch", ClutchBlockEntity::new, woodBlocks(Wood.BlockType.CLUTCH));
+    public static final Id<BeltBlockEntity> BELT = register("belt", BeltBlockEntity::new, woodBlocks(Wood.BlockType.BELT));
+    public static final Id<BeltSectionBlockEntity> BELT_SECTION = register("belt_section", BeltSectionBlockEntity::new, TFCBlocks.BELT);
     public static final Id<EncasedAxleBlockEntity> ENCASED_AXLE = register("encased_axle", EncasedAxleBlockEntity::new, woodBlocks(Wood.BlockType.ENCASED_AXLE));
     public static final Id<GearBoxBlockEntity> GEAR_BOX = register("gear_box", GearBoxBlockEntity::new, woodBlocks(Wood.BlockType.GEAR_BOX));
     public static final Id<WindmillBlockEntity> WINDMILL = register("windmill", WindmillBlockEntity::new, woodBlocks(Wood.BlockType.WINDMILL));

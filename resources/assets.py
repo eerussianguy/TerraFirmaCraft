@@ -1918,6 +1918,11 @@ def generate(rm: ResourceManager):
         block.with_block_model({'wood': 'tfc:block/wood/sheet/%s' % wood}, 'tfc:block/bladed_axle')
         rm.item_model('tfc:wood/bladed_axle/%s' % wood, no_textures=True, parent='tfc:block/wood/bladed_axle/%s' % wood)
 
+        # Belt
+        block = rm.blockstate('tfc:wood/belt/%s' % wood, 'tfc:block/empty')
+        block.with_lang(lang('%s belt', wood))
+        block.with_block_loot('tfc:wood/belt/%s' % wood)
+
         # Encased Axle
         block = rm.blockstate(('wood', 'encased_axle', wood), variants={
             'axis=x': {'model': 'tfc:block/wood/encased_axle/%s' % wood, 'x': 90, 'y': 90},
@@ -2015,6 +2020,12 @@ def generate(rm: ResourceManager):
     slab_loot(rm, 'tfc:wood/planks/palm_mosaic_slab')
     rm.block(('wood', 'planks', 'palm_mosaic_slab')).with_lang(lang('palm mosaic slab'))
     rm.block(('wood', 'planks', 'palm_mosaic_stairs')).with_lang(lang('palm mosaic stairs')).with_block_loot('tfc:wood/planks/palm_mosaic_stairs')
+
+    # Belt
+    block = rm.blockstate('tfc:belt', 'tfc:block/empty')
+    block.with_lang(lang('belt'))
+    block.with_block_loot('tfc:belt')
+    rm.item_model('belt')
 
     rm.blockstate('tree_roots', model='minecraft:block/mangrove_roots').with_block_loot('tfc:tree_roots').with_lang(lang('tree roots'))
     rm.item_model('tree_roots', parent='minecraft:block/mangrove_roots', no_textures=True)

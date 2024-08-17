@@ -152,6 +152,8 @@ import net.dries007.tfc.client.render.blockentity.AnvilBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.AxleBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.BarrelBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.BellowsBlockEntityRenderer;
+import net.dries007.tfc.client.render.blockentity.BeltBlockEntityRenderer;
+import net.dries007.tfc.client.render.blockentity.BeltSectionBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.BladedAxleBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.BowlBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.CharcoalForgeBlockEntityRenderer;
@@ -646,6 +648,8 @@ public final class ClientEventHandler
         event.registerBlockEntityRenderer(TFCBlockEntities.WINDMILL.get(), WindmillBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(TFCBlockEntities.CRANKSHAFT.get(), ctx -> new CrankshaftBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.BELL.get(), TFCBellBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(TFCBlockEntities.BELT.get(), ctx -> new BeltBlockEntityRenderer());
+        event.registerBlockEntityRenderer(TFCBlockEntities.BELT_SECTION.get(), ctx -> new BeltSectionBlockEntityRenderer());
     }
 
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event)

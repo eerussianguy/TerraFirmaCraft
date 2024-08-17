@@ -48,6 +48,7 @@ import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.devices.BarrelBlock;
 import net.dries007.tfc.common.blocks.devices.SluiceBlock;
 import net.dries007.tfc.common.blocks.rotation.AxleBlock;
+import net.dries007.tfc.common.blocks.rotation.BeltBlock;
 import net.dries007.tfc.common.blocks.rotation.BladedAxleBlock;
 import net.dries007.tfc.common.blocks.rotation.ClutchBlock;
 import net.dries007.tfc.common.blocks.rotation.EncasedAxleBlock;
@@ -219,9 +220,10 @@ public enum Wood implements RegistryWood
         SCRIBING_TABLE(wood -> new ScribingTableBlock(properties(wood).noOcclusion().strength(2.5F).flammable(20, 30))),
         SEWING_TABLE(wood -> new SewingTableBlock(properties(wood).noOcclusion().strength(2.5F).flammable(20, 30))),
         SHELF(wood -> new ShelfBlock(properties(wood).noOcclusion().strength(2.5f).flammableLikePlanks().blockEntity(TFCBlockEntities.SHELF))),
-        AXLE((self, wood) -> new AxleBlock(properties(wood).noOcclusion().strength(2.5F).flammableLikeLogs().pushReaction(PushReaction.DESTROY).blockEntity(TFCBlockEntities.AXLE), getBlock(wood, self.windmill()), self.planksTexture(wood))),
+        AXLE((self, wood) -> new AxleBlock(properties(wood).noOcclusion().strength(2.5F).flammableLikeLogs().pushReaction(PushReaction.DESTROY).blockEntity(TFCBlockEntities.AXLE), getBlock(wood, self.windmill()), getBlock(wood, self.belt()), self.planksTexture(wood))),
         BLADED_AXLE((self, wood) -> new BladedAxleBlock(properties(wood).noOcclusion().strength(2.5F).flammableLikeLogs().pushReaction(PushReaction.DESTROY).blockEntity(TFCBlockEntities.BLADED_AXLE), getBlock(wood, self.axle()))),
         ENCASED_AXLE((self, wood) -> new EncasedAxleBlock(properties(wood).strength(2.5F).flammableLikeLogs().pushReaction(PushReaction.DESTROY).blockEntity(TFCBlockEntities.ENCASED_AXLE))),
+        BELT((self, wood) -> new BeltBlock(properties(wood).strength(2.5F).flammableLikeLogs().pushReaction(PushReaction.DESTROY).blockEntity(TFCBlockEntities.BELT), getBlock(wood, self.axle()))),
         CLUTCH((self, wood) -> new ClutchBlock(properties(wood).strength(2.5F).flammableLikeLogs().pushReaction(PushReaction.DESTROY).blockEntity(TFCBlockEntities.CLUTCH), getBlock(wood, self.axle()))),
         GEAR_BOX((self, wood) -> new GearBoxBlock(properties(wood).strength(2f).noOcclusion().blockEntity(TFCBlockEntities.GEAR_BOX), getBlock(wood, self.axle()))),
         WINDMILL((self, wood) -> new WindmillBlock(properties(wood).strength(9f).noOcclusion().blockEntity(TFCBlockEntities.WINDMILL).ticks(WindmillBlockEntity::serverTick, WindmillBlockEntity::clientTick), getBlock(wood, self.axle()))),
@@ -285,7 +287,7 @@ public enum Wood implements RegistryWood
         {
             return switch(this)
                 {
-                    case VERTICAL_SUPPORT, HORIZONTAL_SUPPORT, SIGN, WALL_SIGN, POTTED_SAPLING, WINDMILL -> false;
+                    case VERTICAL_SUPPORT, HORIZONTAL_SUPPORT, SIGN, WALL_SIGN, POTTED_SAPLING, WINDMILL, BELT -> false;
                     default -> true;
                 };
         }
@@ -310,6 +312,7 @@ public enum Wood implements RegistryWood
         private BlockType leaves() { return LEAVES; }
         private BlockType axle() { return AXLE; }
         private BlockType windmill() { return WINDMILL; }
+        private BlockType belt() { return BELT; }
 
         public Supplier<Block> create(RegistryWood wood)
         {

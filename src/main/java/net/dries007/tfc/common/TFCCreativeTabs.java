@@ -524,6 +524,7 @@ public final class TFCCreativeTabs
         out.accept(TFCBlocks.CERAMIC_BOWL);
         out.accept(TFCBlocks.QUERN);
         out.accept(TFCItems.HANDSTONE);
+        out.accept(TFCBlocks.BELT);
         out.accept(TFCBlocks.CRANKSHAFT);
         out.accept(TFCBlocks.TRIP_HAMMER);
         out.accept(TFCBlocks.CRUCIBLE);
