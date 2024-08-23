@@ -1,0 +1,10 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "loader": "tfc:grass",
+  "grass": {
+    "parent": "tfc:block/grass_top"
+  },
+  "snow": {
+    "parent": "tfc:block/grass_snowy_top"
+  }
+}

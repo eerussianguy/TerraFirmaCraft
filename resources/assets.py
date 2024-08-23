@@ -678,13 +678,13 @@ def generate(rm: ResourceManager):
     rm.block_model('grass_side', textures={'overlay': 'tfc:block/grass_side', 'particle': 'tfc:block/grass_side'}, parent='block/block', elements=[north_face, north_face_overlay_tint0])
     rm.block_model('grass_snowy_side', textures={'overlay': 'tfc:block/grass_snowy_side', 'particle': '#texture'}, parent='block/block', elements=[north_face, north_face_overlay])
     rm.block_model('grass_bottom', textures={'texture': '#texture', 'particle': '#texture'}, parent='block/block', elements=[north_face])
-    rm.custom_block_model('grass_top_dynamic', 'tfc:grass', {'grass': 'tfc:block/grass_top', 'snow': 'tfc:block/grass_snowy_top'})
+    rm.custom_block_model('grass_top_dynamic', 'tfc:grass', {'grass': {'parent': 'tfc:block/grass_top'}, 'snow': {'parent': 'tfc:block/grass_snowy_top'}})
 
     # Grass (Peat, Normal + Clay) - Helper Functions
     def grass_multipart(model: str):
         return [
             {'model': model + '/bottom', 'x': 90},
-            ({'snowy': False}, [{'model': model + '/top', 'x': 270, 'y': y} for y in (90, None, 180, 270)]),
+            ({'snowy': False}, [{'model': 'tfc:block/grass_top_dynamic', 'x': 270, 'y': y} for y in (90, None, 180, 270)]),
             ({'snowy': True}, [{'model': model + '/snowy_top', 'x': 270, 'y': y} for y in (90, None, 180, 270)]),
             ({'north': True, 'snowy': False}, {'model': 'tfc:block/grass_top_dynamic'}),
             ({'east': True, 'snowy': False}, {'model': 'tfc:block/grass_top_dynamic', 'y': 90}),
@@ -704,10 +704,10 @@ def generate(rm: ResourceManager):
             ({'west': False, 'snowy': True}, {'model': model + '/snowy_side', 'y': 270})
         ]
 
-    def grass_models(_name: ResourceIdentifier, _texture: str):
+    def grass_models(_name: str, _texture: str):
         for _variant in ('top', 'snowy_top', 'side', 'snowy_side', 'bottom'):
-            rm.block_model((_name, _variant), {'texture': _texture}, parent='tfc:block/grass_%s' % _variant)
-        rm.custom_block_model((_name, 'side_dynamic'), 'tfc:grass', {'grass': 'tfc:block/%s/side' % _name, 'snow': 'tfc:block/%s/snowy_side' % _name})
+            rm.block_model((_name, _variant), {'texture': _texture if _variant != 'snowy_top' else 'minecraft:block/snow'}, parent='tfc:block/grass_%s' % _variant)
+        rm.custom_block_model(f'{_name}/side_dynamic', 'tfc:grass', {'grass': {'parent': f'tfc:block/{_name}/side', 'textures': {'texture': _texture}}, 'snow': {'parent': f'tfc:block/{_name}/snowy_side', 'textures': {'texture': _texture}}})
 
     # Peat Grass
     rm.blockstate_multipart('peat_grass', *grass_multipart('tfc:block/peat_grass')).with_block_loot('tfc:peat').with_lang(lang('Peat Grass'))
@@ -722,7 +722,7 @@ def generate(rm: ResourceManager):
             else:
                 block.with_block_loot('1-3 minecraft:clay_ball')
             block.with_lang(lang('%s %s', soil, grass_var))
-            grass_models((grass_var, soil), dirt)
+            grass_models(f'{grass_var}/{soil}', dirt)
 
         # Farmland
         block = rm.blockstate(('farmland', soil))
