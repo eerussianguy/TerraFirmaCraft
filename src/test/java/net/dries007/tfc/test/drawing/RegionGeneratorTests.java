@@ -76,14 +76,12 @@ public class RegionGeneratorTests implements TestSetup
             generator.visualizeRegion(pos.x, pos.z, (task, region) -> {
                 if (!tasksToDraw.contains(task)) return;
                 final Map<Pos, Color> drawnTask = drawn.computeIfAbsent(task, key -> new HashMap<>());
-                for (int rx = region.minX(); rx <= region.maxX(); rx++)
-                    for (int rz = region.minZ(); rz <= region.maxZ(); rz++)
-                        if (region.at(rx, rz) != null)
-                        {
-                            final Pos at = new Pos(rx, rz);
-                            points.remove(at);
-                            drawnTask.put(at, taskColor(task, region, rx, rz));
-                        }
+                for (final var point : region.points())
+                {
+                    final Pos at = new Pos(point.x, point.z);
+                    points.remove(at);
+                    drawnTask.put(at, taskColor(task, region, point.x, point.z));
+                }
             });
         }
 
@@ -121,7 +119,6 @@ public class RegionGeneratorTests implements TestSetup
 
     private Color taskColor(RegionGenerator.Task task, Region region, int x, int y)
     {
-        if (!region.isIn(x, y)) return new Color(100, 100, 100);
         final Region.Point point = region.at(x, y);
         if (point == null) return new Color(160, 160, 160);
         if (task == ANNOTATE_DISTANCE_TO_CELL_EDGE)
@@ -157,6 +154,7 @@ public class RegionGeneratorTests implements TestSetup
                         new Color(100, 100, 200);
                 case ANNOTATE_CLIMATE -> blue.apply(Mth.clampedMap(point.temperature, -35f, 35f, 0f, 0.999f));
                 case ANNOTATE_RAINFALL -> blue.apply(Mth.clampedMap(point.rainfall, 0f, 500f, 0f, 0.999f));
+                case ANNOTATE_RAINFALL_VARIANCE -> blue.apply(Mth.clampedMap(point.rainfallVariance, -1f, 1f, 0f, 0.999f));
                 default -> point.shore() ?
                     (point.river() ?
                         new Color(150, 160, 255) :
@@ -174,11 +172,13 @@ public class RegionGeneratorTests implements TestSetup
                         new Color(150, 150, 150)) :
                     green.apply(point.baseLandHeight / 24f);
                 case ANNOTATE_DISTANCE_TO_OCEAN -> green.apply(point.distanceToOcean / 20f);
+                case ANNOTATE_DISTANCE_TO_WEST_COAST -> green.apply(point.distanceToWestCoast / 100f);
                 case ADD_RIVERS_AND_LAKES -> point.lake() ? new Color(150, 160, 255) : green.apply(point.baseLandHeight / 24f);
                 case ANNOTATE_BASE_LAND_HEIGHT -> green.apply(point.baseLandHeight / 24f);
                 case ANNOTATE_BIOME_ALTITUDE -> green.apply(Mth.clampedMap(point.discreteBiomeAltitude(), 0, 3, 0, 1));
                 case ANNOTATE_CLIMATE -> temperature.apply(Mth.clampedMap(point.temperature, -35f, 35f, 0f, 0.999f));
                 case ANNOTATE_RAINFALL -> temperature.apply(Mth.clampedMap(point.rainfall, 0f, 500f, 0f, 0.999f));
+                case ANNOTATE_RAINFALL_VARIANCE -> temperature.apply(Mth.clampedMap(point.rainfallVariance, -1f, 1f, 0f, 0.999f));
             };
     }
 
@@ -214,8 +214,9 @@ public class RegionGeneratorTests implements TestSetup
         return Color.BLACK;
     }
 
+    //Set startup arguments, including seed, here
     private RegionGenerator newRegionGenerator()
     {
-        return new RegionGenerator(new Settings(false, 0, 0, 0, 20_000, 0, 20_000, 0, null, 0.5f, 0.5f), new XoroshiroRandomSource(1798237841231L));
+        return new RegionGenerator(new Settings(false, 0, 0, 0, 20_000, 0, 20_000, 10_000, 0, null, 0.5f, 0.5f), new XoroshiroRandomSource(1798237841231L));
     }
 }
