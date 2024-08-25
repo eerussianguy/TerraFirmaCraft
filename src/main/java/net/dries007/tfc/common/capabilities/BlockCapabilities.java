@@ -46,6 +46,7 @@ public final class BlockCapabilities
         registerInventory(event, TFCBlockEntities.CHARCOAL_FORGE);
         registerInventory(event, TFCBlockEntities.COMPOSTER);
         registerInventory(event, TFCBlockEntities.CRUCIBLE);
+        registerInventory(event, TFCBlockEntities.FIREBOX);
         event.registerBlockEntity(FLUID, TFCBlockEntities.CRUCIBLE.get(), CrucibleBlockEntity::getSidedFluidInventory);
         event.registerBlockEntity(HEAT, TFCBlockEntities.CRUCIBLE.get(), (object, context) -> object.getInventory());
         registerInventory(event, TFCBlockEntities.FIREPIT);

@@ -205,6 +205,7 @@ import net.dries007.tfc.client.screen.CharcoalForgeScreen;
 import net.dries007.tfc.client.screen.ClimateScreen;
 import net.dries007.tfc.client.screen.CreateTFCWorldScreen;
 import net.dries007.tfc.client.screen.CrucibleScreen;
+import net.dries007.tfc.client.screen.FireboxScreen;
 import net.dries007.tfc.client.screen.FirepitScreen;
 import net.dries007.tfc.client.screen.GrillScreen;
 import net.dries007.tfc.client.screen.KnappingScreen;
@@ -461,6 +462,8 @@ public final class ClientEventHandler
 
         ItemBlockRenderTypes.setRenderLayer(TFCBlocks.COMPOSTER.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(TFCBlocks.BLOOMERY.get(), cutout);
+        ItemBlockRenderTypes.setRenderLayer(TFCBlocks.FIRE_BRICK_SHELF.get(), cutout);
+        ItemBlockRenderTypes.setRenderLayer(TFCBlocks.FIREPROOF_DOOR.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(TFCBlocks.ICE_PILE.get(), translucent);
 
         ItemBlockRenderTypes.setRenderLayer(TFCBlocks.LARGE_VESSEL.get(), cutout);
@@ -501,6 +504,7 @@ public final class ClientEventHandler
         event.register(TFCContainerTypes.POT.get(), PotScreen::new);
         event.register(TFCContainerTypes.POWDERKEG.get(), PowderkegScreen::new);
         event.register(TFCContainerTypes.CHARCOAL_FORGE.get(), CharcoalForgeScreen::new);
+        event.register(TFCContainerTypes.FIREBOX.get(), FireboxScreen::new);
         event.register(TFCContainerTypes.LOG_PILE.get(), LogPileScreen::new);
         event.register(TFCContainerTypes.NEST_BOX.get(), NestBoxScreen::new);
         event.register(TFCContainerTypes.CRUCIBLE.get(), CrucibleScreen::new);

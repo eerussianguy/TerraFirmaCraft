@@ -165,6 +165,10 @@ public final class TFCCreativeTabs
                 Metal.BlockType.EXPOSED_BLOCK,
                 Metal.BlockType.WEATHERED_BLOCK,
                 Metal.BlockType.OXIDIZED_BLOCK,
+                Metal.BlockType.GRATE,
+                Metal.BlockType.EXPOSED_GRATE,
+                Metal.BlockType.WEATHERED_GRATE,
+                Metal.BlockType.OXIDIZED_GRATE,
                 Metal.BlockType.BLOCK_SLAB,
                 Metal.BlockType.EXPOSED_BLOCK_SLAB,
                 Metal.BlockType.WEATHERED_BLOCK_SLAB,
@@ -539,6 +543,9 @@ public final class TFCCreativeTabs
         out.accept(TFCItems.DEAD_TORCH);
         out.accept(TFCBlocks.BARREL_RACK);
         out.accept(TFCBlocks.FIRE_BRICKS);
+        out.accept(TFCBlocks.FIRE_BRICK_SHELF);
+        out.accept(TFCBlocks.FIREPROOF_DOOR);
+        out.accept(TFCBlocks.FIREBOX);
         out.accept(TFCBlocks.FIRE_CLAY_BLOCK);
 
         out.accept(TFCBlocks.AGGREGATE);

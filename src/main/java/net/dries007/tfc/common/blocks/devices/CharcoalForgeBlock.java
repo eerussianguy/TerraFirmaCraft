@@ -111,7 +111,7 @@ public class CharcoalForgeBlock extends DeviceBlock implements IBellowsConsumer
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity)
     {
-        if (entity instanceof LivingEntity && level.getBlockState(pos).getValue(HEAT) > 0)
+        if (entity instanceof LivingEntity && state.getValue(HEAT) > 0)
         {
             entity.hurt(entity.damageSources().hotFloor(), 1f);
         }

@@ -80,6 +80,7 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
         tag(BlockTags.WOODEN_BUTTONS).add(TFCBlocks.WOODS, Wood.BlockType.BUTTON);
         tag(BlockTags.STONE_BUTTONS).add(TFCBlocks.ROCK_BLOCKS, Rock.BlockType.BUTTON);
         tag(BlockTags.WOODEN_DOORS).add(TFCBlocks.WOODS, Wood.BlockType.DOOR);
+        tag(BlockTags.DOORS).add(TFCBlocks.FIREPROOF_DOOR);
         tag(BlockTags.WOODEN_STAIRS).add(TFCBlocks.WOODS, Wood.BlockType.STAIRS);
         tag(BlockTags.WOODEN_SLABS).add(TFCBlocks.WOODS, Wood.BlockType.SLAB);
         tag(BlockTags.WOODEN_FENCES)
@@ -214,6 +215,9 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
             .addAll(TFCBlocks.ALABASTER_POLISHED_DECORATIONS)
             .add(TFCBlocks.GROUNDCOVER)
             .add(TFCBlocks.GLAZED_LARGE_VESSELS)
+            .add(TFCBlocks.FIRE_BRICK_SHELF)
+            .add(TFCBlocks.FIREPROOF_DOOR)
+            .add(TFCBlocks.FIREBOX)
             .add(
                 TFCBlocks.ICICLE,
                 TFCBlocks.SEA_ICE,

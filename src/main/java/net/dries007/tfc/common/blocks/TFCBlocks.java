@@ -37,6 +37,7 @@ import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -58,6 +59,7 @@ import net.dries007.tfc.common.blockentities.BurningLogPileBlockEntity;
 import net.dries007.tfc.common.blockentities.CharcoalForgeBlockEntity;
 import net.dries007.tfc.common.blockentities.CrucibleBlockEntity;
 import net.dries007.tfc.common.blockentities.DecayingBlockEntity;
+import net.dries007.tfc.common.blockentities.FireboxBlockEntity;
 import net.dries007.tfc.common.blockentities.GlassBasinBlockEntity;
 import net.dries007.tfc.common.blockentities.HotPouredGlassBlockEntity;
 import net.dries007.tfc.common.blockentities.NestBoxBlockEntity;
@@ -112,11 +114,11 @@ import net.dries007.tfc.common.blocks.soil.ConnectedGrassBlock;
 import net.dries007.tfc.common.blocks.soil.SandBlockType;
 import net.dries007.tfc.common.blocks.soil.SoilBlockType;
 import net.dries007.tfc.common.blocks.wood.TFCCeilingHangingSignBlock;
+import net.dries007.tfc.common.blocks.wood.TFCDoorBlock;
 import net.dries007.tfc.common.blocks.wood.TFCSlabBlock;
 import net.dries007.tfc.common.blocks.wood.TFCStairBlock;
 import net.dries007.tfc.common.blocks.wood.TFCWallHangingSignBlock;
 import net.dries007.tfc.common.blocks.wood.Wood;
-import net.dries007.tfc.common.fluids.FluidProperty;
 import net.dries007.tfc.common.fluids.IFluidLoggable;
 import net.dries007.tfc.common.fluids.SimpleFluid;
 import net.dries007.tfc.common.fluids.TFCFluids;
@@ -385,6 +387,9 @@ public final class TFCBlocks
     public static final Id<Block> GLASS_BASIN = registerNoItem("glass_basin", () -> new GlassBasinBlock(ExtendedProperties.of().strength(0.3f).lightLevel(s -> 10).sound(SoundType.GLASS).pushReaction(PushReaction.DESTROY).noOcclusion().noLootTable().pathType(PathType.DANGER_FIRE).blockEntity(TFCBlockEntities.GLASS_BASIN).dynamicShape().ticks(GlassBasinBlockEntity::ticks)));
 
     public static final Id<Block> FIRE_BRICKS = register("fire_bricks", () -> new Block(Properties.of().mapColor(MapColor.COLOR_RED).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final Id<Block> FIRE_BRICK_SHELF = register("fire_brick_shelf", () -> new ShelfBlock(ExtendedProperties.of().mapColor(MapColor.COLOR_RED).strength(2.0F, 6.0F).noOcclusion().strength(2.5f).blockEntity(TFCBlockEntities.SHELF), true));
+    public static final Id<Block> FIREPROOF_DOOR = register("fireproof_door", () -> new TFCDoorBlock(ExtendedProperties.of().sound(SoundType.COPPER).mapColor(MapColor.COLOR_BROWN).strength(2.0F, 6.0F).noOcclusion(), BlockSetType.COPPER));
+    public static final Id<Block> FIREBOX = register("firebox", () -> new FireboxBlock(ExtendedProperties.of().mapColor(MapColor.COLOR_BROWN).sound(SoundType.COPPER).strength(6f).lightLevel(litBlockEmission(15)).blockEntity(TFCBlockEntities.FIREBOX).serverTicks(FireboxBlockEntity::serverTick)));
     public static final Id<Block> FIRE_CLAY_BLOCK = register("fire_clay_block", () -> new Block(Properties.of().mapColor(MapColor.CLAY).strength(0.6F).sound(SoundType.GRAVEL)));
 
     public static final Id<Block> WATTLE = register("wattle", () -> new WattleBlock(ExtendedProperties.of(MapColor.WOOD).strength(0.3F).noOcclusion().sound(SoundType.SCAFFOLDING).flammable(60, 30)));
@@ -528,7 +533,7 @@ public final class TFCBlocks
         return false;
     }
 
-    public static boolean never(BlockState state, BlockGetter world, BlockPos pos, EntityType<?> type)
+    public static boolean neverEntity(BlockState state, BlockGetter world, BlockPos pos, EntityType<?> type)
     {
         return false;
     }

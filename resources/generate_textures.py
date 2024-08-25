@@ -216,8 +216,8 @@ def create_bookshelf(wood: str):
     filled = Image.open(templates + 'chiseled_bookshelf_occupied.png').convert('RGBA')
     empty.paste(planks, mask=mask)
     filled.paste(planks, mask=mask)
-    empty.save(path + 'block/wood/planks/%s_bookshelf_empty.png' % wood)
-    filled.save(path + 'block/wood/planks/%s_bookshelf_occupied.png' % wood)
+    empty.save(path + 'block/wood/bookshelf/%s_empty.png' % wood)
+    filled.save(path + 'block/wood/bookshelf/%s_occupied.png' % wood)
 
 def create_sign(wood: str):
     log = Image.open(path + 'block/wood/log/%s' % wood + '.png').convert('RGBA')
@@ -295,6 +295,17 @@ def create_boat_texture(wood: str):
     manual_palette_swap(img, palette_key, palette)
     img.save(path + 'entity/boat/%s.png' % wood)
 
+def grate(metal: str, weathering: bool):
+    versions = ('block', 'exposed', 'oxidized', 'weathered')
+    if not weathering:
+        versions = ('block',)
+    mask_img = Image.open(templates + 'grate.png').convert('L')
+    for v in versions:
+        img = Image.open(path + 'block/metal/%s/%s.png' % (v if v == 'block' else '%s_block' % v, metal))
+        blank = Image.new('RGBA', (16, 16), (0, 0, 0, 0))
+        blank.paste(img, mask=mask_img)
+        blank.save(path + 'block/metal/%s/%s.png' % ('grate' if v == 'block' else '%s_grate' % v, metal))
+
 def manual_palette_swap(img: Image, palette_key: Image, palette: Image) -> Image:
     data = {}
     for x in range(0, palette_key.width):
@@ -306,11 +317,10 @@ def manual_palette_swap(img: Image, palette_key: Image, palette: Image) -> Image
                 img.putpixel((x, y), data[dat])
     return img
 
-# TODO IM BROKEN
 def main():
     for wood in WOODS.keys():
-        for bench in ('workbench_front', 'workbench_side', 'workbench_top'):
-            overlay_image(templates + bench, path + 'block/wood/planks/%s' % wood, path + 'block/wood/planks/%s_' % wood + bench)
+        for bench in ('front', 'side', 'top'):
+            overlay_image(templates + 'workbench_' + bench, path + 'block/wood/planks/%s' % wood, path + 'block/wood/workbench/%s_%s' % (wood, bench))
         create_chest(wood)
         create_sign(wood)
         create_bookshelf(wood)
@@ -321,7 +331,7 @@ def main():
         if wood != 'palm':
             create_boat_texture(wood)
         for metal, metal_data in METALS.items():
-            if 'utility' in metal_data.types:
+            if 'all' == metal_data.type:
                 create_hanging_sign(wood, metal)
 
     for rock, data in ROCKS.items():
@@ -338,11 +348,11 @@ def main():
         overlay_image(templates + 'mangrove_roots_top', path + 'block/mud/%s' % soil, path + 'block/mud/%s_roots_top' % soil)
 
     for metal, metal_data in METALS.items():
-        if 'utility' in metal_data.types:
+        if 'all' == metal_data.type:
             overlay_image(path + 'block/metal/smooth/%s' % metal, path + 'block/empty', path + 'block/metal/chain/%s' % metal, templates + 'chain_mask')
-        if 'utility' in metal_data.types:
             smooth_color = get_metal_colors('smooth/%s' % metal)
             create_hanging_sign_chains_item(metal, smooth_color)
+            grate(metal, metal_data.weathering)
 
 
     for i in range(0, 32):

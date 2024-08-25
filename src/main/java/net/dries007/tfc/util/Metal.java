@@ -34,6 +34,7 @@ import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.Nullable;
@@ -44,6 +45,8 @@ import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.TFCTiers;
 import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
+import net.dries007.tfc.common.blocks.GrateBlock;
+import net.dries007.tfc.common.blocks.WeatheringGrateBlock;
 import net.dries007.tfc.common.blocks.IWeatheringBlock.Age;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.TFCChainBlock;
@@ -222,11 +225,25 @@ public enum Metal implements StringRepresentable, RegistryMetal
         EXPOSED_BLOCK_STAIRS(PartType.WEATHERED, stairs(EXPOSED_BLOCK, Age.EXPOSED)),
         WEATHERED_BLOCK_STAIRS(PartType.WEATHERED, stairs(WEATHERED_BLOCK, Age.WEATHERED)),
         OXIDIZED_BLOCK_STAIRS(PartType.WEATHERED, stairs(OXIDIZED_BLOCK, Age.OXIDIZED)),
+        GRATE(PartType.ALL, grate(Age.NONE)),
+        EXPOSED_GRATE(PartType.ALL_WEATHERED, grate(Age.EXPOSED)),
+        WEATHERED_GRATE(PartType.ALL_WEATHERED, grate(Age.WEATHERED)),
+        OXIDIZED_GRATE(PartType.ALL_WEATHERED, grate(Age.OXIDIZED)),
         ANVIL(PartType.ALL, metal -> new AnvilBlock(ExtendedProperties.of().mapColor(metal.mapColor()).noOcclusion().sound(SoundType.ANVIL).strength(10, 10).requiresCorrectToolForDrops().blockEntity(TFCBlockEntities.ANVIL), metal.toolTier().level())),
         BARS(PartType.ALL, metal -> new IronBarsBlock(BlockBehaviour.Properties.of().mapColor(metal.mapColor()).requiresCorrectToolForDrops().strength(6.0F, 7.0F).sound(SoundType.METAL).noOcclusion())),
         CHAIN(PartType.ALL, metal -> new TFCChainBlock(Block.Properties.of().mapColor(metal.mapColor()).requiresCorrectToolForDrops().strength(5, 6).sound(SoundType.CHAIN).lightLevel(TFCBlocks.lavaLoggedBlockEmission()))),
         LAMP(PartType.ALL, metal -> new LampBlock(ExtendedProperties.of().mapColor(metal.mapColor()).noOcclusion().sound(SoundType.LANTERN).strength(4, 10).randomTicks().pushReaction(PushReaction.DESTROY).lightLevel(state -> state.getValue(LampBlock.LIT) ? 15 : 0).blockEntity(TFCBlockEntities.LAMP)), (block, properties) -> new LampBlockItem(block, properties.stacksTo(1))),
-        TRAPDOOR(PartType.ALL, metal -> new TrapDoorBlock(BlockSetType.IRON, Block.Properties.of().mapColor(metal.mapColor()).requiresCorrectToolForDrops().strength(5.0F).sound(SoundType.METAL).noOcclusion().isValidSpawn(TFCBlocks::never)));
+        TRAPDOOR(PartType.ALL, metal -> new TrapDoorBlock(BlockSetType.IRON, Block.Properties.of().mapColor(metal.mapColor()).requiresCorrectToolForDrops().strength(5.0F).sound(SoundType.METAL).noOcclusion().isValidSpawn(TFCBlocks::neverEntity)));
+
+        private static Function<RegistryMetal, Block> grate(Age age)
+        {
+            return metal -> {
+                final BlockBehaviour.Properties prop = blockProperties(metal).noOcclusion().sound(SoundType.COPPER_GRATE).noOcclusion().isValidSpawn(TFCBlocks::neverEntity).isRedstoneConductor(TFCBlocks::never).isSuffocating(TFCBlocks::never).isViewBlocking(TFCBlocks::never);
+                return metal.weatheredParts()
+                    ? new WeatheringGrateBlock(prop, age, metal.weatheringResistance())
+                    : new GrateBlock(prop);
+            };
+        }
 
         private static Function<RegistryMetal, Block> block(Age age)
         {
@@ -417,7 +434,7 @@ public enum Metal implements StringRepresentable, RegistryMetal
 
     enum PartType
     {
-        INGOT, DEFAULT, DEFAULT_WEATHERING, ALL, ALL_WEATHERING, WEATHERED;
+        INGOT, DEFAULT, DEFAULT_WEATHERING, ALL, ALL_WEATHERING, WEATHERED, ALL_WEATHERED;
 
         /**
          * Assuming {@code this} represents a block or item type, which must be one of four values, does the {@code metal}
@@ -428,6 +445,7 @@ public enum Metal implements StringRepresentable, RegistryMetal
             return switch (this)
             {
                 case WEATHERED -> metal == DEFAULT_WEATHERING || metal == ALL_WEATHERING;
+                case ALL_WEATHERED -> metal == ALL_WEATHERING;
                 case ALL -> metal.ordinal() >= ALL.ordinal();
                 case DEFAULT -> metal.ordinal() >= DEFAULT.ordinal();
                 case INGOT -> true;

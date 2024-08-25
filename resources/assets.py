@@ -900,6 +900,23 @@ def generate(rm: ResourceManager):
                 })
             rm.item_model(bars, 'tfc:block/%s' % bars)
 
+            if metal_data.type == 'all':
+                if metal_data.weathering:
+                    for variant, word in (
+                        ('grate', ''),
+                        ('exposed_grate', 'exposed'),
+                        ('weathered_grate', 'weathered'),
+                        ('oxidized_grate', None)
+                    ):
+                        if metal_data.has_block(variant):
+                            if word is None:
+                                word = OXIDIZED_METAL_NAMES[metal]
+                            block = rm.blockstate(('metal', variant, metal))
+                            block.with_block_model().with_lang(lang('%s %s grate', word, metal)).with_item_model().with_block_loot('tfc:metal/%s/%s' % (variant, metal))
+                else:
+                    block = rm.blockstate(('metal', 'grate', metal))
+                    block.with_block_model().with_lang(lang('%s grate', metal)).with_item_model().with_block_loot('tfc:metal/grate/%s' % metal)
+
         # Storage Blocks (+ Stair, Slab)
         # Includes weathering variants for metals that support that
         for variant, word in (
@@ -2018,6 +2035,31 @@ def generate(rm: ResourceManager):
 
     rm.blockstate('tree_roots', model='minecraft:block/mangrove_roots').with_block_loot('tfc:tree_roots').with_lang(lang('tree roots'))
     rm.item_model('tree_roots', parent='minecraft:block/mangrove_roots', no_textures=True)
+
+    block = rm.blockstate('fire_brick_shelf', variants=four_rotations('tfc:block/fire_brick_shelf', (90, None, 180, 270)))
+    block.with_item_model()
+    block.with_lang(lang('fire brick shelf'))
+    block.with_block_loot('tfc:fire_brick_shelf')
+
+    block = rm.blockstate('fireproof_door', variants=door_blockstate('tfc:block/fireproof_door'))
+    rm.item_model('tfc:fireproof_door', 'tfc:item/fireproof_door')
+    block.with_lang(lang('fireproof door'))
+    block.with_block_loot({
+        'name': 'tfc:fireproof_door',
+        'conditions': [loot_tables.block_state_property('tfc:fireproof_door[half=lower]')]
+    })
+
+    for model in ('bottom_left', 'bottom_left_open', 'bottom_right', 'bottom_right_open', 'top_left', 'top_left_open', 'top_right', 'top_right_open'):
+        rm.block_model('tfc:fireproof_door_%s' % model, {
+            'top': 'tfc:block/fireproof_door_top',
+            'bottom': 'tfc:block/fireproof_door_bottom'
+        }, parent='block/door_%s' % model)
+
+    block = rm.blockstate('firebox', variants={'lit=true': {'model': 'tfc:block/firebox_on'}, 'lit=false': {'model': 'tfc:block/firebox_off'}})
+    block.with_lang(lang('firebox')).with_block_loot('tfc:firebox')
+    rm.item_model('firebox', parent='tfc:block/firebox_off', no_textures=True)
+    for state in ('on', 'off'):
+        rm.block_model('firebox_%s' % state, {'side': 'tfc:block/devices/firebox/%s' % state, 'end': 'tfc:block/devices/firebox/top'}, parent='block/cube_column')
 
     rm.blockstate('light', variants={'level=%s' % i: {'model': 'minecraft:block/light_%s' % i if i >= 10 else 'minecraft:block/light_0%s' % i} for i in range(0, 15 + 1)}).with_lang(lang('Light'))
     rm.item_model('light', no_textures=True, parent='minecraft:item/light')

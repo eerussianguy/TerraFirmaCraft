@@ -172,6 +172,11 @@ public final class Helpers
         return ResourceLocation.fromNamespaceAndPath(domain, path);
     }
 
+    public static Vec3 getRandomSpeedRanges(RandomSource random)
+    {
+        return new Vec3(Mth.nextDouble(random, -0.5, 0.5), Mth.nextDouble(random, -0.5, 0.5), Mth.nextDouble(random, -0.5, 0.5));
+    }
+
     @Nullable
     public static <T, C> T getCapability(BlockCapability<T, @Nullable C> capability, Level level, BlockPos pos)
     {

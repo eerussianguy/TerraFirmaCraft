@@ -34,10 +34,11 @@ public class ShelfBlock extends PlacedItemBlock
 {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final VoxelShape TOP_SHAPE = box(0, 15, 0, 16, 16, 16);
+    public static final VoxelShape TOP_SHAPE_TALL = box(0, 14, 0, 16, 16, 16);
 
-    public ShelfBlock(ExtendedProperties properties)
+    public ShelfBlock(ExtendedProperties properties, boolean thick)
     {
-        super(properties, TOP_SHAPE, true);
+        super(properties, thick ? TOP_SHAPE_TALL : TOP_SHAPE, true);
     }
 
     @Override

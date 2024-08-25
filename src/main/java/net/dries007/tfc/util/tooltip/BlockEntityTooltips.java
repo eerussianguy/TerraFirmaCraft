@@ -37,6 +37,7 @@ import net.dries007.tfc.common.blockentities.ComposterBlockEntity;
 import net.dries007.tfc.common.blockentities.CropBlockEntity;
 import net.dries007.tfc.common.blockentities.CrucibleBlockEntity;
 import net.dries007.tfc.common.blockentities.DecayingBlockEntity;
+import net.dries007.tfc.common.blockentities.FireboxBlockEntity;
 import net.dries007.tfc.common.blockentities.IngotPileBlockEntity;
 import net.dries007.tfc.common.blockentities.LampBlockEntity;
 import net.dries007.tfc.common.blockentities.LoomBlockEntity;
@@ -48,6 +49,7 @@ import net.dries007.tfc.common.blockentities.SheetPileBlockEntity;
 import net.dries007.tfc.common.blockentities.TickCounterBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.RotatingBlockEntity;
 import net.dries007.tfc.common.blocks.BloomBlock;
+import net.dries007.tfc.common.blocks.FireboxBlock;
 import net.dries007.tfc.common.blocks.HotPouredGlassBlock;
 import net.dries007.tfc.common.blocks.TFCCandleBlock;
 import net.dries007.tfc.common.blocks.TFCCandleCakeBlock;
@@ -117,6 +119,7 @@ public final class BlockEntityTooltips
         callback.register("composter", COMPOSTER, TFCComposterBlock.class);
         callback.register("crop", CROP, CropBlock.class);
         callback.register("crucible", CRUCIBLE, CrucibleBlock.class);
+        callback.register("firebox", FIREBOX, FireboxBlock.class);
         callback.register("firepit", FIREPIT, FirepitBlock.class);
         callback.register("fruit_tree_sapling", FRUIT_TREE_SAPLING, FruitTreeSaplingBlock.class);
         callback.register("hoe_overlay", HOE_OVERLAY, Block.class);
@@ -471,6 +474,13 @@ public final class BlockEntityTooltips
             {
                 tooltip.accept(Component.translatable("tfc.jade.loom_progress", loom.getProgress(), recipe.getStepCount(), recipe.getResultItem(level.registryAccess()).getDisplayName()));
             }
+        }
+    };
+
+    public static final BlockEntityTooltip FIREBOX = (level, state, pos, entity, tooltip) -> {
+        if (entity instanceof FireboxBlockEntity firebox)
+        {
+            heat(tooltip, firebox.getTemperature());
         }
     };
 
