@@ -15,6 +15,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -216,12 +217,13 @@ public class PlacedItemBlock extends DeviceBlock implements IForgeBlockExtension
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult result, LevelReader level, BlockPos pos, Player player)
     {
+        final ItemStack backup = asItem() == Items.AIR ? ItemStack.EMPTY : new ItemStack(asItem());
         if (result instanceof BlockHitResult blockResult)
         {
             return level.getBlockEntity(pos, TFCBlockEntities.PLACED_ITEM.get())
                 .map(placedItem -> placedItem.getCloneItemStack(state, blockResult))
-                .orElse(ItemStack.EMPTY);
+                .orElse(backup);
         }
-        return ItemStack.EMPTY;
+        return backup;
     }
 }

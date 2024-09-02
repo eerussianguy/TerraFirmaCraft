@@ -43,6 +43,7 @@ import net.dries007.tfc.common.blockentities.LampBlockEntity;
 import net.dries007.tfc.common.blockentities.LoomBlockEntity;
 import net.dries007.tfc.common.blockentities.NestBoxBlockEntity;
 import net.dries007.tfc.common.blockentities.PitKilnBlockEntity;
+import net.dries007.tfc.common.blockentities.PlacedItemBlockEntity;
 import net.dries007.tfc.common.blockentities.PotBlockEntity;
 import net.dries007.tfc.common.blockentities.PowderkegBlockEntity;
 import net.dries007.tfc.common.blockentities.SheetPileBlockEntity;
@@ -51,6 +52,7 @@ import net.dries007.tfc.common.blockentities.rotation.RotatingBlockEntity;
 import net.dries007.tfc.common.blocks.BloomBlock;
 import net.dries007.tfc.common.blocks.FireboxBlock;
 import net.dries007.tfc.common.blocks.HotPouredGlassBlock;
+import net.dries007.tfc.common.blocks.ShelfBlock;
 import net.dries007.tfc.common.blocks.TFCCandleBlock;
 import net.dries007.tfc.common.blocks.TFCCandleCakeBlock;
 import net.dries007.tfc.common.blocks.TFCTorchBlock;
@@ -70,6 +72,7 @@ import net.dries007.tfc.common.blocks.devices.JackOLanternBlock;
 import net.dries007.tfc.common.blocks.devices.LampBlock;
 import net.dries007.tfc.common.blocks.devices.NestBoxBlock;
 import net.dries007.tfc.common.blocks.devices.PitKilnBlock;
+import net.dries007.tfc.common.blocks.devices.PlacedItemBlock;
 import net.dries007.tfc.common.blocks.devices.PowderkegBlock;
 import net.dries007.tfc.common.blocks.devices.QuernBlock;
 import net.dries007.tfc.common.blocks.devices.SheetPileBlock;
@@ -147,6 +150,8 @@ public final class BlockEntityTooltips
         callback.register("water_wheel", ROTATING, WaterWheelBlock.class);
         callback.register("windmill", ROTATING, WindmillBlock.class);
         callback.register("hot_poured_glass", HOT_POURED_GLASS, HotPouredGlassBlock.class);
+        callback.register("placed_item", PLACED_ITEM, PlacedItemBlock.class);
+        callback.register("shelf", PLACED_ITEM, ShelfBlock.class);
     }
 
     public static final BlockEntityTooltip HOT_POURED_GLASS = (level, state, pos, entity, tooltip) -> {
@@ -483,6 +488,17 @@ public final class BlockEntityTooltips
             heat(tooltip, firebox.getTemperature());
         }
     };
+
+    public static final BlockEntityTooltip PLACED_ITEM = (level, state, pos, entity, tooltip) -> {
+        if (entity instanceof PlacedItemBlockEntity placedItem)
+        {
+            for (ItemStack stack : Helpers.iterate(placedItem.getInventory()))
+            {
+                tooltip.accept(stack.getHoverName());
+            }
+        }
+    };
+
 
     private static void pitKiln(Level level, BlockPos pos, Consumer<Component> tooltip)
     {

@@ -1264,6 +1264,8 @@ DEFAULT_LANG = {
     'config.jade.plugin_tfc.water_wheel': 'Water Wheel',
     'config.jade.plugin_tfc.windmill': 'Windmill',
     'config.jade.plugin_tfc.hot_poured_glass': 'Hot Poured Glass',
+    'config.jade.plugin_tfc.shelf': 'Shelf',
+    'config.jade.plugin_tfc.placed_item': 'Placed Item',
 
     'config.jade.plugin_tfc.animal': 'Animal',
     'config.jade.plugin_tfc.frog': 'Frog',
