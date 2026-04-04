@@ -49,7 +49,6 @@ public class ClutchBlock extends ExtendedRotatedPillarBlock implements EntityBlo
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public boolean isSignalSource(BlockState state)
     {
         return true;

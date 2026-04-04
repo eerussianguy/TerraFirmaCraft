@@ -33,6 +33,11 @@ public class BowlBlockEntityRenderer implements BlockEntityRenderer<BowlBlockEnt
         map.accept(() -> Items.GUNPOWDER, Helpers.identifier("block/powder/gunpowder"));
     });
 
+    public static ResourceLocation getTexture(Item item)
+    {
+        return TEXTURES.getOrDefault(item, FALLBACK);
+    }
+
     /**
      * Associates an item with a texture in bowl blocks.
      * <p>

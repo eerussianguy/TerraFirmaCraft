@@ -26,6 +26,7 @@ import net.dries007.tfc.common.blockentities.rotation.CrankshaftBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.CreativeRotationBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.EncasedAxleBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.GearBoxBlockEntity;
+import net.dries007.tfc.common.blockentities.rotation.GlassworkingWheelBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.PowerLoomBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.PumpBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.TripHammerBlockEntity;
@@ -152,6 +153,7 @@ public final class TFCBlockEntities
     public static final Id<CrankshaftBlockEntity> CRANKSHAFT = register("crankshaft", CrankshaftBlockEntity::new, TFCBlocks.CRANKSHAFT);
     public static final Id<TripHammerBlockEntity> TRIP_HAMMER = register("trip_hammer", TripHammerBlockEntity::new, TFCBlocks.TRIP_HAMMER);
     public static final Id<PowerLoomBlockEntity> POWER_LOOM = register("power_loom", PowerLoomBlockEntity::new, TFCBlocks.POWER_LOOM);
+    public static final Id<GlassworkingWheelBlockEntity> GLASSWORKING_WHEEL = register("glassworking_wheel", GlassworkingWheelBlockEntity::new, TFCBlocks.GLASSWORKING_WHEEL);
     public static final Id<VaneBlockEntity> VANE = register("vane", VaneBlockEntity::new, TFCBlocks.VANE);
     public static final Id<AnemometerBlockEntity> ANEMOMETER = register("anemometer", AnemometerBlockEntity::new, TFCBlocks.ANEMOMETER);
 

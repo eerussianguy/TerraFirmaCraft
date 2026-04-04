@@ -155,6 +155,7 @@ import net.dries007.tfc.client.overworld.LevelRendererExtension;
 import net.dries007.tfc.client.overworld.StarsReloadListener;
 import net.dries007.tfc.client.particle.AnimatedParticle;
 import net.dries007.tfc.client.particle.BubbleColumnDownParticle;
+import net.dries007.tfc.client.particle.DustParticle;
 import net.dries007.tfc.client.particle.BubbleColumnUpParticle;
 import net.dries007.tfc.client.particle.BubbleParticle;
 import net.dries007.tfc.client.particle.FallingLeafParticle;
@@ -183,6 +184,7 @@ import net.dries007.tfc.client.render.blockentity.CrankshaftBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.CrucibleBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.FirepitBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.GlassBasinBlockEntityRenderer;
+import net.dries007.tfc.client.render.blockentity.GlassworkingWheelBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.GrillBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.HotPouredGlassBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.JavelinItemRenderer;
@@ -668,6 +670,7 @@ public final class ClientEventHandler
         event.registerBlockEntityRenderer(TFCBlockEntities.TRAPPED_CHEST.get(), TFCChestBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(TFCBlockEntities.LOOM.get(), ctx -> new LoomBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.POWER_LOOM.get(), ctx -> new PowerLoomBlockEntityRenderer());
+        event.registerBlockEntityRenderer(TFCBlockEntities.GLASSWORKING_WHEEL.get(), ctx -> new GlassworkingWheelBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.SLUICE.get(), ctx -> new SluiceBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.BELLOWS.get(), ctx -> new BellowsBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.TOOL_RACK.get(), ctx -> new ToolRackBlockEntityRenderer());
@@ -802,6 +805,7 @@ public final class ClientEventHandler
         FirepitBlockEntityRenderer.BURN_STAGE_MODELS.values().forEach(list -> list.forEach(event::register));
 
         event.register(CrankshaftBlockEntityRenderer.WHEEL_MODEL);
+        event.register(GlassworkingWheelBlockEntityRenderer.AXLE_MODEL);
 
         ResourceManager rm = Minecraft.getInstance().getResourceManager();
         Map<ResourceLocation, Resource> resources = rm.listResources("models/block/mold", r -> r.getPath().endsWith(".json"));
@@ -983,6 +987,7 @@ public final class ClientEventHandler
         event.registerSpriteSet(TFCParticles.FALLING_LEAF.get(), set -> new FallingLeafParticle.Provider(set, true));
         event.registerSpriteSet(TFCParticles.FEATHER.get(), set -> new LeafParticle.Provider(set, false));
         event.registerSpriteSet(TFCParticles.SPARK.get(), SparkParticle.Provider::new);
+        event.registerSpriteSet(TFCParticles.DUST.get(), DustParticle.Provider::new);
         TFCParticles.BUTTERFLIES.values().forEach(fly -> event.registerSpriteSet(fly.get(), AnimatedParticle.Provider::new));
         event.registerSpriteSet(TFCParticles.FLUID_DRIP.get(), set -> FluidDripParticle.provider(set, FluidDripParticle.FluidHangParticle::new));
         event.registerSpriteSet(TFCParticles.FLUID_FALL.get(), set -> FluidDripParticle.provider(set, FluidDripParticle.FluidFallAndLandParticle::new));

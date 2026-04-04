@@ -106,6 +106,8 @@ public class TFCTags
         public static final TagKey<Block> GLASS_BASIN_BLOCKS = tag("glass_basin_blocks");
         /** Thatch blocks that can be used to create a thatch bed */
         public static final TagKey<Block> THATCH_BED_THATCH = tag("thatch_bed_thatch");
+        /** Ignored by the glassworking wheel for occlusion */
+        public static final TagKey<Block> GLASSWORKING_WHEEL_INVISIBLE = tag("glassworking_wheel_invisible");
         /** Used for fruit tree growth mechanics */
         public static final TagKey<Block> FRUIT_TREE_BRANCH = tag("fruit_tree_branches");
         public static final TagKey<Block> FRUIT_TREE_LEAVES = tag("fruit_tree_leaves");

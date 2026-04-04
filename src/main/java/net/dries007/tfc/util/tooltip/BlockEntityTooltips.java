@@ -59,6 +59,7 @@ import net.dries007.tfc.common.blockentities.ThermometerBlockEntity;
 import net.dries007.tfc.common.blockentities.TickCounterBlockEntity;
 import net.dries007.tfc.common.blockentities.TickingPlantBlockEntity;
 import net.dries007.tfc.common.blockentities.VaneBlockEntity;
+import net.dries007.tfc.common.blockentities.rotation.GlassworkingWheelBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.PowerLoomBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.RotatingBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.WaterWheelBlockEntity;
@@ -105,6 +106,7 @@ import net.dries007.tfc.common.blocks.rotation.CrankshaftBlock;
 import net.dries007.tfc.common.blocks.rotation.CreativeRotationBlock;
 import net.dries007.tfc.common.blocks.rotation.EncasedAxleBlock;
 import net.dries007.tfc.common.blocks.rotation.GearBoxBlock;
+import net.dries007.tfc.common.blocks.rotation.GlassworkingWheelBlock;
 import net.dries007.tfc.common.blocks.rotation.WaterWheelBlock;
 import net.dries007.tfc.common.blocks.rotation.WindmillBlock;
 import net.dries007.tfc.common.blocks.soil.HoeOverlayBlock;
@@ -113,8 +115,14 @@ import net.dries007.tfc.common.blocks.wood.TFCSaplingBlock;
 import net.dries007.tfc.common.component.EggComponent;
 import net.dries007.tfc.common.component.TFCComponents;
 import net.dries007.tfc.common.component.food.FoodCapability;
+import net.dries007.tfc.common.component.glass.GlassOperation;
+import net.dries007.tfc.common.component.glass.GlassOperations;
 import net.dries007.tfc.common.component.heat.HeatCapability;
+import net.dries007.tfc.common.component.heat.IHeat;
 import net.dries007.tfc.common.component.heat.IHeatView;
+import net.dries007.tfc.common.component.item.ItemComponent;
+import net.dries007.tfc.common.items.BlowpipeItem;
+import net.dries007.tfc.common.items.GlassBlowpipeItem;
 import net.dries007.tfc.common.items.Powder;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.common.recipes.BloomeryRecipe;
@@ -179,7 +187,46 @@ public final class BlockEntityTooltips
         callback.register("thermometer", THERMOMETER, ThermometerBlock.class);
         callback.register("anemometer", ANEMOMETER, AnemometerBlock.class);
         callback.register("vane", VANE, VaneBlock.class);
+        callback.register("glassworking_wheel", GLASSWORKING_WHEEL, GlassworkingWheelBlock.class);
     }
+
+    public static final BlockEntityTooltip GLASSWORKING_WHEEL = (level, state, pos, entity, tooltip) -> {
+        if (entity instanceof GlassworkingWheelBlockEntity wheel)
+        {
+            getRotationComponent(wheel).ifPresent(tooltip);
+            for (ItemStack item : Helpers.iterate(wheel.getInventory()))
+            {
+                if (item.isEmpty())
+                    continue;
+                final MutableComponent comp = item.getHoverName().copy();
+                final IHeat heat = HeatCapability.get(item);
+                if (heat != null)
+                {
+                    final var heatComp = TFCConfig.CLIENT.heatTooltipStyle.get().formatColored(heat.getTemperature());
+                    if (heatComp != null)
+                    {
+                        tooltip.accept(comp.append(" (").append(heatComp).append(")"));
+                    }
+                }
+                else
+                {
+                    tooltip.accept(comp);
+                }
+                final GlassOperations ops = item.get(TFCComponents.GLASS);
+                if (ops != null && !ops.batch().isEmpty())
+                {
+                    tooltip.accept(Component.literal("  ").append(ops.batch().getHoverName()).withStyle(ChatFormatting.DARK_AQUA));
+                    var opsComp = Component.literal("  ");
+                    for (GlassOperation step : ops.steps())
+                    {
+                        opsComp = opsComp.append(Component.translatable(step.getTranslationId())).append("; ");
+                    }
+                    if (!ops.steps().isEmpty())
+                        tooltip.accept(opsComp);
+                }
+            }
+        }
+    };
 
     public static final BlockEntityTooltip HOT_POURED_GLASS = (level, state, pos, entity, tooltip) -> {
         if (state.getBlock() instanceof HotPouredGlassBlock && !state.getValue(HotPouredGlassBlock.FLAT))

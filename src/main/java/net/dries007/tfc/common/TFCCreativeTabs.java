@@ -554,6 +554,8 @@ public final class TFCCreativeTabs
         out.accept(TFCBlocks.CRANKSHAFT);
         out.accept(TFCBlocks.TRIP_HAMMER);
         out.accept(TFCBlocks.POWER_LOOM);
+        out.accept(TFCBlocks.GLASSWORKING_WHEEL);
+        out.accept(TFCBlocks.HATCH);
         out.accept(TFCBlocks.CRUCIBLE);
         out.accept(TFCBlocks.COMPOSTER);
         out.accept(TFCBlocks.BLOOMERY);

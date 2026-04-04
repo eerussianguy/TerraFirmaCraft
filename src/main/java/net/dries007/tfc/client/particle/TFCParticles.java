@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.function.Function;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -54,6 +55,7 @@ public final class TFCParticles
     public static final Id<SimpleParticleType> SMOKE_2 = register("smoke_2");
     public static final Id<SimpleParticleType> SMOKE_3 = register("smoke_3");
     public static final Id<SimpleParticleType> SMOKE_4 = register("smoke_4");
+    public static final Id<ParticleType<ItemParticleOption>> DUST = register("dust", ItemParticleOption::codec, ItemParticleOption::streamCodec);
     public static final Id<ParticleType<FluidParticleOption>> FLUID_DRIP = register("fluid_drip", FluidParticleOption::codec, FluidParticleOption::streamCodec);
     public static final Id<ParticleType<FluidParticleOption>> FLUID_FALL = register("fluid_fall", FluidParticleOption::codec, FluidParticleOption::streamCodec);
     public static final Id<ParticleType<FluidParticleOption>> FLUID_LAND = register("fluid_land", FluidParticleOption::codec, FluidParticleOption::streamCodec);

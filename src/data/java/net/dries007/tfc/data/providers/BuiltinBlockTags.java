@@ -281,6 +281,8 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
                 TFCBlocks.STEEL_PUMP,
                 TFCBlocks.TRIP_HAMMER,
                 TFCBlocks.POWER_LOOM,
+                TFCBlocks.GLASSWORKING_WHEEL,
+                TFCBlocks.HATCH,
                 TFCBlocks.BRONZE_BELL,
                 TFCBlocks.BRASS_BELL,
                 TFCBlocks.LARGE_VESSEL
@@ -473,7 +475,7 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
             TFCBlocks.BURNING_LOG_PILE,
             TFCBlocks.CHARCOAL_PILE);
         tag(CHARCOAL_FORGE_INSULATION).addTag(INSULATION);
-        tag(CHARCOAL_FORGE_INVISIBLE).add(TFCBlocks.CRUCIBLE);
+        tag(CHARCOAL_FORGE_INVISIBLE).add(TFCBlocks.CRUCIBLE, TFCBlocks.GLASSWORKING_WHEEL);
         tag(BLOOMERY_INSULATION).addTag(INSULATION);
         tag(BLAST_FURNACE_INSULATION).add(TFCBlocks.REINFORCED_FIRE_BRICKS).add(TFCBlocks.REINFORCED_FIRE_BRICKS);
         tag(HEAT_INSULATION).add(TFCBlocks.FIRE_BRICKS).add(TFCBlocks.REINFORCED_FIRE_BRICKS).add(Blocks.BRICKS).add(Blocks.BRICK_STAIRS).add(Blocks.BRICK_SLAB).add(Blocks.TINTED_GLASS).add(TFCBlocks.FIREPROOF_DOOR);
@@ -483,6 +485,7 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
             .add(TFCBlocks.METALS, Metal.BlockType.OXIDIZED_GRATE)
             .add(TFCBlocks.METALS, Metal.BlockType.WEATHERED_GRATE);
         tag(SCRAPING_SURFACE).addTag(BlockTags.LOGS);
+        tag(GLASSWORKING_WHEEL_INVISIBLE).add(TFCBlocks.HATCH);
         tag(GLASS_POURING_TABLE)
             .add(TFCBlocks.METALS.get(Metal.BRASS).get(Metal.BlockType.BLOCK))
             .add(TFCBlocks.METALS.get(Metal.BRASS).get(Metal.BlockType.EXPOSED_BLOCK))

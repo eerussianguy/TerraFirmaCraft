@@ -52,6 +52,7 @@ public final class BlockCapabilities
         registerInventory(event, TFCBlockEntities.FIREBOX);
         event.registerBlockEntity(FLUID, TFCBlockEntities.CRUCIBLE.get(), CrucibleBlockEntity::getSidedFluidInventory);
         event.registerBlockEntity(HEAT, TFCBlockEntities.CRUCIBLE.get(), (object, context) -> object.getInventory());
+        event.registerBlockEntity(HEAT, TFCBlockEntities.GLASSWORKING_WHEEL.get(), (object, context) -> object);
         registerInventory(event, TFCBlockEntities.FIREPIT);
         registerInventory(event, TFCBlockEntities.GRILL);
         event.registerBlockEntity(FLUID, TFCBlockEntities.LAMP.get(), LampBlockEntity::getSidedFluidInventory);

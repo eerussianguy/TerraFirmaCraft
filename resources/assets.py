@@ -2444,6 +2444,13 @@ def generate(rm: ResourceManager):
     block = rm.blockstate('power_loom', variants=four_rotations('tfc:block/power_loom', (270, 180, None, 90)))
     block.with_lang(lang('power loom')).with_item_model().with_block_loot('tfc:power_loom')
 
+    rm.blockstate('glassworking_wheel', model='tfc:block/empty').with_lang(lang('glassworking wheel')).with_item_model().with_block_loot('tfc:glassworking_wheel')
+
+    rm.blockstate('hatch', variants={
+        'powered=false': {'model': 'tfc:block/hatch'},
+        'powered=true': {'model': 'tfc:block/hatch_open'}
+    }).with_lang(lang('hatch')).with_item_model().with_block_loot('tfc:hatch')
+
     for fluid in SIMPLE_FLUIDS:
         water_based_fluid(rm, fluid)
 

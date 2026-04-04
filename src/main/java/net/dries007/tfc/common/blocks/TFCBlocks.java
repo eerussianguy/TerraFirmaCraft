@@ -73,6 +73,7 @@ import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blockentities.ThermometerBlockEntity;
 import net.dries007.tfc.common.blockentities.VaneBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.CreativeRotationBlockEntity;
+import net.dries007.tfc.common.blockentities.rotation.GlassworkingWheelBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.PowerLoomBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.PumpBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.TripHammerBlockEntity;
@@ -125,6 +126,7 @@ import net.dries007.tfc.common.blocks.rotation.CrankshaftBlock;
 import net.dries007.tfc.common.blocks.rotation.CreativeRotationBlock;
 import net.dries007.tfc.common.blocks.rotation.FluidPipeBlock;
 import net.dries007.tfc.common.blocks.rotation.FluidPumpBlock;
+import net.dries007.tfc.common.blocks.rotation.GlassworkingWheelBlock;
 import net.dries007.tfc.common.blocks.soil.ColoredBlock;
 import net.dries007.tfc.common.blocks.soil.ConnectedGrassBlock;
 import net.dries007.tfc.common.blocks.soil.SandBlockType;
@@ -489,6 +491,8 @@ public final class TFCBlocks
     public static final Id<Block> STEEL_PIPE = register("steel_pipe", () -> new FluidPipeBlock(ExtendedProperties.of().strength(5f).sound(SoundType.METAL)));
     public static final Id<Block> STEEL_PUMP = register("steel_pump", () -> new FluidPumpBlock(ExtendedProperties.of().strength(5f).sound(SoundType.METAL).blockEntity(TFCBlockEntities.PUMP).serverTicks(PumpBlockEntity::serverTick).forceSolidOn()));
     public static final Id<Block> POWER_LOOM = register("power_loom", () -> new PowerLoomBlock(ExtendedProperties.of().strength(5f).noOcclusion().sound(SoundType.METAL).blockEntity(TFCBlockEntities.POWER_LOOM).ticks(PowerLoomBlockEntity::powerLoomTick)));
+    public static final Id<Block> GLASSWORKING_WHEEL = register("glassworking_wheel", () -> new GlassworkingWheelBlock(ExtendedProperties.of().sound(SoundType.METAL).noOcclusion().strength(2.5F).pushReaction(PushReaction.DESTROY).blockEntity(TFCBlockEntities.GLASSWORKING_WHEEL).serverTicks(GlassworkingWheelBlockEntity::serverTick)));
+    public static final Id<Block> HATCH = register("hatch", () -> new HatchBlock(ExtendedProperties.of().strength(5f).sound(SoundType.METAL).noOcclusion()));
 
     public static final Id<Block> CHANNEL = register("channel", () -> new ChannelBlock(ExtendedProperties.of(MapColor.METAL).strength(3).sound(SoundType.METAL).blockEntity(TFCBlockEntities.CHANNEL).lightLevel(s -> s.getValue(ChannelBlock.WITH_METAL) ? 10 : 0)));
     public static final Id<Block> MOLD_TABLE = register("mold_table", () -> new MoldTableBlock(ExtendedProperties.of(MapColor.METAL).strength(3).sound(SoundType.METAL).blockEntity(TFCBlockEntities.MOLD_TABLE).serverTicks(MoldTableBlockEntity::serverTick)));
