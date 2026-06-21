@@ -9,9 +9,9 @@
     "id": "tfc:metal/pickaxe_head/black_steel"
   },
   "rules": [
-    "bend_not_last",
+    "punch_last",
     "draw_not_last",
-    "punch_last"
+    "bend_not_last"
   ],
   "tier": 5
 }

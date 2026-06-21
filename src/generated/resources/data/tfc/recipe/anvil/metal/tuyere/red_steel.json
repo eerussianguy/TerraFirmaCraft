@@ -8,8 +8,8 @@
     "id": "tfc:metal/tuyere/red_steel"
   },
   "rules": [
-    "bend_second_last",
-    "bend_last"
+    "bend_last",
+    "bend_second_last"
   ],
   "tier": 6
 }

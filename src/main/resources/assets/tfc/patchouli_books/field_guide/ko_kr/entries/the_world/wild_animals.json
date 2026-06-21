@@ -148,13 +148,6 @@
     },
     {
       "type": "patchouli:entity",
-      "entity": "tfc:rabbit",
-      "scale": 0.7,
-      "name": "Rabbit",
-      "text": "The rabbit is known to chew on carrots and cabbage. They are ubiquitous in the world, changing their coat based on climate. They only need 15mm of $(l:the_world/climate#rainfall)rainfall$() to spawn."
-    },
-    {
-      "type": "patchouli:entity",
       "entity": "tfc:fox",
       "scale": 0.7,
       "name": "Fox",
@@ -210,9 +203,6 @@
       "scale": 0.8,
       "name": "Peafowl",
       "text": "The peafowl spawns in forests at any $(l:the_world/climate#temperature)temperature$() above 14°C, and $(l:the_world/climate#rainfall)rainfall$() between 190 and 500mm."
-    },
-    {
-      "type": "patchouli:empty"
     },
     {
       "type": "patchouli:text",
@@ -286,7 +276,42 @@
       "entity": "tfc:salmon",
       "scale": 0.7,
       "name": "§l연어",
-      "text": "연어는 $(l:the_world/climate#temperature)기온$()이 -5°C 이상인 강이나 호수에서 생성됩니다."
+      "text": "Salmon spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -8°C and at most 12°C and with rainfall of at least 250 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:rainbow_trout",
+      "scale": 0.7,
+      "name": "Rainbow Trout",
+      "text": "Rainbow Trout spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -12°C and at most 10°C and with rainfall of at least 150 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:lake_trout",
+      "scale": 0.7,
+      "name": "Lake Trout",
+      "text": "Lake Trout spawn in any lake with a $(l:the_world/climate#temperature)temperature$() of at least -5°C and at most 15°C and with rainfall of at least 250 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:largemouth_bass",
+      "scale": 0.7,
+      "name": "Largemouth Bass",
+      "text": "Largemouth Bass spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -14°C and at most 16°C and with rainfall of at least 200 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:smallmouth_bass",
+      "scale": 0.7,
+      "name": "Smallmouth Bass",
+      "text": "Smallmouth Bass spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -14°C and at most 16°C and with rainfall of less than 300 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:crappie",
+      "scale": 0.7,
+      "name": "Crappie",
+      "text": "블루길은 $(l:the_world/climate#temperature)기온$()이 -10°C 이상 26°C 이하인 강이나 호수에 생성됩니다."
     },
     {
       "type": "patchouli:entity",
@@ -294,6 +319,69 @@
       "scale": 0.7,
       "name": "§l블루길",
       "text": "블루길은 $(l:the_world/climate#temperature)기온$()이 -10°C 이상 26°C 이하인 강이나 호수에 생성됩니다."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:northern_pike",
+      "scale": 0.7,
+      "name": "Northern Pike",
+      "text": "Northern Pike spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -10°C and at most 26°C with rainfall between 150 mm and 400 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:peacock_bass",
+      "scale": 0.7,
+      "name": "Peacock Bass",
+      "text": "Peacock Bass spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least 12°C and at most 25°C with rainfall between 200 mm and 400 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:arctic_char",
+      "scale": 0.7,
+      "name": "Arctic Char",
+      "text": "Arctic Char spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -20°C and at most -8°C with rainfall between 150mm and 400 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:muksun",
+      "scale": 0.7,
+      "name": "Muksun",
+      "text": "Muksun spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -20°C and at most -10°C with rainfall of at least 250 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:burbot",
+      "scale": 0.7,
+      "name": "Burbot",
+      "text": "Burbot spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -16°C and at most -9°C with rainfall less than 350 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:tilapia",
+      "scale": 0.7,
+      "name": "Tilapia",
+      "text": "Tilapia spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least 10°C and at most 32°C with rainfall less than 300 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:spotted_gudgeon",
+      "scale": 0.7,
+      "name": "Spotted Gudgeon",
+      "text": "Spotted Gudgeon spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least 6°C and at most 24°C with rainfall less than 250 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:pacu",
+      "scale": 0.7,
+      "name": "Pacu",
+      "text": "Pacu spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least 20°C and at most 35°C with rainfall above 200 mm."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "tfc:red_piranha",
+      "scale": 0.7,
+      "name": "Red Piranha",
+      "text": "Red Piranha spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least 22°C and at most 35°C with rainfall above 300 mm."
     },
     {
       "type": "patchouli:text",

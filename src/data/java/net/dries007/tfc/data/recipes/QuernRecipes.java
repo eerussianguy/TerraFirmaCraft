@@ -12,7 +12,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.dries007.tfc.common.TFCTags;
-import net.dries007.tfc.common.blocks.GroundcoverBlockType;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.crop.Crop;
 import net.dries007.tfc.common.blocks.plant.Plant;

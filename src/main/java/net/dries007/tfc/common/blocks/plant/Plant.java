@@ -11,7 +11,6 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PlaceOnWaterBlockItem;
@@ -20,7 +19,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathType;
@@ -30,7 +28,6 @@ import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
 import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.fluids.TFCFluids;
 import net.dries007.tfc.util.registry.RegistryPlant;
 
 /*

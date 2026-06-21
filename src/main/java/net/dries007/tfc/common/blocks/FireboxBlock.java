@@ -6,7 +6,6 @@
 
 package net.dries007.tfc.common.blocks;
 
-import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.config.TFCConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -31,14 +30,12 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import net.dries007.tfc.common.blockentities.FireboxBlockEntity;
 import net.dries007.tfc.common.blocks.devices.DeviceBlock;
 import net.dries007.tfc.common.blocks.devices.IBellowsConsumer;
-import net.dries007.tfc.common.capabilities.BlockCapabilities;
 import net.dries007.tfc.util.Helpers;
 
 public class FireboxBlock extends DeviceBlock implements IBellowsConsumer

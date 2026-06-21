@@ -81,7 +81,7 @@ public final class FluidHelpers
      */
     public static boolean isEyeInWaterLikeFluid(Entity entity)
     {
-        return entity.isEyeInFluidType(TFCFluids.SALT_WATER.type().get()) || entity.isEyeInFluidType(TFCFluids.SALT_WATER.type().get());
+        return entity.isEyeInFluidType(TFCFluids.SALT_WATER.type().get()) || entity.isEyeInFluidType(TFCFluids.SPRING_WATER.type().get());
     }
 
 
@@ -431,7 +431,7 @@ public final class FluidHelpers
                 return false;
             }
 
-            if (state.getBlock() != toPlace.getBlock())
+            if (state.getBlock() != toPlace.getBlock() || (fluid instanceof FlowingFluid && toPlace.getFluidState().isSource()))
             {
                 if (!level.isClientSide && state.canBeReplaced(fluid) && !state.liquid())
                 {

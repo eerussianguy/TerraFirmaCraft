@@ -15,8 +15,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -29,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import net.dries007.tfc.common.blockentities.PlacedItemBlockEntity;
 import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blocks.devices.PlacedItemBlock;
+import net.dries007.tfc.util.Helpers;
 
 public class ShelfBlock extends PlacedItemBlock
 {
@@ -39,6 +44,16 @@ public class ShelfBlock extends PlacedItemBlock
     public ShelfBlock(ExtendedProperties properties, boolean thick)
     {
         super(properties, thick ? TOP_SHAPE_TALL : TOP_SHAPE, true);
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos)
+    {
+        if (facing == state.getValue(FACING) && !state.canSurvive(level, currentPos))
+        {
+            return Blocks.AIR.defaultBlockState();
+        }
+        return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 
     @Override
@@ -103,9 +118,18 @@ public class ShelfBlock extends PlacedItemBlock
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        final BlockState state = defaultBlockState().setValue(FACING, context.getHorizontalDirection());
-        return canSurvive(state, context.getLevel(), context.getClickedPos())
-            ? PlacedItemBlock.updateStateValues(context.getLevel(), context.getClickedPos().below(), state)
-            : null;
+        return Helpers.getSupportedDirectionalStateForPlacement(this, context, true);
+    }
+
+    @Override
+    protected BlockState rotate(BlockState state, Rotation rot)
+    {
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    protected BlockState mirror(BlockState state, Mirror mirror)
+    {
+        return rotate(state, mirror.getRotation(state.getValue(FACING)));
     }
 }

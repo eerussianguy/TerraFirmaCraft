@@ -1,5 +1,6 @@
 {
   "values": [
-    "tfc:metal/bronze"
+    "tfc:metal/bronze",
+    "tfc:metal/flowing_bronze"
   ]
 }

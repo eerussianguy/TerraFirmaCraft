@@ -7,7 +7,6 @@
 package net.dries007.tfc.common.entities.aquatic;
 
 import com.mojang.serialization.Dynamic;
-import java.util.Optional;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;

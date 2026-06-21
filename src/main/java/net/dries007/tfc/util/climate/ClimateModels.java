@@ -6,7 +6,6 @@
 
 package net.dries007.tfc.util.climate;
 
-import java.util.function.Supplier;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Registry;
 import net.minecraft.network.codec.StreamCodec;

@@ -9,7 +9,6 @@ package net.dries007.tfc.client.screen;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

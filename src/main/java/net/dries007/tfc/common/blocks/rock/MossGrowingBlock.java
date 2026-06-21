@@ -10,11 +10,9 @@ import java.util.function.Supplier;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 
-import net.dries007.tfc.common.fluids.FluidHelpers;
 
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 

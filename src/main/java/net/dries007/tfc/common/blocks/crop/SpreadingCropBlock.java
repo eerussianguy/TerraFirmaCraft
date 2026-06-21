@@ -24,7 +24,6 @@ import org.jetbrains.annotations.Nullable;
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blockentities.CropBlockEntity;
 import net.dries007.tfc.common.blockentities.DecayingBlockEntity;
-import net.dries007.tfc.common.blockentities.FarmlandBlockEntity;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.HorizontalPipeBlock;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;

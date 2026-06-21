@@ -19,7 +19,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.GsonHelper;

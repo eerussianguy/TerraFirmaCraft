@@ -307,7 +307,7 @@ METAL_ITEMS: dict[str, MetalItem] = {
 
 ORES: dict[str, Ore] = {
     'native_copper': Ore('copper', True, 'copper', 'copper', 'orange'),
-    'native_gold': Ore('gold', True, 'copper', 'gold'),
+    'native_gold': Ore('gold', True, 'copper', 'gold', 'yellow'),
     'hematite': Ore('cast_iron', True, 'copper', 'iron', 'red'),
     'native_silver': Ore('silver', True, 'copper', 'silver', 'light_gray'),
     'cassiterite': Ore('tin', True, 'copper', 'tin', 'gray'),
@@ -606,7 +606,7 @@ PLANTS: dict[str, Plant] = {
     'red_algae': Plant(False, -20, 30, 215, 450, 'floating'),
     'red_sealing_wax_palm': Plant(False, 19.3, 40, 280, 500, 'tall_plant'),
     'reindeer_lichen': Plant(False, -30, -8, 50, 470, 'creeping'),
-    'rose': Plant(True, -5, 20, 150, 300, 'tall_plant'),
+    'rose': Plant(False, -0.4, 17.6, 150, 300, 'tall_plant'),
     'sacred_datura': Plant(False, 6.8, 19.3, 75, 150, 'standard'),
     'sagebrush': Plant(False, -5.7, 15.7, 0, 120, 'dry'),
     'sago': Plant(False, -12.9, 19.3, 200, 500, 'water_fresh'),
@@ -848,7 +848,7 @@ VESSEL_TYPES = {
 }
 
 SIMPLE_BLOCKS = ('peat', 'aggregate', 'fire_bricks', 'smooth_mud_bricks')
-SIMPLE_ITEMS = ('alabaster_brick', 'bone_needle', 'blank_disc', 'blubber', 'brass_mechanisms', 'burlap_cloth', 'cactus_wood', 'compost', 'daub', 'dirty_jute_net', 'dried_cactus_wood', 'empty_jar', 'empty_jar_with_lid', 'fire_clay', 'goat_horn', 'gem_saw', 'glow_arrow', 'glue', 'hematitic_glass_batch', 'jacks', 'jar_lid', 'canola', 'alfalfa', 'jute', 'jute_fiber', 'jute_net', 'kaolin_clay', 'lamp_glass', 'lens', 'mortar', 'olive_paste', 'canola_paste', 'olivine_glass_batch', 'paddle', 'papyrus', 'papyrus_strip', 'pure_nitrogen', 'pure_phosphorus', 'pure_potassium', 'rotten_compost', 'sandpaper', 'silica_glass_batch', 'silk_cloth', 'soaked_papyrus_strip', 'soot', 'spindle', 'stick_bunch', 'stick_bundle', 'straw', 'treated_hide', 'unrefined_paper', 'volcanic_glass_batch', 'wool', 'wool_cloth', 'wool_yarn', 'wrought_iron_grill')
+SIMPLE_ITEMS = ('alabaster_brick', 'bone_needle', 'blank_disc', 'blubber', 'brass_mechanisms', 'burlap_cloth', 'cactus_wood', 'compost', 'daub', 'dirty_jute_net', 'dried_cactus_wood', 'empty_jar', 'empty_jar_with_lid', 'fire_clay', 'goat_horn', 'gem_saw', 'glow_arrow', 'glue', 'hematitic_glass_batch', 'jacks', 'jar_lid', 'canola', 'alfalfa', 'jute', 'jute_fiber', 'jute_net', 'kaolin_clay', 'lamp_glass', 'lens', 'mortar', 'olive_paste', 'canola_paste', 'olivine_glass_batch', 'paddle', 'papyrus', 'papyrus_strip', 'pure_nitrogen', 'pure_phosphorus', 'pure_potassium', 'rope', 'rotten_compost', 'sandpaper', 'silica_glass_batch', 'silk_cloth', 'soaked_papyrus_strip', 'soot', 'spindle', 'stick_bunch', 'stick_bundle', 'straw', 'treated_hide', 'unrefined_paper', 'volcanic_glass_batch', 'wool', 'wool_cloth', 'wool_yarn', 'wrought_iron_grill')
 
 GENERIC_POWDERS = {
     'charcoal': 'black',
@@ -903,7 +903,7 @@ FRUITS: dict[str, Fruit] = {
 }
 JAR_FRUITS = tuple([*BERRIES.keys(), *FRUITS.keys(), 'melon_slice', 'peanut'])
 
-SIMPLE_FRESHWATER_FISH = ('bluegill', 'crappie', 'lake_trout', 'largemouth_bass', 'rainbow_trout', 'salmon', 'smallmouth_bass',)
+SIMPLE_FRESHWATER_FISH = ('bluegill', 'crappie', 'lake_trout', 'largemouth_bass', 'rainbow_trout', 'salmon', 'smallmouth_bass', 'arctic_char', 'burbot', 'muksun', 'northern_pike', 'spotted_gudgeon', 'tilapia', 'peacock_bass', 'pacu', 'red_piranha')
 ADVANCEMENT_FISH = ('cod', 'calamari', 'shellfish', 'tropical_fish', *SIMPLE_FRESHWATER_FISH)
 
 GRAINS = ('barley', 'maize', 'oat', 'rice', 'rye', 'wheat')
@@ -980,7 +980,6 @@ DEFAULT_LANG = {
     'death.attack.tfc.coral.player': '%1$s impaled themself on a coral reef while trying to escape %2$s',
     'death.attack.tfc.pluck': '%1$s was plucked to death.',
     'death.attack.tfc.pluck.player': '%1$s was plucked to death by %2$s, which is surprising, because people don\'t typically grow feathers.',
-    'effect.tfc.pinned': 'Pinned',
     'effect.tfc.ink': 'Ink',
     'effect.tfc.glow_ink': 'Glowing Ink',
     'effect.tfc.overburdened': 'Overburdened',
@@ -989,6 +988,7 @@ DEFAULT_LANG = {
     'tfc.key.place_block': 'Place Block',
     'tfc.key.cycle_chisel_mode': 'Cycle Chisel Mode',
     'tfc.key.stack_food': 'Stack Food',
+    'glass.tfc.complete': 'Complete',
     'glass_operation.tfc.blow': 'Blow',
     'glass_operation.tfc.roll': 'Roll',
     'glass_operation.tfc.stretch': 'Stretch',
@@ -1316,7 +1316,7 @@ DEFAULT_LANG = {
     'tfc.tooltip.fertilizer.potassium': '§d(K) Potassium: §r%s%%',
     'tfc.tooltip.plantable.hold_shift': 'Hold (Shift) for Plant Info',
     'tfc.tooltip.plantable.climate': 'Climate:',
-    'tfc.tooltip.plantable.climate.temperature': '§1Temperature:§r %s §7-§r %s \u00b0C',
+    'tfc.tooltip.plantable.climate.temperature_range': '§1Temperature:§r %s §7-§r %s',
     'tfc.tooltip.plantable.climate.hydration': '§1Hydration:§r %s%% §7-§r %s%%',
     'tfc.tooltip.plantable.nutrients': 'Nutrients:',
     'tfc.tooltip.plantable.lifecycle': 'Lifecycle:',
@@ -1402,6 +1402,7 @@ DEFAULT_LANG = {
     'tfc.tooltip.sewing.stitch': 'Stitch',
     'tfc.tooltip.sewing.remove_stitch': 'Remove Stitch',
     'tfc.tooltip.sewing.select_recipe': 'Select Recipe',
+    'tfc.tooltip.rope.throw_me': 'Right click again to throw the rope in the direction you\'re facing.',
     'tfc.tooltip.firebox.time_to_heat': 'Heating %s blocks in %s',
     'tfc.tooltip.firebox.heated': 'Heated %s blocks',
     'tfc.tooltip.firebox.no_heat': 'No heatable area detected',
@@ -1490,6 +1491,7 @@ DEFAULT_LANG = {
     'config.jade.plugin_tfc.decaying': 'Decaying Block',
     'config.jade.plugin_tfc.loom': 'Loom',
     'config.jade.plugin_tfc.power_loom': 'Power Loom',
+    'config.jade.plugin_tfc.trip_hammer': 'Trip Hammer',
     'config.jade.plugin_tfc.ingot_pile': 'Ingot Pile',
     'config.jade.plugin_tfc.axle': 'Axle',
     'config.jade.plugin_tfc.encased_axle': 'Encased Axle',
@@ -1688,6 +1690,7 @@ DEFAULT_LANG = {
     'entity.tfc.horse': 'Horse',
     'entity.tfc.horse.male': 'Stallion',
     'entity.tfc.horse.female': 'Mare',
+    'entity.tfc.rope_knot': 'Rope',
     **{'entity.tfc.boat.%s' % wood: lang('%s boat', wood) for wood in WOODS.keys()},
     **{'entity.tfc.chest_boat.%s' % wood: lang('%s boat with chest', wood) for wood in WOODS.keys()},
 
@@ -2196,7 +2199,7 @@ DEFAULT_LANG = {
     'tfc.config.server.fireboxEnableAutomation': 'Enable Automation',
     'tfc.config.server.firePitEnableAutomation': 'Enable Automation',
     'tfc.config.server.foodDecayModifier': 'Food Decay Modifier',
-    'tfc.config.server.foodDecayStackTicks1': 'Food Decay Stack Ticks',
+    'tfc.config.server.foodDecayStackTicks': 'Food Decay Stack Ticks',
     'tfc.config.server.fruitBranchGrowthTicks': 'Fruit Branch Growth Ticks',
     'tfc.config.server.fruitPickBloomDelayTicks': 'Fruit Pick Bloom Delay Ticks',
     'tfc.config.server.saplingGrowthModifier': 'Sapling Growth Modifier',

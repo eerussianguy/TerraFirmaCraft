@@ -8,8 +8,6 @@ package net.dries007.tfc.world.region;
 
 import net.minecraft.util.Mth;
 
-import net.dries007.tfc.world.noise.Noise2D;
-import net.dries007.tfc.world.noise.OpenSimplex2D;
 
 public enum AnnotateClimate implements RegionTask
 {

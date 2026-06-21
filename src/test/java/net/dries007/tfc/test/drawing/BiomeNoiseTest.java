@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import net.dries007.tfc.test.TestSetup;
 import net.dries007.tfc.world.biome.BiomeNoise;
 import net.dries007.tfc.world.noise.Noise2D;
-import net.dries007.tfc.world.noise.OpenSimplex2D;
 
 import static net.dries007.tfc.world.TFCChunkGenerator.*;
 import static net.dries007.tfc.world.biome.BiomeNoise.*;

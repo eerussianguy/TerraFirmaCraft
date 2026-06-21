@@ -26,7 +26,6 @@ import net.dries007.tfc.common.blockentities.FirepitBlockEntity;
 import net.dries007.tfc.common.blockentities.GrillBlockEntity;
 import net.dries007.tfc.common.blockentities.InventoryBlockEntity;
 import net.dries007.tfc.common.blockentities.LargeVesselBlockEntity;
-import net.dries007.tfc.common.blockentities.LogPileBlockEntity;
 import net.dries007.tfc.common.blockentities.NestBoxBlockEntity;
 import net.dries007.tfc.common.blockentities.PotBlockEntity;
 import net.dries007.tfc.common.blockentities.PowderkegBlockEntity;

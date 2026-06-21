@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.client.RenderHelpers;
@@ -47,6 +48,10 @@ public class SimpleMobRenderer<T extends Mob, M extends EntityModel<T>> extends 
         super.setupRotations(entity, poseStack, bob, yBodyRot, partialTick, scale);
         if (doesFlop)
         {
+            // handle patchouli
+            final Vec3 pos = entity.position();
+            if (Math.abs(pos.x) < 0.01f && Math.abs(pos.y) < 0.01f && Math.abs(pos.z) < 0.01f)
+                return;
             poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.sin(0.6F * bob)));
             if (!entity.isInWater())
             {

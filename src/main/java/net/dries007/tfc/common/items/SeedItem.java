@@ -6,7 +6,9 @@
 
 package net.dries007.tfc.common.items;
 
+import java.util.Map;
 import java.util.function.Supplier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
@@ -16,12 +18,14 @@ import net.dries007.tfc.util.climate.ClimateRange;
 
 public class SeedItem extends ItemNameBlockItem implements PlantableInfo
 {
+    protected final Block deadBlock;
     private final PlantNutrients nutrients;
     private final Supplier<ClimateRange> climateRange;
 
-    public SeedItem(Crop crop, Block block, Properties properties)
+    public SeedItem(Crop crop, Block block, Block deadBlock, Properties properties)
     {
         super(block, properties);
+        this.deadBlock = deadBlock;
         nutrients = new PlantNutrients(crop.getNitrogen(), crop.getPhosphorous(), crop.getPotassium());
         climateRange = crop.getClimateRange();
     }
@@ -36,5 +40,12 @@ public class SeedItem extends ItemNameBlockItem implements PlantableInfo
     public @Nullable ClimateRange getClimateRangeInfo()
     {
         return climateRange.get();
+    }
+
+    @Override
+    public void registerBlocks(Map<Block, Item> blockToItemMap, Item item)
+    {
+        super.registerBlocks(blockToItemMap, item);
+        blockToItemMap.put(this.deadBlock, item);
     }
 }

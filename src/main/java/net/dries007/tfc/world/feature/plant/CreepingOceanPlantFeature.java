@@ -41,14 +41,15 @@ public class CreepingOceanPlantFeature extends Feature<CreepingPlantConfig>
         final int radius = context.config().radius();
         final int height = context.config().height();
         final BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
-
+        
+        boolean isSuccessful = false;
         for (int x = -radius; x <= radius; x++)
         {
             for (int z = -radius; z <= radius; z++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    if (x * x + z + z < radius * radius && context.random().nextFloat() < context.config().integrity())
+                    if ((x * x) + (z * z) < (radius * radius) && context.random().nextFloat() < context.config().integrity())
                     {
                         cursor.setWithOffset(pos, x, y, z);
                         if (EnvironmentHelpers.isWorldgenReplaceable(level, cursor) && cursor.getY() <= context.config().heightAboveTide() + maxTideHeight.noise(cursor.getX(), cursor.getZ()))
@@ -62,6 +63,7 @@ public class CreepingOceanPlantFeature extends Feature<CreepingPlantConfig>
                                 if (waterloggedState != null)
                                 {
                                     setBlock(level, cursor, waterloggedState.setValue(TFCBlockStateProperties.OPEN, isOpen));
+                                    isSuccessful = true;
                                 }
                             }
                         }
@@ -69,7 +71,7 @@ public class CreepingOceanPlantFeature extends Feature<CreepingPlantConfig>
                 }
             }
         }
-
-        return false;
+        
+        return isSuccessful;
     }
 }

@@ -22,7 +22,6 @@ public class TFCDamageTypes
     public static final ResourceKey<DamageType> GRILL = ResourceKey.create(Registries.DAMAGE_TYPE, Helpers.identifier("grill"));
     public static final ResourceKey<DamageType> POT = ResourceKey.create(Registries.DAMAGE_TYPE, Helpers.identifier("pot"));
     public static final ResourceKey<DamageType> DEHYDRATION = ResourceKey.create(Registries.DAMAGE_TYPE, Helpers.identifier("dehydration"));
-    public static final ResourceKey<DamageType> CORAL = ResourceKey.create(Registries.DAMAGE_TYPE, Helpers.identifier("coral"));
     public static final ResourceKey<DamageType> PLUCK = ResourceKey.create(Registries.DAMAGE_TYPE, Helpers.identifier("pluck"));
 
     public static void grill(Entity entity, float amount)
@@ -33,11 +32,6 @@ public class TFCDamageTypes
     public static void pot(Entity entity, float amount)
     {
         entity.hurt(new DamageSource(fetch(POT, entity.level())), amount);
-    }
-
-    public static void coral(Entity entity, float amount)
-    {
-        entity.hurt(new DamageSource(fetch(CORAL, entity.level())), amount);
     }
 
     public static void pluck(Entity entity, float amount, @Nullable Entity plucker)

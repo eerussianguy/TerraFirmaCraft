@@ -6,12 +6,8 @@
 
 package net.dries007.tfc.common.container;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,7 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import net.dries007.tfc.client.particle.TFCParticles;
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blockentities.AnvilBlockEntity;
 import net.dries007.tfc.common.component.forge.ForgeStep;

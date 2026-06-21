@@ -12,7 +12,6 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 
 import net.dries007.tfc.common.blocks.plant.TallWaterPlantBlock;
 import net.dries007.tfc.util.EnvironmentHelpers;

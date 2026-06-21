@@ -9,9 +9,9 @@
     "id": "tfc:metal/axe_head/copper"
   },
   "rules": [
-    "upset_third_last",
+    "punch_last",
     "hit_second_last",
-    "punch_last"
+    "upset_third_last"
   ],
   "tier": 1
 }

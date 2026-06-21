@@ -28,8 +28,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -139,17 +137,15 @@ public abstract class RotatableWaterPlantBlock extends WaterPlantBlock
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public BlockState rotate(BlockState state, Rotation rot)
+    protected BlockState rotate(BlockState state, Rotation rot)
     {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public BlockState mirror(BlockState state, Mirror mirror)
+    protected BlockState mirror(BlockState state, Mirror mirror)
     {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+        return rotate(state, mirror.getRotation(state.getValue(FACING)));
     }
 
     @Override

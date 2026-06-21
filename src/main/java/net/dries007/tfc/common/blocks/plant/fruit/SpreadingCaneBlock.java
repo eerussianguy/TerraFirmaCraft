@@ -166,16 +166,14 @@ public class SpreadingCaneBlock extends SpreadingBushBlock
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public BlockState rotate(BlockState oldState, Rotation rot)
+    protected BlockState rotate(BlockState state, Rotation rot)
     {
-        return oldState.setValue(FACING, rot.rotate(oldState.getValue(FACING)));
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public BlockState mirror(BlockState oldState, Mirror mirror)
+    protected BlockState mirror(BlockState state, Mirror mirror)
     {
-        return oldState.rotate(mirror.getRotation(oldState.getValue(FACING)));
+        return rotate(state, mirror.getRotation(state.getValue(FACING)));
     }
 }

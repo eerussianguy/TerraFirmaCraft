@@ -2,7 +2,7 @@
   "__comment__": "This file was automatically created by mcresources",
   "name": "畜牧业",
   "category": "tfc:mechanics",
-  "icon": "minecraft:egg",
+  "icon": "minecraft:textures/item/egg.png",
   "pages": [
     {
       "type": "patchouli:text",
@@ -110,7 +110,7 @@
     {
       "type": "patchouli:text",
       "anchor": "rabbit",
-      "text": "$(thing)兔子$()生成在$(l:the_world/climate#temperature)温度$()高于 -16°C 的地区，且$(l:the_world/climate#rainfall)降雨量$()至少 15mm。它们是$(l:mechanics/animal_husbandry#mammals)哺乳动物$()，没有特殊能力。它们会吃任何食物，即使是腐烂的。它们一胎产 1-6 个幼崽，怀孕仅 19 天，20 天成年。衰老前可产仔 6 次。",
+      "text": "$(thing)Rabbits$() spawn in $(l:the_world/climate#temperature)temperatures$() above -16°C, and at least 15mm of $(l:the_world/climate#rainfall)rainfall$(), changing their coat based on climate. They are $(l:mechanics/animal_husbandry#mammals)Mammals$() with no special abilities, aside from being known for chewing on carrots and cabbage. They will eat any food, even if it is rotten. They have 1-6 children, are pregnant for just 19 days, and reach adulthood in 20 days. They can have children 6 times.",
       "title": "兔子"
     },
     {

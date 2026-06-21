@@ -23,6 +23,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.TridentItem;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
@@ -133,7 +134,8 @@ public class PlacedItemBlockEntityRenderer<T extends PlacedItemBlockEntity> impl
             // Tridents (which javelins borrow code from) and shields have special handling in the vanilla code, since they have custom rendering behavior when held.
             // They are hardcoded to behave differently, such as in Neo's ItemRenderer#render and BlockEntityWithoutLevelRenderer#renderByItem methods,
             // so we have to hardcode them to be rendered as items here as well.
-            final boolean renderAsBlock = model.isGui3d() && !(stack.getItem() instanceof JavelinItem || stack.getItem() instanceof ShieldItem);
+            final Item item = stack.getItem();
+            final boolean renderAsBlock = model.isGui3d() && !(item instanceof TridentItem || item instanceof JavelinItem || item instanceof ShieldItem);
 
             if (isLarge)
             {

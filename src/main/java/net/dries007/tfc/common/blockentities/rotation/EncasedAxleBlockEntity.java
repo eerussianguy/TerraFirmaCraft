@@ -7,13 +7,10 @@
 package net.dries007.tfc.common.blockentities.rotation;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import net.dries007.tfc.common.blockentities.TFCBlockEntities;
-import net.dries007.tfc.util.Helpers;
 
 public class EncasedAxleBlockEntity extends AxleBlockEntity
 {

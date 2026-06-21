@@ -28,7 +28,6 @@ import net.dries007.tfc.common.blockentities.rotation.RotatingBlockEntity;
 import net.dries007.tfc.common.blocks.EntityBlockExtension;
 import net.dries007.tfc.common.blocks.ExtendedBlock;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
-import net.dries007.tfc.util.Helpers;
 
 public class WaterWheelBlock extends ExtendedBlock implements EntityBlockExtension, ConnectedAxleBlock
 {

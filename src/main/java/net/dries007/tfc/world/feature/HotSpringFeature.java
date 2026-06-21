@@ -15,7 +15,6 @@ import java.util.Set;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -28,7 +27,6 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.fluids.FluidHelpers;
 import net.dries007.tfc.util.Helpers;

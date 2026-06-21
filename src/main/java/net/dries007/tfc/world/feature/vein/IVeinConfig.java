@@ -6,11 +6,7 @@
 
 package net.dries007.tfc.world.feature.vein;
 
-import java.util.function.Function;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import org.jetbrains.annotations.Nullable;

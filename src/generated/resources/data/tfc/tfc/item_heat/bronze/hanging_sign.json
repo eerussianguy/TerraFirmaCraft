@@ -1,0 +1,67 @@
+{
+  "forging_temperature": 570.0,
+  "heat_capacity": 0.114285715,
+  "ingredient": [
+    {
+      "item": "tfc:wood/hanging_sign/bronze/acacia"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/ash"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/aspen"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/birch"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/blackwood"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/chestnut"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/douglas_fir"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/hickory"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/kapok"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/mangrove"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/maple"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/oak"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/palm"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/pine"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/rosewood"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/sequoia"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/spruce"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/sycamore"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/white_cedar"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/bronze/willow"
+    }
+  ],
+  "welding_temperature": 760.0
+}

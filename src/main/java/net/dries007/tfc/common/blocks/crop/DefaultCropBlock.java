@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 import net.dries007.tfc.common.blockentities.CropBlockEntity;
-import net.dries007.tfc.common.blockentities.FarmlandBlockEntity;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
 import net.dries007.tfc.common.blocks.TFCBlocks;

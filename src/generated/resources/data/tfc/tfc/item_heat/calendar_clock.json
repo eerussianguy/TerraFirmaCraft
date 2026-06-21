@@ -1,0 +1,8 @@
+{
+  "forging_temperature": 558.0,
+  "heat_capacity": 14.285715,
+  "ingredient": {
+    "item": "tfc:calendar_clock"
+  },
+  "welding_temperature": 744.0
+}

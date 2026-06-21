@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
@@ -115,7 +114,7 @@ public class StoveBlock extends FirepitBlock
     }
 
     @Override
-    public BlockState rotate(BlockState state, Rotation rot)
+    protected BlockState rotate(BlockState state, Rotation rot)
     {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
@@ -123,6 +122,6 @@ public class StoveBlock extends FirepitBlock
     @Override
     protected BlockState mirror(BlockState state, Mirror mirror)
     {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+        return rotate(state, mirror.getRotation(state.getValue(FACING)));
     }
 }

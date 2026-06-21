@@ -259,6 +259,7 @@ public class TFCTags
         public static final TagKey<Block> THERMOMETER_READABLE = tag("thermometer_readable");
         /**  */
         public static final TagKey<Block> CLOCK_READABLE = tag("clock_readable");
+        public static final TagKey<Block> NO_ICICLE_GENERATION = tag("no_icicle_generation");
 
         private static TagKey<Block> tag(String name)
         {
@@ -571,7 +572,6 @@ public class TFCTags
         public static final TagKey<Item> FIREPIT_FUEL = tag("firepit_fuel");
         public static final TagKey<Item> FORGE_FUEL = tag("forge_fuel");
         public static final TagKey<Item> BLAST_FURNACE_FUEL = tag("blast_furnace_fuel");
-        public static final TagKey<Item> BLAST_FURNACE_SHEETS = tag("blast_furnace_sheets");
         public static final TagKey<Item> BLAST_FURNACE_TUYERES = tag("blast_furnace_tuyeres");
         public static final TagKey<Item> TOOL_RACK_TOOLS = tag("usable_on_tool_rack");
         public static final TagKey<Item> POWDER_KEG_FUEL = tag("usable_in_powder_keg");

@@ -9,9 +9,9 @@
     "id": "tfc:metal/unfinished_greaves/black_steel"
   },
   "rules": [
-    "bend_any",
+    "hit_any",
     "draw_any",
-    "hit_any"
+    "bend_any"
   ],
   "tier": 5
 }

@@ -7,8 +7,6 @@
 package net.dries007.tfc.common.blocks.devices;
 
 import java.util.function.BiPredicate;
-
-import net.dries007.tfc.config.TFCConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -24,15 +22,18 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -42,6 +43,7 @@ import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blocks.CharcoalPileBlock;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
+import net.dries007.tfc.config.TFCConfig;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.MultiBlock;
 
@@ -207,5 +209,11 @@ public class CharcoalForgeBlock extends DeviceBlock implements IBellowsConsumer
     protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType)
     {
         return false;
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player)
+    {
+        return new ItemStack(Items.CHARCOAL);
     }
 }

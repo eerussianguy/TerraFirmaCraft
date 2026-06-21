@@ -61,13 +61,13 @@ public class PetCommandScreen extends Screen
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick)
     {
-        PoseStack poseStack = graphics.pose();
         graphics.fillGradient(0, 0, width, height, -1072689136, -804253680);
+        super.render(graphics, mouseX, mouseY, partialTick);
+        PoseStack poseStack = graphics.pose();
         poseStack.pushPose();
         poseStack.scale(2.0F, 2.0F, 2.0F);
         graphics.drawCenteredString(font, title, width / 2 / 2, 30, 16777215);
         poseStack.popPose();
-        super.render(graphics, mouseX, mouseY, partialTick);
 
         for (Renderable widget : renderables)
         {

@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -158,7 +157,7 @@ public class BurningLogPileBlock extends Block implements IForgeBlockExtension, 
     @Override
     protected VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        return getShapeByDirByCount(state.getValue(AXIS), state.getValue(COUNT));
+        return getShapeByDirByCount(state.getValue(AXIS), state.getValue(COUNT), false);
     }
 
     @Override

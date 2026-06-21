@@ -19,7 +19,16 @@ public enum Fish
     LARGEMOUTH_BASS,
     RAINBOW_TROUT,
     SALMON,
-    SMALLMOUTH_BASS;
+    SMALLMOUTH_BASS,
+    NORTHERN_PIKE,
+    BURBOT,
+    ARCTIC_CHAR,
+    MUKSUN,
+    TILAPIA,
+    SPOTTED_GUDGEON,
+    PEACOCK_BASS,
+    PACU,
+    RED_PIRANHA;
 
     private final String serializedName;
 

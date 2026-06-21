@@ -8,7 +8,6 @@ package net.dries007.tfc.world.feature;
 
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Objects;
 import java.util.Set;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;

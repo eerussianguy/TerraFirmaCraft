@@ -8,8 +8,8 @@
     "id": "tfc:metal/tuyere/wrought_iron"
   },
   "rules": [
-    "bend_second_last",
-    "bend_last"
+    "bend_last",
+    "bend_second_last"
   ],
   "tier": 3
 }

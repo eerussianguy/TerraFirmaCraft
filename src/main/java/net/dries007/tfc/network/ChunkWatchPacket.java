@@ -7,7 +7,6 @@
 package net.dries007.tfc.network;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.level.ChunkPos;

@@ -22,7 +22,6 @@ import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blockentities.IPotInventory;
-import net.dries007.tfc.common.blockentities.PotBlockEntity;
 import net.dries007.tfc.common.component.food.FoodCapability;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.common.recipes.outputs.PotOutput;

@@ -246,7 +246,7 @@ public final class CropHelpers
                     repeat = minAmountRequiredToNextFillBar(farmland, fertilizer, FarmlandBlockEntity.NutrientType.NITROGEN, repeat, bonus);
                     repeat = minAmountRequiredToNextFillBar(farmland, fertilizer, FarmlandBlockEntity.NutrientType.POTASSIUM, repeat, bonus);
                     repeat = minAmountRequiredToNextFillBar(farmland, fertilizer, FarmlandBlockEntity.NutrientType.PHOSPHOROUS, repeat, bonus);
-                    repeat = Math.min(repeat, stack.getCount());
+                    repeat = player.isCreative() ? 99 : Math.min(repeat, stack.getCount());
                 }
                 if (repeat == -1)
                 {

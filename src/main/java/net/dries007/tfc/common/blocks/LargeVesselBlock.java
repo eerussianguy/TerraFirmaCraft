@@ -22,12 +22,13 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -42,7 +43,7 @@ import net.dries007.tfc.config.TFCConfig;
 
 public class LargeVesselBlock extends SealableDeviceBlock
 {
-    public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public static final VoxelShape OPENED_SHAPE = box(3D, 0D, 3D, 13D, 10D, 13D);
     public static final VoxelShape CLOSED_SHAPE = Shapes.or(
@@ -71,20 +72,20 @@ public class LargeVesselBlock extends SealableDeviceBlock
     public LargeVesselBlock(ExtendedProperties properties)
     {
         super(properties);
-        registerDefaultState(getStateDefinition().any().setValue(AXIS, Direction.Axis.X).setValue(SEALED, false).setValue(POWERED, false));
+        registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(SEALED, false).setValue(POWERED, false));
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
         final BlockState state = super.getStateForPlacement(context);
-        return state != null ? state.setValue(AXIS, context.getHorizontalDirection().getAxis()) : null;
+        return state != null ? state.setValue(FACING, context.getHorizontalDirection()) : null;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
-        super.createBlockStateDefinition(builder.add(AXIS));
+        super.createBlockStateDefinition(builder.add(FACING));
     }
 
     @Override
@@ -143,10 +144,15 @@ public class LargeVesselBlock extends SealableDeviceBlock
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public BlockState rotate(BlockState state, Rotation rot)
+    protected BlockState rotate(BlockState state, Rotation rot)
     {
-        return rot == Rotation.COUNTERCLOCKWISE_90 || rot == Rotation.CLOCKWISE_90 ? state.cycle(AXIS) : state;
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    protected BlockState mirror(BlockState state, Mirror mirror)
+    {
+        return rotate(state, mirror.getRotation(state.getValue(FACING)));
     }
 
 }

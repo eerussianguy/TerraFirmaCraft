@@ -14,6 +14,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
@@ -80,6 +81,15 @@ public class BuiltinEntityLoot extends EntityLootSubProvider
                 case RAINBOW_TROUT -> Food.RAINBOW_TROUT;
                 case SALMON -> Food.SALMON;
                 case SMALLMOUTH_BASS -> Food.SMALLMOUTH_BASS;
+                case NORTHERN_PIKE -> Food.NORTHERN_PIKE;
+                case BURBOT -> Food.BURBOT;
+                case ARCTIC_CHAR -> Food.ARCTIC_CHAR;
+                case MUKSUN -> Food.MUKSUN;
+                case TILAPIA -> Food.TILAPIA;
+                case SPOTTED_GUDGEON -> Food.SPOTTED_GUDGEON;
+                case PEACOCK_BASS -> Food.PEACOCK_BASS;
+                case PACU -> Food.PACU;
+                case RED_PIRANHA -> Food.RED_PIRANHA;
             };
             add(TFCEntities.FRESHWATER_FISH.get(fish).get(), killedByPlayerFood(food));
         }

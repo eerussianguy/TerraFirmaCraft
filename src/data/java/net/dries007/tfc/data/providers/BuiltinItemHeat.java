@@ -8,6 +8,7 @@ package net.dries007.tfc.data.providers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -16,16 +17,17 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.plant.Plant;
 import net.dries007.tfc.common.blocks.rock.Ore;
+import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.common.component.heat.HeatCapability;
 import net.dries007.tfc.common.component.heat.HeatDefinition;
 import net.dries007.tfc.common.items.Food;
@@ -102,6 +104,12 @@ public class BuiltinItemHeat extends DataManagerProvider<HeatDefinition> impleme
             add(metal, Metal.BlockType.CHAIN);
             add(metal, Metal.BlockType.LAMP);
             add(metal, Metal.BlockType.TRAPDOOR);
+
+            if (metal.allParts())
+            {
+                Collection<TFCItems.ItemId> items = Helpers.mapOf(Wood.class, wood -> TFCItems.HANGING_SIGNS.get(wood).get(metal)).values();
+                add(metal, "hanging_sign", Ingredient.of(items.stream().map(ItemStack::new)), 4);
+            }
         });
         TFCItems.METAL_ITEMS.forEach((metal, items) -> {
             add(metal, Metal.ItemType.INGOT);
@@ -133,6 +141,9 @@ public class BuiltinItemHeat extends DataManagerProvider<HeatDefinition> impleme
         addAndMeltIron(TFCItems.REFINED_IRON_BLOOM, 100);
         addAndMeltIron(TFCItems.WROUGHT_IRON_GRILL, 400);
         addAndMeltIron(Items.IRON_DOOR, 200);
+        addAndMeltIron(TFCBlocks.BLAST_FURNACE, 3200);
+        addAndMeltIron(TFCBlocks.FIREPROOF_DOOR, 600);
+        addAndMeltIron(TFCBlocks.STOVE, 1600);
 
         addAndMelt(Items.BELL, Metal.GOLD, 100);
         addAndMelt(TFCBlocks.BRONZE_BELL, Metal.BRONZE, 100);
@@ -140,6 +151,14 @@ public class BuiltinItemHeat extends DataManagerProvider<HeatDefinition> impleme
         addAndMelt(TFCItems.JACKS, Metal.BRASS, 100);
         addAndMelt(TFCItems.GEM_SAW, Metal.BRASS, 50);
         addAndMelt(TFCItems.JAR_LID, Metal.TIN, 6);
+        addAndMelt(TFCItems.BRASS_MECHANISMS, Metal.BRASS, 50);
+        addAndMelt(TFCBlocks.STEEL_PIPE, Metal.STEEL, 25);
+        addAndMelt(TFCBlocks.ANEMOMETER, Metal.BRASS, 200);
+        addAndMelt(TFCBlocks.CRANKSHAFT, Metal.BRASS, 250);
+        addAndMelt(TFCBlocks.CALENDAR_CLOCK, Metal.BRASS,500);
+        addAndMelt(TFCBlocks.THERMOMETER, Metal.BRASS, 200);
+        addAndMelt(TFCItems.BLOWPIPE, Metal.BRASS, 50);
+        addAndMelt(Items.COPPER_DOOR, Metal.COPPER, 200);
 
         add(TFCTags.Items.GLASS_BLOWPIPES, 0.7f);
         add(Tags.Items.RODS_WOODEN, 2.5f); // Includes twigs

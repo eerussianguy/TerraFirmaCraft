@@ -1,0 +1,70 @@
+{
+  "type": "tfc:heating",
+  "ingredient": [
+    {
+      "item": "tfc:wood/hanging_sign/copper/acacia"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/ash"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/aspen"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/birch"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/blackwood"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/chestnut"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/douglas_fir"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/hickory"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/kapok"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/mangrove"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/maple"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/oak"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/palm"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/pine"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/rosewood"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/sequoia"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/spruce"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/sycamore"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/white_cedar"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/copper/willow"
+    }
+  ],
+  "result_fluid": {
+    "amount": 4,
+    "id": "tfc:metal/copper"
+  },
+  "temperature": 1080.0
+}

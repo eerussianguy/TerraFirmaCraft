@@ -23,7 +23,7 @@ public class TFCCatModel extends OcelotModel<TFCCat>
     @Override
     public void prepareMobModel(TFCCat cat, float limbSwing, float limbSwingAmount, float ageInTicks)
     {
-        if (cat.isSleeping())
+        if (!cat.isSleeping())
         {
             this.head.xRot = 0.0F;
             this.head.zRot = 0.0F;

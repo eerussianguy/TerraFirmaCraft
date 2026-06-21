@@ -18,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.TFCTags;
-import net.dries007.tfc.common.entities.TFCEntities;
 import net.dries007.tfc.common.entities.livestock.TFCAnimalProperties;
 import net.dries007.tfc.config.TFCConfig;
 
@@ -51,7 +50,9 @@ public class TFCMule extends TFCChestedHorse
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob other)
     {
-        return TFCEntities.MULE.get().create(level); // left for spawn egg creation
+        if (other != this)
+            return null;
+        return super.getBreedOffspring(level, other); // left for spawn egg creation
     }
 
     @Override

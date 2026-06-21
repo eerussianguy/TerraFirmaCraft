@@ -169,6 +169,6 @@ public class ThermometerBlock extends DeviceBlock
     @Override
     protected BlockState mirror(BlockState state, Mirror mirror)
     {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+        return rotate(state, mirror.getRotation(state.getValue(FACING)));
     }
 }

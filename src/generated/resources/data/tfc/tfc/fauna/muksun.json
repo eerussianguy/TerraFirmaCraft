@@ -1,0 +1,15 @@
+{
+  "ignore_rivers": true,
+  "max_groundwater": 500.0,
+  "max_temperature": -10.0,
+  "min_groundwater": 250.0,
+  "min_temperature": -20.0,
+  "months": [
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october"
+  ]
+}

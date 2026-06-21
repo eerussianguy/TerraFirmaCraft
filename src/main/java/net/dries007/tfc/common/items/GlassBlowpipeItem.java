@@ -39,6 +39,7 @@ import net.dries007.tfc.util.advancements.TFCAdvancements;
 
 public class GlassBlowpipeItem extends BlowpipeItem
 {
+
     private static ItemStack getOtherHandItem(Player player)
     {
         return player.getItemInHand(player.getUsedItemHand() == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
@@ -51,7 +52,7 @@ public class GlassBlowpipeItem extends BlowpipeItem
 
     private final float breakChance;
 
-    public GlassBlowpipeItem(Properties properties,float breakChance)
+    public GlassBlowpipeItem(Properties properties, float breakChance)
     {
         super(properties);
         this.breakChance = breakChance;
@@ -146,6 +147,7 @@ public class GlassBlowpipeItem extends BlowpipeItem
         final ItemStack held = player.getItemInHand(hand);
         final ItemStack otherItem = getOtherHandItem(player, hand);
         final GlassOperation op = GlassOperation.get(otherItem, player);
+
         if (op != null)
         {
             if (!op.hasRequiredTemperature(held))
@@ -194,10 +196,10 @@ public class GlassBlowpipeItem extends BlowpipeItem
             player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
 
             // Cooldown all blowpipe items
-            player.getCooldowns().addCooldown(TFCItems.BLOWPIPE.asItem(), 80);
-            player.getCooldowns().addCooldown(TFCItems.CERAMIC_BLOWPIPE.asItem(), 80);
-            player.getCooldowns().addCooldown(TFCItems.BLOWPIPE_WITH_GLASS.asItem(), 80);
-            player.getCooldowns().addCooldown(TFCItems.CERAMIC_BLOWPIPE_WITH_GLASS.asItem(), 80);
+            player.getCooldowns().addCooldown(TFCItems.BLOWPIPE.asItem(), COOLDOWN_DURATION);
+            player.getCooldowns().addCooldown(TFCItems.CERAMIC_BLOWPIPE.asItem(), COOLDOWN_DURATION);
+            player.getCooldowns().addCooldown(TFCItems.BLOWPIPE_WITH_GLASS.asItem(), COOLDOWN_DURATION);
+            player.getCooldowns().addCooldown(TFCItems.CERAMIC_BLOWPIPE_WITH_GLASS.asItem(), COOLDOWN_DURATION);
         }
         return super.finishUsingItem(stack, level, entity);
     }

@@ -8,7 +8,6 @@ package net.dries007.tfc.common.component.forge;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.chat.Component;

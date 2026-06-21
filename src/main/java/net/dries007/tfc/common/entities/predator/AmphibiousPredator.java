@@ -9,7 +9,6 @@ package net.dries007.tfc.common.entities.predator;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.Brain;
@@ -99,12 +98,6 @@ public class AmphibiousPredator extends Predator implements AquaticMob
     protected Brain<?> makeBrain(Dynamic<?> dynamic)
     {
         return AmphibiousPredatorAi.makeBrain(brainProvider().makeBrain(dynamic), this);
-    }
-
-    @Override
-    public boolean doHurtTarget(Entity target)
-    {
-        return super.doHurtTarget(target, target.isInWaterOrBubble() ? 2 : 0);
     }
 
     @Override

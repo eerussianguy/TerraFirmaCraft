@@ -8,8 +8,8 @@
     "id": "tfc:blowpipe"
   },
   "rules": [
-    "hit_third_last",
+    "draw_last",
     "draw_second_last",
-    "draw_last"
+    "hit_third_last"
   ]
 }

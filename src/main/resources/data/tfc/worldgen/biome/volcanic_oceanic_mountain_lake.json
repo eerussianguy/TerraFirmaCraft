@@ -281,7 +281,19 @@
         "maxCount": 4
       },
       {
+        "type": "tfc:lake_trout",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
         "type": "tfc:largemouth_bass",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:rainbow_trout",
         "weight": 10,
         "minCount": 2,
         "maxCount": 4
@@ -294,6 +306,60 @@
       },
       {
         "type": "tfc:smallmouth_bass",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:arctic_char",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:burbot",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:muksun",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:northern_pike",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:spotted_gudgeon",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:tilapia",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:peacock_bass",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:pacu",
+        "weight": 10,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:red_piranha",
         "weight": 10,
         "minCount": 2,
         "maxCount": 4

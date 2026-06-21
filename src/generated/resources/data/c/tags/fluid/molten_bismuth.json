@@ -1,5 +1,6 @@
 {
   "values": [
-    "tfc:metal/bismuth"
+    "tfc:metal/bismuth",
+    "tfc:metal/flowing_bismuth"
   ]
 }

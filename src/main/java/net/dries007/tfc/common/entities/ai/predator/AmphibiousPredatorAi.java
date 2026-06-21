@@ -10,38 +10,27 @@ import java.util.List;
 import java.util.Optional;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.GlobalPos;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.memory.MemoryStatus;
-import net.minecraft.world.entity.ai.memory.NearestVisibleLivingEntities;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.level.Level;
 
-import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.entities.ai.SetLookTarget;
 import net.dries007.tfc.common.entities.ai.TFCBrain;
-import net.dries007.tfc.common.entities.ai.amphibian.AmphibianAi;
 import net.dries007.tfc.common.entities.ai.pet.MoveToTargetSinkIfNotSleeping;
-import net.dries007.tfc.common.entities.aquatic.AmphibiousAnimal;
-import net.dries007.tfc.common.entities.predator.AmphibiousPredator;
 import net.dries007.tfc.common.entities.predator.Predator;
 import net.dries007.tfc.util.EnvironmentHelpers;
-import net.dries007.tfc.util.Helpers;
 
 import static net.dries007.tfc.common.entities.ai.predator.PredatorAi.*;
 

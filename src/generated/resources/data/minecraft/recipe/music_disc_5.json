@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "tfc:blank_disc"
+    },
+    "F": {
+      "item": "minecraft:disc_fragment_5"
+    }
+  },
+  "pattern": [
+    "FFF",
+    "FDF",
+    "FFF"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:music_disc_5"
+  }
+}

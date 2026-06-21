@@ -35,6 +35,8 @@ import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.ForestType;
 
+import static net.dries007.tfc.world.TFCChunkGenerator.SEA_LEVEL_Y;
+
 public class ForestFeature extends Feature<ForestConfig>
 {
     public ForestFeature(Codec<ForestConfig> codec)
@@ -91,6 +93,10 @@ public class ForestFeature extends Feature<ForestConfig>
         {
             if (entry.floating())
             {
+                if (mutablePos.getY() < SEA_LEVEL_Y - 4)
+                {
+                    return false;
+                }
                 mutablePos.setY(level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, mutablePos.getX(), mutablePos.getZ()) + random.nextInt(2));
             }
             ConfiguredFeature<?, ?> feature;

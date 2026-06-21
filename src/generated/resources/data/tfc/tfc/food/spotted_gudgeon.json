@@ -1,0 +1,8 @@
+{
+  "decay_modifier": 3.0,
+  "hunger": 4,
+  "ingredient": {
+    "item": "tfc:food/spotted_gudgeon"
+  },
+  "protein": 0.7
+}

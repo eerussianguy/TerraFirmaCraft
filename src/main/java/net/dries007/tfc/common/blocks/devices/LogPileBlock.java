@@ -83,6 +83,17 @@ public class LogPileBlock extends DeviceBlock implements IForgeBlockExtension, E
         }
     });
 
+    private static final VoxelShape[][] BASED_SHAPES_BY_DIR_BY_COUNT = Util.make(new VoxelShape[2][3], shapes -> {
+        final VoxelShape baseBox = Block.box(0.25, 0, 0.25, 15.75, 1, 15.75);
+        for (int i = 0; i < 3; i++)
+        {
+            for (int dir = 0; dir < 2; dir++)
+            {
+                shapes[dir][i] = Shapes.or(baseBox, SHAPES_BY_DIR_BY_COUNT[dir][i]);
+            }
+        }
+    });
+
     public LogPileBlock(ExtendedProperties properties)
     {
         super(properties, InventoryRemoveBehavior.DROP);
@@ -244,31 +255,32 @@ public class LogPileBlock extends DeviceBlock implements IForgeBlockExtension, E
         return Block.isFaceFull(blockstate.getCollisionShape(level, pos.below()), Direction.UP) || blockstate.getBlock() instanceof LogPileBlock;
     }
 
-    public static VoxelShape getShapeByDirByCount(Direction.Axis axis, int count)
+    public static VoxelShape getShapeByDirByCount(Direction.Axis axis, int count, boolean based)
     {
-        count--;
-        if (axis == Direction.Axis.X)
+        final int dir = axis == Direction.Axis.X ? 0 : 1;
+        final int i = count - 1;
+        if (based && count < 4)
         {
-            return SHAPES_BY_DIR_BY_COUNT[0][count];
+            return BASED_SHAPES_BY_DIR_BY_COUNT[dir][i];
         }
-        return SHAPES_BY_DIR_BY_COUNT[1][count];
+        return SHAPES_BY_DIR_BY_COUNT[dir][i];
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter levle, BlockPos pos, CollisionContext context)
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        return getShapeByDirByCount(state.getValue(AXIS), state.getValue(COUNT));
+        return getShapeByDirByCount(state.getValue(AXIS), state.getValue(COUNT), true);
     }
 
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        return getShapeByDirByCount(state.getValue(AXIS), state.getValue(COUNT));
+        return getShapeByDirByCount(state.getValue(AXIS), state.getValue(COUNT), false);
     }
 
     @Override
     protected VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        return getShapeByDirByCount(state.getValue(AXIS), state.getValue(COUNT));
+        return getShapeByDirByCount(state.getValue(AXIS), state.getValue(COUNT), false);
     }
 }

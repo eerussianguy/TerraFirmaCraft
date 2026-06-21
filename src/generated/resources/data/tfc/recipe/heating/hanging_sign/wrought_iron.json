@@ -1,0 +1,70 @@
+{
+  "type": "tfc:heating",
+  "ingredient": [
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/acacia"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/ash"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/aspen"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/birch"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/blackwood"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/chestnut"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/douglas_fir"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/hickory"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/kapok"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/mangrove"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/maple"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/oak"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/palm"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/pine"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/rosewood"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/sequoia"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/spruce"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/sycamore"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/white_cedar"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/wrought_iron/willow"
+    }
+  ],
+  "result_fluid": {
+    "amount": 4,
+    "id": "tfc:metal/cast_iron"
+  },
+  "temperature": 1535.0
+}

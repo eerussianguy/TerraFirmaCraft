@@ -16,7 +16,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.Vec3;
 
-import net.minecraft.client.gui.GuiGraphics;
 import net.dries007.tfc.mixin.client.accessor.LevelRendererAccessor;
 
 public interface IHighlightHandler

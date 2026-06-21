@@ -129,15 +129,13 @@ public abstract class PipePlantBlock extends PipeBlock implements IForgeBlockExt
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public BlockState rotate(BlockState state, Rotation rot)
+    protected BlockState rotate(BlockState state, Rotation rot)
     {
         return DirectionPropertyBlock.rotate(state, rot);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public BlockState mirror(BlockState state, Mirror mirror)
+    protected BlockState mirror(BlockState state, Mirror mirror)
     {
         return DirectionPropertyBlock.mirror(state, mirror);
     }

@@ -1,0 +1,67 @@
+{
+  "forging_temperature": 891.00006,
+  "heat_capacity": 0.114285715,
+  "ingredient": [
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/acacia"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/ash"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/aspen"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/birch"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/blackwood"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/chestnut"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/douglas_fir"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/hickory"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/kapok"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/mangrove"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/maple"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/oak"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/palm"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/pine"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/rosewood"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/sequoia"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/spruce"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/sycamore"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/white_cedar"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_steel/willow"
+    }
+  ],
+  "welding_temperature": 1188.0
+}

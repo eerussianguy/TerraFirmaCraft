@@ -8,9 +8,9 @@
     "id": "tfc:wrought_iron_grill"
   },
   "rules": [
-    "punch_not_last",
+    "punch_last",
     "draw_any",
-    "punch_last"
+    "punch_not_last"
   ],
   "tier": 3
 }

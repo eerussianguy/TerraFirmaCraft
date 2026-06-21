@@ -9,9 +9,9 @@
     "id": "tfc:metal/unfinished_helmet/bronze"
   },
   "rules": [
-    "bend_third_last",
+    "hit_last",
     "bend_second_last",
-    "hit_last"
+    "bend_third_last"
   ],
   "tier": 2
 }

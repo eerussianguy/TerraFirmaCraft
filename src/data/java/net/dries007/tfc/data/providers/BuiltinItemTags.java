@@ -711,12 +711,6 @@ public class BuiltinItemTags extends TagsProvider<Item> implements Accessors
         tag(ItemTags.COALS).add(TFCItems.ORES.get(Ore.BITUMINOUS_COAL), TFCItems.ORES.get(Ore.LIGNITE));
         tag(FORGE_FUEL).addTag(ItemTags.COALS);
         tag(BLAST_FURNACE_FUEL).add(Items.CHARCOAL);
-        tag(BLAST_FURNACE_SHEETS)
-            .add(TFCItems.METAL_ITEMS.get(Metal.WROUGHT_IRON).get(Metal.ItemType.SHEET))
-            .add(TFCItems.METAL_ITEMS.get(Metal.STEEL).get(Metal.ItemType.SHEET))
-            .add(TFCItems.METAL_ITEMS.get(Metal.BLACK_STEEL).get(Metal.ItemType.SHEET))
-            .add(TFCItems.METAL_ITEMS.get(Metal.BLUE_STEEL).get(Metal.ItemType.SHEET))
-            .add(TFCItems.METAL_ITEMS.get(Metal.RED_STEEL).get(Metal.ItemType.SHEET));
         tag(BLAST_FURNACE_TUYERES).add(TFCItems.METAL_ITEMS, Metal.ItemType.TUYERE);
         tag(TOOL_RACK_TOOLS)
             .addTags(Tags.Items.TOOLS, SEWING_NEEDLES)

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.world.level.ChunkPos;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.world.region.Units;
 
 public record ChunkRockDataCache(

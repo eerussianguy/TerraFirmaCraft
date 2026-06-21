@@ -9,8 +9,8 @@
     "id": "tfc:metal/shovel_head/wrought_iron"
   },
   "rules": [
-    "hit_not_last",
-    "punch_last"
+    "punch_last",
+    "hit_not_last"
   ],
   "tier": 3
 }

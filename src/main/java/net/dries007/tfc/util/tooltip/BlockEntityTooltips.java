@@ -45,6 +45,7 @@ import net.dries007.tfc.common.blockentities.CropBlockEntity;
 import net.dries007.tfc.common.blockentities.CrucibleBlockEntity;
 import net.dries007.tfc.common.blockentities.DecayingBlockEntity;
 import net.dries007.tfc.common.blockentities.FireboxBlockEntity;
+import net.dries007.tfc.common.blockentities.HotPouredGlassBlockEntity;
 import net.dries007.tfc.common.blockentities.IHeatable;
 import net.dries007.tfc.common.blockentities.IngotPileBlockEntity;
 import net.dries007.tfc.common.blockentities.LampBlockEntity;
@@ -62,6 +63,7 @@ import net.dries007.tfc.common.blockentities.VaneBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.GlassworkingWheelBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.PowerLoomBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.RotatingBlockEntity;
+import net.dries007.tfc.common.blockentities.rotation.TripHammerBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.WaterWheelBlockEntity;
 import net.dries007.tfc.common.blockentities.rotation.WindmillBlockEntity;
 import net.dries007.tfc.common.blocks.BloomBlock;
@@ -72,6 +74,7 @@ import net.dries007.tfc.common.blocks.TFCCandleBlock;
 import net.dries007.tfc.common.blocks.TFCCandleCakeBlock;
 import net.dries007.tfc.common.blocks.TFCTorchBlock;
 import net.dries007.tfc.common.blocks.TFCWallTorchBlock;
+import net.dries007.tfc.common.blocks.TripHammerBlock;
 import net.dries007.tfc.common.blocks.crop.CropBlock;
 import net.dries007.tfc.common.blocks.crop.DecayingBlock;
 import net.dries007.tfc.common.blocks.crop.DoubleCropBlock;
@@ -188,6 +191,7 @@ public final class BlockEntityTooltips
         callback.register("anemometer", ANEMOMETER, AnemometerBlock.class);
         callback.register("vane", VANE, VaneBlock.class);
         callback.register("glassworking_wheel", GLASSWORKING_WHEEL, GlassworkingWheelBlock.class);
+        callback.register("trip_hammer", TRIP_HAMMER, TripHammerBlock.class);
     }
 
     public static final BlockEntityTooltip GLASSWORKING_WHEEL = (level, state, pos, entity, tooltip) -> {
@@ -229,9 +233,10 @@ public final class BlockEntityTooltips
     };
 
     public static final BlockEntityTooltip HOT_POURED_GLASS = (level, state, pos, entity, tooltip) -> {
-        if (state.getBlock() instanceof HotPouredGlassBlock && !state.getValue(HotPouredGlassBlock.FLAT))
+        if (state.getBlock() instanceof HotPouredGlassBlock && entity instanceof HotPouredGlassBlockEntity glass && !state.getValue(HotPouredGlassBlock.FLAT))
         {
             tooltip.accept(Component.translatable("tfc.tooltip.glass.flatten_me"));
+            timeLeft(level, tooltip, HotPouredGlassBlockEntity.TICKS_TO_DESTROY - Calendars.get(level).getTicks() + glass.getCreated());
         }
     };
 
@@ -675,6 +680,23 @@ public final class BlockEntityTooltips
             {
                 if (!stack.isEmpty())
                     tooltip.accept(stack.getHoverName());
+            }
+        }
+    };
+
+    public static final BlockEntityTooltip TRIP_HAMMER = (level, state, pos, entity, tooltip) -> {
+        if (entity instanceof TripHammerBlockEntity tripHammer)
+        {
+            ItemStack stack = tripHammer.getInventory().getStackInSlot(0);
+            if (tripHammer.isItemValid(0, stack))
+            {
+                tooltip.accept(stack.getHoverName());
+                if (stack.isDamageableItem())
+                {
+                    final int total = stack.getMaxDamage();
+                    final int remaining = stack.getMaxDamage() - stack.getDamageValue();
+                    tooltip.accept(Component.translatable("item.durability", remaining, total));
+                }
             }
         }
     };

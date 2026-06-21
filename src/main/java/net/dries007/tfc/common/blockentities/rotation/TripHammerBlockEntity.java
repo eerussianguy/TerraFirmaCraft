@@ -8,7 +8,6 @@ package net.dries007.tfc.common.blockentities.rotation;
 
 import com.mojang.math.Constants;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -46,34 +45,20 @@ public class TripHammerBlockEntity extends TickableInventoryBlockEntity<ItemStac
                 hammer.lastAngle = angle;
                 return;
             }
+            
             // Must account for:
             // 1. the angle wrapping around from 360 to 0
             // 2. the rotation speed being too fast and/or offset enough to sneak past the expected angle
             // 3. negative rotational speeds
             // 4. no last angle (Float.NEGATIVE_INFINITY), e.g. rotation was just applied
-            float lastAngle = hammer.lastAngle;
-            float minAngle = Math.min(angle, lastAngle);
-            float maxAngle = Math.max(angle, lastAngle);
+            final float lastAngle = hammer.lastAngle;
+            final float minAngle = Math.min(angle, lastAngle);
+            final float maxAngle = Math.max(angle, lastAngle);
             if (angle > 90 && angle < 270 && minAngle > 0 && minAngle < 180 && maxAngle > 180)
             {
                 if (rotation.positiveDirection() != state.getValue(TripHammerBlock.FACING).getClockWise())
                 {
-                    ItemStack droppedItem = hammer.inventory.extractItem(0, 1, false);
-                    if (droppedItem.isDamageableItem())
-                    {
-                        droppedItem.hurtAndBreak(droppedItem.getMaxDamage() / 4 + 1, (ServerLevel) level, null, i -> {});
-                    }
-                    if (!droppedItem.isEmpty())
-                    {
-                        Helpers.spawnItem(level, pos, droppedItem);
-                    }
-                    else
-                    {
-                        level.playSound(null, pos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS);
-                    }
-                    level.playSound(null, pos, SoundEvents.VAULT_BREAK, SoundSource.BLOCKS);
-                    hammer.lastAngle = angle;
-                    hammer.checkForLastTickSync();
+                    level.destroyBlock(pos, true);
                     return;
                 }
 

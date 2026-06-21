@@ -31,7 +31,6 @@ import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.entities.EntityHelpers;
-import net.dries007.tfc.common.entities.ai.TFCBrain;
 import net.dries007.tfc.common.entities.ai.prey.RammingPreyAi;
 
 public class RammingPrey extends WildAnimal

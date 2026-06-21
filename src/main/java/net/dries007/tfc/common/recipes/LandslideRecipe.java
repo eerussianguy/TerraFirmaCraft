@@ -139,10 +139,9 @@ public class LandslideRecipe extends BlockRecipe
                     else
                     {
                         // In order to fall in a direction, we need both the block immediately next to, and the one below to be open
-                        // The one adjacent needs to be breakable, wheras the one below just needs to be unstable
                         final BlockPos posSide = pos.relative(side), posSideBelow = posSide.below();
                         if (TFCFallingBlockEntity.canFallThrough(level, posSide, side, fallingState) &&
-                            TFCFallingBlockEntity.canFallThrough(level, posSideBelow, Direction.DOWN))
+                            TFCFallingBlockEntity.canFallThrough(level, posSideBelow, Direction.DOWN, fallingState))
                         {
                             possibleDirections.add(posSide);
                         }

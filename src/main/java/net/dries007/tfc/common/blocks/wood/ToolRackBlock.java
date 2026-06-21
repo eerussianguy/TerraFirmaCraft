@@ -77,8 +77,10 @@ public class ToolRackBlock extends DeviceBlock implements SimpleWaterloggedBlock
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos)
     {
-        Direction direction = state.getValue(FACING);
-        return canAttachTo(level, pos.relative(direction.getOpposite()), direction);
+        Direction facing = state.getValue(FACING);
+        BlockPos facePos = pos.relative(facing.getOpposite());
+        BlockState faceState = level.getBlockState(facePos);
+        return faceState.isFaceSturdy(level, facePos, facing);
     }
 
     @Override
@@ -144,12 +146,6 @@ public class ToolRackBlock extends DeviceBlock implements SimpleWaterloggedBlock
         return InteractionResult.PASS;
     }
 
-    private boolean canAttachTo(BlockGetter level, BlockPos pos, Direction direction)
-    {
-        BlockState blockstate = level.getBlockState(pos);
-        return !blockstate.isSignalSource() && blockstate.isFaceSturdy(level, pos, direction);
-    }
-
     public int getSlotFromPos(BlockState state, Vec3 pos)
     {
         int slot = 0;
@@ -165,15 +161,14 @@ public class ToolRackBlock extends DeviceBlock implements SimpleWaterloggedBlock
     }
 
     @Override
-    public BlockState rotate(BlockState state, Rotation rot)
+    protected BlockState rotate(BlockState state, Rotation rot)
     {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public BlockState mirror(BlockState state, Mirror mirror)
+    protected BlockState mirror(BlockState state, Mirror mirror)
     {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+        return rotate(state, mirror.getRotation(state.getValue(FACING)));
     }
 }

@@ -6,28 +6,13 @@
 
 package net.dries007.tfc.world.surface.builder;
 
-import net.dries007.tfc.common.blocks.SandstoneBlockType;
-import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.blocks.rock.Rock;
-import net.dries007.tfc.common.blocks.soil.SandBlockType;
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.Seed;
 import net.dries007.tfc.world.biome.BiomeNoise;
-import net.dries007.tfc.world.noise.Noise2D;
-import net.dries007.tfc.world.noise.OpenSimplex2D;
-import net.dries007.tfc.world.settings.RockSettings;
 import net.dries007.tfc.world.surface.SurfaceBuilderContext;
 import net.dries007.tfc.world.surface.SurfaceStates;
 
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Arrays;
 
-import static net.dries007.tfc.world.TFCChunkGenerator.SEA_LEVEL_Y;
-import static net.dries007.tfc.world.surface.SurfaceStates.DRY_MUD;
-import static net.dries007.tfc.world.surface.SurfaceStates.MUD;
 
 public class RockyPlateauSurfaceBuilder implements SurfaceBuilder
 {

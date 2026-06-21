@@ -11,6 +11,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 import net.dries007.tfc.client.RenderHelpers;
 import net.dries007.tfc.common.entities.livestock.TFCAnimal;
@@ -35,7 +36,8 @@ public class AnimalRenderer<T extends TFCAnimal, M extends EntityModel<T>> exten
     @Override
     protected void scale(T animal, PoseStack poseStack, float ticks)
     {
-        final float scale = animal.getAgeScale();
+        // note on 1.21 age scale is applied in the vanilla MobRenderer class
+        final float scale = Mth.clampedMap(animal.getGeneticSize(), 1f, 32f, 0.9f, 1.1f);
         poseStack.scale(scale, scale, scale);
         super.scale(animal, poseStack, ticks);
     }

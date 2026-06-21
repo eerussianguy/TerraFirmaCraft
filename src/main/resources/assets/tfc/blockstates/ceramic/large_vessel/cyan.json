@@ -1,17 +1,33 @@
 {
   "__comment__": "This file was automatically created by mcresources",
   "variants": {
-    "sealed=true,axis=x": {
+    "sealed=true,facing=north": {
+      "model": "tfc:block/ceramic/cyan_large_vessel_sealed",
+      "y": 180
+    },
+    "sealed=true,facing=east": {
+      "model": "tfc:block/ceramic/cyan_large_vessel_sealed",
+      "y": 270
+    },
+    "sealed=true,facing=south": {
       "model": "tfc:block/ceramic/cyan_large_vessel_sealed"
     },
-    "sealed=true,axis=z": {
+    "sealed=true,facing=west": {
       "model": "tfc:block/ceramic/cyan_large_vessel_sealed",
       "y": 90
     },
-    "sealed=false,axis=x": {
+    "sealed=false,facing=north": {
+      "model": "tfc:block/ceramic/cyan_large_vessel_opened",
+      "y": 180
+    },
+    "sealed=false,facing=east": {
+      "model": "tfc:block/ceramic/cyan_large_vessel_opened",
+      "y": 270
+    },
+    "sealed=false,facing=south": {
       "model": "tfc:block/ceramic/cyan_large_vessel_opened"
     },
-    "sealed=false,axis=z": {
+    "sealed=false,facing=west": {
       "model": "tfc:block/ceramic/cyan_large_vessel_opened",
       "y": 90
     }

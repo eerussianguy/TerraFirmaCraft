@@ -34,6 +34,8 @@ import net.minecraft.world.phys.Vec3;
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.HotPouredGlassBlock;
 import net.dries007.tfc.util.Helpers;
+import net.dries007.tfc.util.calendar.Calendars;
+import net.dries007.tfc.util.calendar.ICalendar;
 
 public class HotPouredGlassBlockEntity extends TickableBlockEntity
 {
@@ -42,6 +44,11 @@ public class HotPouredGlassBlockEntity extends TickableBlockEntity
         glass.checkForLastTickSync();
         if (!glass.initialized)
         {
+            if (!level.isClientSide && Calendars.SERVER.getTicks() - glass.created > TICKS_TO_DESTROY)
+            {
+                level.destroyBlock(pos, false);
+                Helpers.playSound(level, pos, SoundEvents.GLASS_BREAK);
+            }
             return;
         }
         if (glass.animationTicks > 0)
@@ -154,11 +161,14 @@ public class HotPouredGlassBlockEntity extends TickableBlockEntity
         return false;
     }
 
+    public static final int TICKS_TO_DESTROY = ICalendar.CALENDAR_TICKS_IN_HOUR * 4;
+
     private int capacity = 0;
     private boolean isInitialTransition = true;
     private int animationTicks = 0;
     private boolean initialized = false;
     private BlockState internalState = Blocks.AIR.defaultBlockState();
+    private long created = -1L;
 
     public HotPouredGlassBlockEntity(BlockPos pos, BlockState state)
     {
@@ -178,6 +188,7 @@ public class HotPouredGlassBlockEntity extends TickableBlockEntity
         isInitialTransition = nbt.getBoolean("isInitialTransition");
         animationTicks = nbt.getInt("animationTicks");
         initialized = nbt.getBoolean("initialized");
+        created = nbt.contains("created", CompoundTag.TAG_LONG) ? nbt.getLong("created") : -1L;
         internalState = NbtUtils.readBlockState(provider.lookupOrThrow(Registries.BLOCK), nbt.getCompound("internalState"));
     }
 
@@ -190,13 +201,21 @@ public class HotPouredGlassBlockEntity extends TickableBlockEntity
         nbt.putInt("animationTicks", animationTicks);
         nbt.putBoolean("initialized", initialized);
         nbt.put("internalState", NbtUtils.writeBlockState(internalState));
+        nbt.putLong("created", created);
+    }
+
+    public long getCreated()
+    {
+        return created;
     }
 
     public void setGlassItem(ItemStack stack)
     {
+        assert level != null;
         if (stack.getItem() instanceof BlockItem bi)
         {
             internalState = bi.getBlock().defaultBlockState();
+            created = Calendars.get(level).getTicks();
         }
     }
 

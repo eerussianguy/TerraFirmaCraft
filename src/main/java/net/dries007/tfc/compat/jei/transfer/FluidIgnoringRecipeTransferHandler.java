@@ -9,7 +9,6 @@ package net.dries007.tfc.compat.jei.transfer;
 import java.util.List;
 import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
-import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.transfer.IRecipeTransferError;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandler;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandlerHelper;

@@ -24,11 +24,6 @@ public class TFCEffects
 {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, TerraFirmaCraft.MOD_ID);
 
-    // You can still engage swim mode and go directly upwards... for some reason
-    // todo: what are the names that need to be used for the attributes here?
-    public static final Id<MobEffect> PINNED = register("pinned", () -> new TFCMobEffect(MobEffectCategory.HARMFUL, 5926017)
-        .addAttributeModifier(Attributes.MOVEMENT_SPEED, Helpers.identifier("effect.pinned"), -7.5D, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
-        .addAttributeModifier(NeoForgeMod.SWIM_SPEED, Helpers.identifier("effect.swim_speed"), -7.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     public static final Id<MobEffect> INK = register("ink", () -> new TFCMobEffect(MobEffectCategory.HARMFUL, 0x483454));
     public static final Id<MobEffect> GLOW_INK = register("glow_ink", () -> new TFCMobEffect(MobEffectCategory.HARMFUL, 0x40EDE7));
     public static final Id<MobEffect> OVERBURDENED = register("overburdened", () -> new TFCMobEffect(MobEffectCategory.HARMFUL, 0x263659)

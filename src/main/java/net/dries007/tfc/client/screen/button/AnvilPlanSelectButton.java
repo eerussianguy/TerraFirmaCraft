@@ -12,11 +12,9 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.client.ClientHelpers;
 import net.dries007.tfc.client.RenderHelpers;

@@ -39,7 +39,7 @@ public class AnvilBlockEntityRenderer implements BlockEntityRenderer<AnvilBlockE
         poseStack.scale(0.3f, 0.3f, 0.3f);
         poseStack.mulPose(Axis.XP.rotationDegrees(90f));
         poseStack.mulPose(Axis.ZP.rotationDegrees(90f * rotation + 270f));
-        poseStack.translate(1.2f, 0, 0);
+        poseStack.translate(-0.4f, 0, 0);
 
         final ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
         final AnvilBlockEntity.AnvilInventory inventory = anvil.getInventory();
@@ -49,14 +49,14 @@ public class AnvilBlockEntityRenderer implements BlockEntityRenderer<AnvilBlockE
             itemRenderer.renderStatic(hammer, ItemDisplayContext.FIXED, combinedLight, combinedOverlay, poseStack, buffer, anvil.getLevel(), 0);
         }
 
-        poseStack.translate(-1.3f, 0, 0);
+        poseStack.translate(1.15f, 0, 0);
         final ItemStack input1 = inventory.getStackInSlot(AnvilBlockEntity.SLOT_INPUT_MAIN);
         if (!input1.isEmpty())
         {
             itemRenderer.renderStatic(input1, ItemDisplayContext.FIXED, RenderHelpers.getHeatedBrightness(input1, combinedLight), combinedOverlay, poseStack, buffer,  anvil.getLevel(), 0);
         }
 
-        poseStack.translate(-0.4f, 0, -0.05f);
+        poseStack.translate(0.4f, 0, -0.05f);
         final ItemStack input2 = inventory.getStackInSlot(AnvilBlockEntity.SLOT_INPUT_SECOND);
         if (!input2.isEmpty())
         {
@@ -67,7 +67,7 @@ public class AnvilBlockEntityRenderer implements BlockEntityRenderer<AnvilBlockE
         if (!catalyst.isEmpty())
         {
             poseStack.pushPose();
-            poseStack.translate(0.9f, -0.25f, 0.05f);
+            poseStack.translate(-0.9f, -0.25f, 0.05f);
             poseStack.scale(0.6f, 0.6f, 0.6f);
             itemRenderer.renderStatic(catalyst, ItemDisplayContext.FIXED, combinedLight, combinedOverlay, poseStack, buffer,  anvil.getLevel(),0);
             poseStack.popPose();

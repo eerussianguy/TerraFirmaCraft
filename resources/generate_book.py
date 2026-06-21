@@ -73,7 +73,7 @@ In addition, here's some useful things for dev work, and also making standardize
 from argparse import ArgumentParser
 from typing import Optional
 
-from constants import CROPS, METALS, FRUITS, BERRIES, GRAINS
+from constants import CROPS, METALS, FRUITS, BERRIES, GRAINS, ROCKS
 from patchouli import *
 
 GRADES = ['poor', 'normal', 'rich']  # Sorted so they appear in a nice order for animation
@@ -479,7 +479,6 @@ def make_book(rm: ResourceManager, i18n: I18n, local_instance: bool = False, rev
             empty(),
             page_break(),
             text('$(thing)Prey$() animals fear players and predators. They are adept at fleeing from danger, but generally cannot fight back. Some prey animals enjoy snacking on crops.', title='Prey').anchor('prey'),
-            entity('tfc:rabbit', 'The rabbit is known to chew on carrots and cabbage. They are ubiquitous in the world, changing their coat based on climate. They only need 15mm of $(l:the_world/climate#rainfall)rainfall$() to spawn.', 'Rabbit'),
             entity('tfc:fox', 'The fox likes to eat the berries off of bushes. It can be found in forests with $(l:the_world/climate#temperature)temperature$() below 25°C, and $(l:the_world/climate#rainfall)rainfall$() between 130 and 400mm.', 'Fox'),
             entity('tfc:deer', 'The deer spawns in forests at any $(l:the_world/climate#temperature)temperature$() below 25°C and above -15°C, and $(l:the_world/climate#rainfall)rainfall$() between 130 and 400mm.'),
             entity('tfc:caribou', 'The caribou spawns at any $(l:the_world/climate#temperature)temperature$() below -9°C, and $(l:the_world/climate#rainfall)rainfall$() between 110 and 500mm.', 'Caribou', 0.5),
@@ -489,7 +488,6 @@ def make_book(rm: ResourceManager, i18n: I18n, local_instance: bool = False, rev
             entity('tfc:pheasant', 'The pheasant spawns in forests at any $(l:the_world/climate#temperature)temperature$() below 17°C and above -5°C, and $(l:the_world/climate#rainfall)rainfall$() between 100 and 300mm.'),
             entity('tfc:turkey', 'The turkey spawns in forests at any $(l:the_world/climate#temperature)temperature$() below 17°C and above 0°C, and $(l:the_world/climate#rainfall)rainfall$() between 250 and 450mm.'),
             entity('tfc:peafowl', 'The peafowl spawns in forests at any $(l:the_world/climate#temperature)temperature$() above 14°C, and $(l:the_world/climate#rainfall)rainfall$() between 190 and 500mm.', 'Peafowl', 0.8),
-            empty(),
             page_break(),
             text('$(thing)Aquatic Animals$() are a broad category which covers a number of different behaviors. They may be $(thing)Shore Dwellers$(), $(thing)Fish$(), $(thing)Shellfish$(), or $(thing)Large Aquatic Creatures$()', title='Aquatic Animals').anchor('aquatic'),
             text('$(thing)Shore Animals$() only spawn on sea shores and spend some of their day swimming, and some walking on the beach. They are curious creatures, and will follow the player around, but cannot be tamed.'),
@@ -503,8 +501,22 @@ def make_book(rm: ResourceManager, i18n: I18n, local_instance: bool = False, rev
             entity('tfc:pufferfish', 'Pufferfish live in any ocean with at least a $(l:the_world/climate#temperature)temperature$() of 10°C.', 'Pufferfish'),
             entity('tfc:jellyfish', 'Jellyfish live in warmer oceans, with a $(l:the_world/climate#temperature)temperature$() of at least 18°C.', 'Jellyfish'),
             entity('tfc:tropical_fish', 'Tropical fish prefer warmer oceans, with a $(l:the_world/climate#temperature)temperature$() of at least 18°C.', 'Tropical Fish'),
-            entity('tfc:salmon', 'Salmon spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -5°C.', 'Salmon'),
-            entity('tfc:bluegill', 'Bluegill spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -10°C and at most 26°C.', 'Bluegill'),
+            entity('tfc:salmon', 'Salmon spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -8°C and at most 12°C and with rainfall of at least 250 mm.', 'Salmon'),
+            entity('tfc:rainbow_trout', 'Rainbow Trout spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -12°C and at most 10°C and with rainfall of at least 150 mm.', 'Rainbow Trout'),
+            entity('tfc:lake_trout', 'Lake Trout spawn in any lake with a $(l:the_world/climate#temperature)temperature$() of at least -5°C and at most 15°C and with rainfall of at least 250 mm.', 'Lake Trout'),
+            entity('tfc:largemouth_bass', 'Largemouth Bass spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -14°C and at most 16°C and with rainfall of at least 200 mm.', 'Largemouth Bass'),
+            entity('tfc:smallmouth_bass', 'Smallmouth Bass spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -14°C and at most 16°C and with rainfall of less than 300 mm.', 'Smallmouth Bass'),
+            entity('tfc:crappie', 'Crappie spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -10°C and at most 20°C.', 'Crappie'),
+            entity('tfc:bluegill', 'Bluegill spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -10°C and at most 15°C.', 'Bluegill'),
+            entity('tfc:northern_pike', 'Northern Pike spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -10°C and at most 26°C with rainfall between 150 mm and 400 mm.', 'Northern Pike'),
+            entity('tfc:peacock_bass', 'Peacock Bass spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least 12°C and at most 25°C with rainfall between 200 mm and 400 mm.', 'Peacock Bass'),
+            entity('tfc:arctic_char', 'Arctic Char spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -20°C and at most -8°C with rainfall between 150mm and 400 mm.', 'Arctic Char'),
+            entity('tfc:muksun', 'Muksun spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -20°C and at most -10°C with rainfall of at least 250 mm.', 'Muksun'),
+            entity('tfc:burbot', 'Burbot spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least -16°C and at most -9°C with rainfall less than 350 mm.', 'Burbot'),
+            entity('tfc:tilapia', 'Tilapia spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least 10°C and at most 32°C with rainfall less than 300 mm.', 'Tilapia'),
+            entity('tfc:spotted_gudgeon', 'Spotted Gudgeon spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least 6°C and at most 24°C with rainfall less than 250 mm.', 'Spotted Gudgeon'),
+            entity('tfc:pacu', 'Pacu spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least 20°C and at most 35°C with rainfall above 200 mm.', 'Pacu'),
+            entity('tfc:red_piranha', 'Red Piranha spawn in any river or lake with a $(l:the_world/climate#temperature)temperature$() of at least 22°C and at most 35°C with rainfall above 300 mm.', 'Red Piranha'),
             text('$(thing)Shellfish$() are small animals that live on the floor of bodies of water. They cannot be fished, but drop shells that can be eaten or made into $(l:mechanics/flux)flux$(). Shellfish can be $(l:mechanics/fishing)bait$() for fish.', title='Shellfish').anchor('shellfish'),
             entity('tfc:isopod', 'Isopods spawn in deeper sections of oceans of $(l:the_world/climate#temperature)temperature$() at most 14°C.', 'Isopod'),
             entity('tfc:lobster', 'Lobster spawn in any ocean that is at most of a $(l:the_world/climate#temperature)temperature$() of 21°C.', 'Lobster'),
@@ -749,7 +761,7 @@ def make_book(rm: ResourceManager, i18n: I18n, local_instance: bool = False, rev
             page_break(),
             text('$(thing)Pigs$() spawn in mild forests with $(l:the_world/climate#temperature)temperature$() between -10 and 35°C, and at least 200mm of $(l:the_world/climate#rainfall)rainfall$(). They are $(l:mechanics/animal_husbandry#mammals)Mammals$() with no special abilities. They will eat any food, even if it is rotten. They have 1-10 children, are pregnant for just 19 days, and reach adulthood in 80 days. They can have children 6 times.', title='Pigs').anchor('pig'),
             entity('tfc:pig' + ANIMAL_NBT, 'A pig.', '', scale=0.6),
-            text('$(thing)Rabbits$() spawn in $(l:the_world/climate#temperature)temperatures$() above -16°C, and at least 15mm of $(l:the_world/climate#rainfall)rainfall$(). They are $(l:mechanics/animal_husbandry#mammals)Mammals$() with no special abilities. They will eat any food, even if it is rotten. They have 1-6 children, are pregnant for just 19 days, and reach adulthood in 20 days. They can have children 6 times.', title='Rabbits').anchor('rabbit'),
+            text('$(thing)Rabbits$() spawn in $(l:the_world/climate#temperature)temperatures$() above -16°C, and at least 15mm of $(l:the_world/climate#rainfall)rainfall$(), changing their coat based on climate. They are $(l:mechanics/animal_husbandry#mammals)Mammals$() with no special abilities, aside from being known for chewing on carrots and cabbage. They will eat any food, even if it is rotten. They have 1-6 children, are pregnant for just 19 days, and reach adulthood in 20 days. They can have children 6 times.', title='Rabbits').anchor('rabbit'),
             entity('tfc:rabbit' + ANIMAL_NBT, 'A rabbit.', '', scale=0.8),
             text('$(thing)Cows$() spawn in most climates, between $(l:the_world/climate#temperature)temperature$() -10 and 35°C, and at least 250mm of $(l:the_world/climate#rainfall)rainfall$(). They are $(l:mechanics/animal_husbandry#dairy_animals)Dairy Animals$(). They only eat $(thing)grains$(), which may be rotten. They can have 1-2 children, are pregnant for 58 days, and reach adulthood in 192 days. They can have children 13 times, if they are never milked, or be milked 128 times, if they are never bred. They produce milk every day.', title='Cows').anchor('cow'),
             entity('tfc:cow' + ANIMAL_NBT, 'A cow.', '', scale=0.75),
@@ -960,7 +972,7 @@ def make_book(rm: ResourceManager, i18n: I18n, local_instance: bool = False, rev
             page_break(),
             text('$(thing)Stone Bricks$() can be made using a $(l:mechanics/chisel)Chisel$() with some individual loose rocks. It then requires $(thing)Mortar$() in order to form a strong building block.$(br2)Mortar can be made by adding $(thing)Sand$() to a barrel of $(l:mechanics/barrels#limewater)Limewater$().', title='Bricks and Mortar').anchor('bricks_and_mortar'),
             crafting('tfc:crafting/brick/gneiss', 'tfc:crafting/rock/bricks/gneiss'),
-            text('Other decorative stone blocks can also be made, such as both $(thing)Cracked Bricks$(), and $(thing)Chiseled Stone$(). $(thing)Mossy$() stone blocks can also be created by placing cobblestone or bricks underwater, near existing mossy bricks or cobblestone. The moss will start to spread to these nearby blocks.'),
+            text('Other decorative stone blocks can also be made, such as both $(thing)Cracked Bricks$(), and $(thing)Chiseled Bricks$(). $(thing)Mossy$() stone blocks can also be created by placing cobblestone or bricks underwater, near existing mossy bricks or cobblestone. The moss will start to spread to these nearby blocks.').link(*['tfc:rock/chiseled/%s' % r for r in ROCKS], *['tfc:rock/cracked_bricks/%s' % r for r in ROCKS]),
             crafting('tfc:crafting/rock/chiseled/gneiss', 'tfc:crafting/rock/cracked_bricks/gneiss'),
         )),
         entry('salad', 'Salads', 'tfc:food/protein_salad', pages=(
@@ -1541,6 +1553,12 @@ def make_book(rm: ResourceManager, i18n: I18n, local_instance: bool = False, rev
             text('Fireboxes heat starting with the block above them. Firebox heat can pass through non-occluding blocks, as well as Grates. Therefore, it is recommended to place a grate on top of your firebox to allow heat to pass up into your structure, and provide maintenance access from below.'),
             text('The exterior of a Kiln must be made of some combination of Clay Bricks, Fire Bricks, Tinted Glass, or Fireproof Doors. Stone bricks don\'t work. If the structure is broken during heating, then the heating will be lost and must start over once the seal is re-made. The timer will also restart if the temperature increases or decreases from the initial setpoint.'),
             crafting('tfc:crafting/fireproof_door', text_contents='The Fireproof Door may be made from Cast Iron Sheets.')
+        )),
+        entry('ropes', 'Ropes', 'tfc:rope', pages=(
+            text('$(thing)Rope$() can be strung up to climb down cliffs and shafts. To hang a rope, $(item)$(k:key.use)$() it on the tip of a $(thing)Rock Spike$(), or on a $(thing)Steel Rope Anchor$(). This ties off the rope and turns the block into an anchor.').link('tfc:rope').link('tfc:steel_rope_anchor'),
+            text('$(item)$(k:key.use)$() the rope again to throw it out in the direction you are facing, laying down rope that you can climb. To recall the rope, $(item)$(k:key.use)$() the anchor with an empty hand. The rope will be destroyed, the spike will turn back into an anchor, and the items returned to you.'),
+            crafting('tfc:crafting/steel_rope_anchor', text_contents='$(thing)Rock Spikes$() cannot be picked up, so the $(thing)Steel Rope Anchor$() can be crafted and placed wherever you need an anchor instead.'),
+            empty_last_page(),
         ))
     ))
 

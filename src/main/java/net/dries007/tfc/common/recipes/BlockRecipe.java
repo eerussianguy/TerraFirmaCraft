@@ -8,9 +8,6 @@ package net.dries007.tfc.common.recipes;
 
 import java.util.Optional;
 import java.util.function.BiFunction;
-import com.mojang.datafixers.util.Either;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;

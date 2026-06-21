@@ -15,7 +15,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.data.DataManager;
-import net.dries007.tfc.world.Codecs;
 import net.dries007.tfc.world.chunkdata.ForestType;
 import net.dries007.tfc.world.placement.ClimatePlacement;
 

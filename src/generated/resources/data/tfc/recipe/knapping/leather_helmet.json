@@ -1,12 +1,11 @@
 {
   "type": "tfc:knapping",
+  "default_on": false,
   "knapping_type": "tfc:leather",
   "pattern": [
     "#####",
     "#   #",
-    "#   #",
-    "     ",
-    "     "
+    "#   #"
   ],
   "result": {
     "count": 1,

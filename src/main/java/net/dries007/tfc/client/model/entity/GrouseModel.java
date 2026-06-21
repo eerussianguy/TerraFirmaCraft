@@ -24,8 +24,6 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 import net.dries007.tfc.client.ClientHelpers;
-import net.dries007.tfc.client.ClimateRenderCache;
-import net.dries007.tfc.client.overworld.SolarCalculator;
 import net.dries007.tfc.common.entities.prey.WingedPrey;
 import net.dries007.tfc.util.calendar.Calendars;
 import net.dries007.tfc.util.calendar.Month;

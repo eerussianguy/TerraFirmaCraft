@@ -9,9 +9,9 @@
     "id": "tfc:metal/shield/blue_steel"
   },
   "rules": [
-    "bend_third_last",
+    "upset_last",
     "bend_second_last",
-    "upset_last"
+    "bend_third_last"
   ],
   "tier": 6
 }

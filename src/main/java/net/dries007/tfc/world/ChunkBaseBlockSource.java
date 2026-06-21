@@ -10,7 +10,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.fluids.SimpleFluid;
 import net.dries007.tfc.world.biome.BiomeExtension;
 import net.dries007.tfc.world.biome.TFCBiomes;
 import net.dries007.tfc.world.chunkdata.RockData;

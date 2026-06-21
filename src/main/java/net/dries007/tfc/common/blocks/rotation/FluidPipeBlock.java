@@ -126,15 +126,13 @@ public class FluidPipeBlock extends ExtendedBlock implements DirectionPropertyBl
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public BlockState rotate(BlockState state, Rotation rotation)
+    protected BlockState rotate(BlockState state, Rotation rot)
     {
-        return DirectionPropertyBlock.rotate(state, rotation);
+        return DirectionPropertyBlock.rotate(state, rot);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public BlockState mirror(BlockState state, Mirror mirror)
+    protected BlockState mirror(BlockState state, Mirror mirror)
     {
         return DirectionPropertyBlock.mirror(state, mirror);
     }

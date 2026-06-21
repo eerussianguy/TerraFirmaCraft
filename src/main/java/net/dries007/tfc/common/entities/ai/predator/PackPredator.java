@@ -152,7 +152,7 @@ public class PackPredator extends Predator implements Temptable
     @Override
     public boolean doHurtTarget(Entity target)
     {
-        if (super.doHurtTarget(target, 10))
+        if (super.doHurtTarget(target))
         {
             if (!target.isAlive())
             {

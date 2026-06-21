@@ -8,16 +8,12 @@ package net.dries007.tfc.util.rotation;
 
 import java.util.EnumSet;
 import java.util.Set;
-import java.util.function.IntSupplier;
-import java.util.function.LongSupplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
 import org.jetbrains.annotations.CheckReturnValue;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
-import net.dries007.tfc.util.calendar.Calendars;
 
 /**
  * The core element of a rotation network. This is supplied as a capability from a {@link net.minecraft.world.level.block.entity.BlockEntity} to expose that entity as connected to the rotation network.

@@ -15,7 +15,6 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -29,7 +28,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector2ic;
 import org.lwjgl.opengl.GL11;
-import vazkii.patchouli.api.BookDrawScreenEvent;
 import vazkii.patchouli.client.base.ClientTicker;
 import vazkii.patchouli.client.book.BookEntry;
 import vazkii.patchouli.client.book.gui.GuiBook;
@@ -40,12 +38,8 @@ import vazkii.patchouli.common.book.BookRegistry;
 import vazkii.patchouli.common.item.ItemModBook;
 import vazkii.patchouli.common.util.ItemStackUtil;
 
-import net.dries007.tfc.client.ClientForgeEventHandler;
-import net.dries007.tfc.client.screen.button.PlayerInventoryTabButton;
 import net.dries007.tfc.config.TFCConfig;
 import net.dries007.tfc.network.OpenFieldGuidePacket;
-import net.dries007.tfc.network.PacketHandler;
-import net.dries007.tfc.util.Helpers;
 
 /**
  * This is modified from {@link TooltipHandler}, in order to render additional tooltips, as we don't have an explicit book item. We render a tooltip,

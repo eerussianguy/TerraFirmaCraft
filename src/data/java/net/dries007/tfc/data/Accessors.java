@@ -6,7 +6,6 @@
 
 package net.dries007.tfc.data;
 
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
 import com.google.common.collect.ImmutableMap;
@@ -22,7 +21,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;

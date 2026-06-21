@@ -22,7 +22,6 @@ import net.minecraft.world.entity.ai.behavior.StopAttackingIfTargetInvalid;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
-import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.schedule.Activity;

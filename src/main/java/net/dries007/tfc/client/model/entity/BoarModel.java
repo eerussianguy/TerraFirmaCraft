@@ -19,8 +19,6 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.schedule.Activity;
 
 import net.dries007.tfc.common.entities.EntityHelpers;
 import net.dries007.tfc.common.entities.prey.RammingPrey;

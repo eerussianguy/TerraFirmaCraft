@@ -6,7 +6,6 @@
 
 package net.dries007.tfc.client.render.blockentity;
 
-import java.util.Map;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -22,10 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import net.dries007.tfc.client.RenderHelpers;
 import net.dries007.tfc.client.model.entity.WaterWheelModel;
 import net.dries007.tfc.common.blockentities.rotation.WaterWheelBlockEntity;
-import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rotation.WaterWheelBlock;
-import net.dries007.tfc.common.blocks.wood.Wood;
-import net.dries007.tfc.util.Helpers;
 
 public class WaterWheelBlockEntityRenderer implements BlockEntityRenderer<WaterWheelBlockEntity>
 {

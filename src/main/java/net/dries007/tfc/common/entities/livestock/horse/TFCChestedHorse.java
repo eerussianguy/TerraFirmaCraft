@@ -205,7 +205,7 @@ public abstract class TFCChestedHorse extends AbstractChestedHorse implements Ho
 
                 if (this.getChestItem().isEmpty() && Helpers.isItem(stack, TFCTags.Items.CARRIED_BY_HORSE))
                 {
-                    this.setChestItem(stack.copy()); // set an explicit chest item
+                    this.setChestItem(stack.copyWithCount(1)); // set an explicit chest item
                     this.playChestEquipsSound();
                     if (!player.getAbilities().instabuild)
                     {

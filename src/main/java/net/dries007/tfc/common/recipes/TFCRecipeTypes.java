@@ -12,7 +12,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.registry.RegistryHolder;
 
 import static net.dries007.tfc.TerraFirmaCraft.*;

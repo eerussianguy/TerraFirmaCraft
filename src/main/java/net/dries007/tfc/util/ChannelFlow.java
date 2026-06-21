@@ -16,29 +16,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
-import org.apache.commons.lang3.tuple.Pair;
-import org.jetbrains.annotations.Nullable;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import net.dries007.tfc.common.blockentities.MoldTableBlockEntity;
-import net.dries007.tfc.common.blockentities.TFCBlockEntities;
-import net.dries007.tfc.common.blocks.devices.ChannelBlock;
-import net.dries007.tfc.common.blocks.devices.MoldTableBlock;
-import net.dries007.tfc.common.blockentities.CrucibleBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.Nullable;
+
+import net.dries007.tfc.common.blockentities.ChannelBlockEntity;
+import net.dries007.tfc.common.blockentities.CrucibleBlockEntity;
+import net.dries007.tfc.common.blockentities.MoldTableBlockEntity;
+import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 
 public class ChannelFlow
 {
@@ -101,16 +103,16 @@ public class ChannelFlow
         // improves performance a bit and most importantly prevents
         // a flickering rendered flow.
         molds.removeIf(
-                pos -> {
-                    Optional<MoldTableBlockEntity> moldEnt = level.getBlockEntity(pos, TFCBlockEntities.MOLD_TABLE.get());
+            pos -> {
+                Optional<MoldTableBlockEntity> moldEnt = level.getBlockEntity(pos, TFCBlockEntities.MOLD_TABLE.get());
 
-                    if (moldEnt.isEmpty())
-                        return true;
-                    if (!moldEnt.get().getOutputStack().isEmpty())
-                        return true;
-                    final FluidStack outputDrop = iFldHandler.get().drain(1, IFluidHandler.FluidAction.SIMULATE);
-                    return !couldBeFilled(moldEnt.get().getInventory(), outputDrop, MoldTableBlockEntity.MOLD_SLOT);
-                });
+                if (moldEnt.isEmpty())
+                    return true;
+                if (!moldEnt.get().getOutputStack().isEmpty())
+                    return true;
+                final FluidStack outputDrop = iFldHandler.get().drain(1, IFluidHandler.FluidAction.SIMULATE);
+                return !couldBeFilled(moldEnt.get().getInventory(), outputDrop, MoldTableBlockEntity.MOLD_SLOT);
+            });
 
         // Early exit if no (valid) molds are connected
         if (molds.size() == 0)
@@ -166,11 +168,11 @@ public class ChannelFlow
         for (BlockPos mold : molds)
         {
             List<BlockPos> path = aStar(
-                    graph,
-                    heuristic,
-                    0,
-                    channelsAndMolds.inverse().get(mold)).stream()
-                    .map(channelsAndMolds::get).toList(); // index to BlockPos
+                graph,
+                heuristic,
+                0,
+                channelsAndMolds.inverse().get(mold)).stream()
+                .map(channelsAndMolds::get).toList(); // index to BlockPos
             // goal (mold) to start (first channel)
 
             for (int i = 0; i < path.size() - 1; i++)
@@ -180,9 +182,9 @@ public class ChannelFlow
                 BlockPos relative = channelSource.offset(currentChannel.multiply(-1));
                 int distance = Math.abs(relative.getX() + relative.getY() + relative.getZ());
                 BlockPos normal = new BlockPos(relative.getX() / distance, relative.getY() / distance,
-                        relative.getZ() / distance);
+                    relative.getZ() / distance);
                 flowSource.put(currentChannel,
-                        Pair.of(Direction.fromDelta(normal.getX(), normal.getY(), normal.getZ()), (byte) distance));
+                    Pair.of(Direction.fromDelta(normal.getX(), normal.getY(), normal.getZ()), (byte) distance));
                 numFlows.put(channelSource, numFlows.getOrDefault(channelSource, 0) + 1);
             }
         }
@@ -190,23 +192,23 @@ public class ChannelFlow
         for (BlockPos channelOrMold : flowSource.keySet())
         {
             level.getBlockEntity(channelOrMold, TFCBlockEntities.CHANNEL.get()).ifPresent(
-                    channel -> {
-                        channel.setLinkProperties(
-                                flowSource.get(channelOrMold),
-                                true,
-                                numFlows.get(channelOrMold),
-                                fluidKey);
-                    });
+                channel -> {
+                    channel.setLinkProperties(
+                        flowSource.get(channelOrMold),
+                        true,
+                        numFlows.get(channelOrMold),
+                        fluidKey);
+                });
             level.getBlockEntity(channelOrMold, TFCBlockEntities.MOLD_TABLE.get()).ifPresent(
-                    mold -> mold.setSource(
-                            source.getBlockPos(), fluid, flowSource.get(channelOrMold)));
+                mold -> mold.setSource(
+                    source.getBlockPos(), fluid, flowSource.get(channelOrMold)));
         }
         BlockPos pos = source.getBlockPos().offset(originChannel.multiply(-1));
         level.getBlockEntity(originChannel, TFCBlockEntities.CHANNEL.get()).get().setLinkProperties(
-                Pair.of(Direction.fromDelta(pos.getX(), pos.getY(), pos.getZ()), (byte) 1),
-                false,
-                numFlows.get(originChannel),
-                fluidKey);
+            Pair.of(Direction.fromDelta(pos.getX(), pos.getY(), pos.getZ()), (byte) 1),
+            false,
+            numFlows.get(originChannel),
+            fluidKey);
     }
 
     private static List<BlockPos> findAdjacent(LevelAccessor level, BlockPos current, boolean findMolds)
@@ -224,13 +226,14 @@ public class ChannelFlow
             {
                 BlockPos relative = current.relative(dir, i);
                 BlockState blockState = level.getBlockState(relative);
+                BlockEntity blockEntity = level.getBlockEntity(relative);
 
-                if (findMolds && blockState.getBlock() instanceof MoldTableBlock)
+                if (findMolds && blockEntity instanceof MoldTableBlockEntity mold && !mold.hasSource())
                 {
                     adjacent.add(relative);
                     break;
                 }
-                else if (!findMolds && blockState.getBlock() instanceof ChannelBlock)
+                else if (!findMolds && blockEntity instanceof ChannelBlockEntity channel && !channel.hasFlow())
                 {
                     adjacent.add(relative);
                     break;
@@ -246,7 +249,7 @@ public class ChannelFlow
 
     /**
      * Finds the shortest distance between two nodes using the A-star algorithm
-     * 
+     *
      * @param graph     an adjacency-matrix-representation of the graph where (x,y)
      *                  is the weight of the edge or 0 if there is no edge.
      * @param heuristic an estimation of distance from node x to y that is
@@ -255,9 +258,9 @@ public class ChannelFlow
      * @param start     the node to start from.
      * @param goal      the node we're searching for
      * @return The path from goal to start, both included
-     * 
-     *         Adapted from
-     *         https://github.com/ClaasM/Algorithms/blob/master/src/a_star/java/simple/AStar.java
+     *
+     * Adapted from
+     * https://github.com/ClaasM/Algorithms/blob/master/src/a_star/java/simple/AStar.java
      */
     private static List<Integer> aStar(int[][] graph, double[][] heuristic, int start, int goal)
     {
@@ -292,7 +295,8 @@ public class ChannelFlow
             for (int i = 0; i < priorities.length; i++)
             {
                 // ... by going through all nodes that haven't been visited yet
-                if (priorities[i] < lowestPriority && !visited[i]) {
+                if (priorities[i] < lowestPriority && !visited[i])
+                {
                     lowestPriority = priorities[i];
                     lowestPriorityIndex = i;
                 }
@@ -352,5 +356,15 @@ public class ChannelFlow
             }
         }
         return false;
+    }
+
+    public static void damageEntities(LevelAccessor level, BlockPos pos, int n)
+    {
+        if (level.isClientSide()) return;
+        AABB moltenFall = new AABB(
+            pos.getX() + 6.0 / 16, pos.getY() + 4.0 / 16, pos.getZ() + 6.0 / 16,
+            pos.getX() + +10.0 / 16, pos.getY() + (n - 1), pos.getZ() + +10.0 / 16
+        );
+        level.getEntitiesOfClass(LivingEntity.class, moltenFall).forEach(Entity::lavaHurt);
     }
 }

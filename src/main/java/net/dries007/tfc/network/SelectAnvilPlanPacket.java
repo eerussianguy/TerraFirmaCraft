@@ -6,7 +6,6 @@
 
 package net.dries007.tfc.network;
 
-import java.util.Objects;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -15,7 +14,6 @@ import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.container.AnvilContainer;
-import net.dries007.tfc.common.recipes.AnvilRecipe;
 
 public record SelectAnvilPlanPacket(ResourceLocation recipeId) implements CustomPacketPayload
 {

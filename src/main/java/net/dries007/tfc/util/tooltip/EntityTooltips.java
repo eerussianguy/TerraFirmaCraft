@@ -126,7 +126,7 @@ public final class EntityTooltips
             final double usageRatio = animal.getUses() >= animal.getUsesToElderly() ? 0.99 : (float) animal.getUses() / animal.getUsesToElderly();
             switch (age)
             {
-                case CHILD -> tooltip.accept(Component.translatable("tfc.jade.adulthood_progress", Calendars.get(level).getTimeDelta((long) ICalendar.TICKS_IN_DAY * animal.getDaysToAdulthood() + animal.getBirthTick() - Calendars.get(level).getTicks())));
+                case CHILD -> tooltip.accept(Component.translatable("tfc.jade.adulthood_progress", Calendars.get(level).getTimeDelta((long) ICalendar.PLAYER_TICKS_IN_DEFAULT_DAY * animal.getDaysToAdulthood() + animal.getBirthTick() - Calendars.get(level).getTicks())));
                 case ADULT -> tooltip.accept(Component.translatable("tfc.jade.animal_wear", String.format("%d%%", Math.min(100, Math.round(100f * usageRatio)))));
                 case OLD -> tooltip.accept(Component.translatable("tfc.jade.old_animal"));
             }

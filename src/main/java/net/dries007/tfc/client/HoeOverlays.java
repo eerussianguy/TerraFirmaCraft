@@ -15,7 +15,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.gui.GuiGraphics;
 import net.dries007.tfc.common.blocks.soil.HoeOverlayBlock;
 import net.dries007.tfc.config.TFCConfig;

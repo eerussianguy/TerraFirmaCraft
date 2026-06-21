@@ -7,14 +7,10 @@
 package net.dries007.tfc.world.surface.builder;
 
 
-import java.util.Random;
-import net.dries007.tfc.common.blocks.soil.SoilBlockType;
 import net.dries007.tfc.world.Seed;
 import net.dries007.tfc.world.noise.Noise2D;
 import net.dries007.tfc.world.noise.OpenSimplex2D;
-import net.dries007.tfc.world.surface.SoilSurfaceState;
 import net.dries007.tfc.world.surface.SurfaceBuilderContext;
-import net.dries007.tfc.world.surface.SurfaceState;
 
 import static net.dries007.tfc.world.TFCChunkGenerator.*;
 import static net.dries007.tfc.world.surface.SurfaceStates.*;

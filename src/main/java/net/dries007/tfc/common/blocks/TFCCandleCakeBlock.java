@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -142,5 +143,11 @@ public class TFCCandleCakeBlock extends AbstractCandleBlock implements IForgeBlo
     protected MapCodec<? extends AbstractCandleBlock> codec()
     {
         return fakeBlockCodec();
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player)
+    {
+        return new ItemStack(TFCBlocks.CAKE.get());
     }
 }

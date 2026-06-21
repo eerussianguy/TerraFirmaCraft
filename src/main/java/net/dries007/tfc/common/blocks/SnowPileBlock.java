@@ -6,7 +6,6 @@
 
 package net.dries007.tfc.common.blocks;
 
-import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;

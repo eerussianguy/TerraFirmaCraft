@@ -23,7 +23,6 @@ import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blockentities.IPotInventory;
-import net.dries007.tfc.common.blockentities.PotBlockEntity;
 import net.dries007.tfc.common.component.Bowl;
 import net.dries007.tfc.common.component.TFCComponents;
 import net.dries007.tfc.common.component.food.FoodCapability;

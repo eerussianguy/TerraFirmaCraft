@@ -34,7 +34,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-import net.dries007.tfc.client.ClientHelpers;
 import net.dries007.tfc.client.ClimateRenderCache;
 import net.dries007.tfc.client.overworld.SolarCalculator;
 import net.dries007.tfc.client.particle.TFCParticles;
@@ -50,7 +49,6 @@ import net.dries007.tfc.config.TFCConfig;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.Calendars;
 import net.dries007.tfc.util.calendar.Season;
-import net.dries007.tfc.util.climate.ClimateModel;
 
 public class TFCLeavesBlock extends Block implements ILeavesBlock, IForgeBlockExtension, IFluidLoggable, ISlowEntities
 {

@@ -47,6 +47,7 @@ import net.dries007.tfc.common.component.mold.IMold;
 import net.dries007.tfc.common.recipes.CastingRecipe;
 import net.dries007.tfc.common.recipes.InstantBarrelRecipe;
 import net.dries007.tfc.common.recipes.TFCRecipeTypes;
+import net.dries007.tfc.util.ChannelFlow;
 import net.dries007.tfc.util.FluidAlloy;
 import net.dries007.tfc.util.Helpers;
 
@@ -78,7 +79,7 @@ public class MoldTableBlockEntity extends TickableInventoryBlockEntity<MoldTable
                     Optional<IFluidHandler> fluidHandler = getFluidHandlerIfAppropriate(crucible, mold.fluid);
 
                     // If the chain of channels was broken, finish the flow
-                    if (fluidHandler.isEmpty() || mold.isLinkBroken())
+                    if (fluidHandler.isEmpty() || !mold.isFlowing())
                     {
                         mold.finishFlow();
                         return;
@@ -235,7 +236,7 @@ public class MoldTableBlockEntity extends TickableInventoryBlockEntity<MoldTable
         this.flowSource = Optional.of(flowSource);
     }
 
-    public boolean isLinkBroken()
+    public boolean isFlowing()
     {
         assert level != null;
         Optional<ChannelBlockEntity> blockEntity = level.getBlockEntity(
@@ -243,18 +244,24 @@ public class MoldTableBlockEntity extends TickableInventoryBlockEntity<MoldTable
             TFCBlockEntities.CHANNEL.get());
 
         if (blockEntity.isEmpty())
-            return true;
+            return false;
 
         for (byte i = 1; i < flowSource.get().getRight(); i++)
         {
             BlockPos rel = worldPosition.relative(flowSource.get().getLeft(), i);
             if (!level.getBlockState(rel).isAir())
             {
-                return true;
+                return false;
             }
         }
 
-        return blockEntity.get().isLinkBroken();
+        if (blockEntity.get().isFlowing())
+        {
+            if (flowSource.get().getLeft() == Direction.UP && flowSource.get().getRight() > 1)
+                ChannelFlow.damageEntities(level, worldPosition, flowSource.get().getRight());
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -413,12 +420,11 @@ public class MoldTableBlockEntity extends TickableInventoryBlockEntity<MoldTable
     public void setAndUpdateSlots(int slot)
     {
         super.setAndUpdateSlots(slot);
-        markForSync();
+        requestModelDataUpdate();
         if (level != null && level.isClientSide)
         {
             // Need to make sure that this gets called at least on the client
-            // TODO figure out why requestModelDataUpdate() does not update the already rendered model
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS | Block.UPDATE_IMMEDIATE);
         }
     }
 

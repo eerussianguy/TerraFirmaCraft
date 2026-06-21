@@ -6,7 +6,6 @@
 
 package net.dries007.tfc.common.blocks.soil;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 import net.minecraft.core.BlockPos;

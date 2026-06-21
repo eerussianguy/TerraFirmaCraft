@@ -9,8 +9,8 @@
     "id": "tfc:metal/saw_blade/copper"
   },
   "rules": [
-    "hit_second_last",
-    "hit_last"
+    "hit_last",
+    "hit_second_last"
   ],
   "tier": 1
 }

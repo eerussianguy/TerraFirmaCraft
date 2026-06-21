@@ -19,6 +19,8 @@ import net.minecraft.world.level.Level;
 
 public class BlowpipeItem extends Item
 {
+    public static final int OPERATION_USE_DURATION = 40;
+    public static final int COOLDOWN_DURATION = 20;
     public static Item transform(Item blowpipe)
     {
         if (blowpipe == TFCItems.BLOWPIPE.get())
@@ -48,7 +50,7 @@ public class BlowpipeItem extends Item
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity)
     {
-        return 80;
+        return OPERATION_USE_DURATION;
     }
 
     @Override

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "tfc:blank_disc"
+    },
+    "S": {
+      "item": "tfc:powder/sapphire"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SDS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:music_disc_relic"
+  }
+}

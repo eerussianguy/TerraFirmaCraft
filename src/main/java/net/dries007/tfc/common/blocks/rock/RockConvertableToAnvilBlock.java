@@ -9,7 +9,6 @@ package net.dries007.tfc.common.blocks.rock;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -20,7 +19,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.util.Helpers;

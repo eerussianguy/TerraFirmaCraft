@@ -17,9 +17,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.SurfaceSystem;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.fluids.FluidHelpers;
 import net.dries007.tfc.util.climate.OverworldClimateModel;
 import net.dries007.tfc.world.Seed;
 import net.dries007.tfc.world.biome.BiomeNoise;

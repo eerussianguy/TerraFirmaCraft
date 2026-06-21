@@ -8,7 +8,6 @@ package net.dries007.tfc.client.model.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -20,7 +19,7 @@ import net.minecraft.util.Mth;
 
 import net.dries007.tfc.common.entities.aquatic.Manatee;
 
-public class ManateeModel extends EntityModel<Manatee>
+public class ManateeModel extends HierarchicalAnimatedModel<Manatee>
 {
     public static LayerDefinition createBodyLayer()
     {
@@ -59,6 +58,7 @@ public class ManateeModel extends EntityModel<Manatee>
 
     public ManateeModel(ModelPart root)
     {
+        super(root);
         this.head = root.getChild("head");
         this.finright = root.getChild("finright");
         this.finleft = root.getChild("finleft");

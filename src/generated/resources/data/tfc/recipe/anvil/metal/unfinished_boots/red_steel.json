@@ -9,9 +9,9 @@
     "id": "tfc:metal/unfinished_boots/red_steel"
   },
   "rules": [
-    "shrink_third_last",
+    "bend_last",
     "bend_second_last",
-    "bend_last"
+    "shrink_third_last"
   ],
   "tier": 6
 }

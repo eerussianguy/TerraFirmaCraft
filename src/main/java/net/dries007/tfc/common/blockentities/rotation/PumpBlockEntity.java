@@ -23,6 +23,7 @@ import net.dries007.tfc.common.blockentities.TFCBlockEntities;
 import net.dries007.tfc.common.blockentities.TFCBlockEntity;
 import net.dries007.tfc.common.blocks.DirectionPropertyBlock;
 import net.dries007.tfc.common.blocks.TFCBlocks;
+import net.dries007.tfc.common.blocks.rock.AqueductBlock;
 import net.dries007.tfc.common.blocks.rotation.FluidPumpBlock;
 import net.dries007.tfc.common.fluids.FluidHelpers;
 import net.dries007.tfc.util.Helpers;
@@ -42,6 +43,10 @@ public class PumpBlockEntity extends TFCBlockEntity
 
             if (fluid != null)
             {
+                if (outputState.getBlock() instanceof AqueductBlock)
+                {
+                    return;
+                }
                 final BlockState newState = FluidHelpers.fillWithFluid(outputState, fluid);
                 if (newState != null && newState != outputState)
                 {

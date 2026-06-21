@@ -18,7 +18,6 @@ import net.dries007.tfc.client.ClimateRenderCache;
 import net.dries007.tfc.client.TFCColors;
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.wood.TFCLeavesBlock;
-import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.util.Helpers;
 
 public class LeafParticle extends TextureSheetParticle

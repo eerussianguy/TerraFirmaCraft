@@ -15,14 +15,12 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.registry.HolderHolder;
-import net.dries007.tfc.util.registry.RegistryHolder;
 
 public final class TFCArmorMaterials
 {

@@ -6,12 +6,10 @@
 
 package net.dries007.tfc.common.component;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;

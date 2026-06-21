@@ -11,7 +11,9 @@ import java.util.function.IntUnaryOperator;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -20,6 +22,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.effect.TFCEffects;
 import net.dries007.tfc.common.entities.EntityHelpers;
@@ -39,7 +42,7 @@ public interface HorseProperties extends MammalProperties
     float MIN_JUMP_STRENGTH = (float) generateJumpStrength(() -> 0.0);
     float MAX_JUMP_STRENGTH = (float) generateJumpStrength(() -> 1.0);
     float MIN_HEALTH = generateMaxHealth(v -> 0);
-    float MAX_HEALTH = generateMaxHealth(v -> 1);
+    float MAX_HEALTH = generateMaxHealth(v -> v - 1);
 
     static float generateMaxHealth(IntUnaryOperator supplier)
     {
@@ -73,7 +76,7 @@ public interface HorseProperties extends MammalProperties
         tag.putDouble("jumpStrength1", male.getAttributeBaseValue(Attributes.JUMP_STRENGTH));
         tag.putDouble("jumpStrength2", female.getAttributeBaseValue(Attributes.JUMP_STRENGTH));
         tag.putDouble("movementSpeed1", male.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
-        tag.putDouble("movementSpeed2", male.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
+        tag.putDouble("movementSpeed2", female.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
     }
 
     @Override
@@ -88,7 +91,7 @@ public interface HorseProperties extends MammalProperties
         }
         else
         {
-            maxHealth = generateMaxHealth(i -> getEntity().getRandom().nextInt());
+            maxHealth = generateMaxHealth(getEntity().getRandom()::nextInt);
         }
         double jumpStrength;
         if (tag.contains("jumpStrength1", Tag.TAG_DOUBLE))
@@ -158,5 +161,23 @@ public interface HorseProperties extends MammalProperties
         horse.ejectPassengers();
         horse.makeMad();
         horse.level().broadcastEntityEvent(horse, (byte) 6);
+    }
+
+    @Nullable
+    @Override
+    default AgeableMob getBreedOffspring(ServerLevel level, AgeableMob other)
+    {
+        AgeableMob mob = MammalProperties.super.getBreedOffspring(level, other);
+        if (other == this && mob instanceof HorseProperties baby)
+        {
+            CompoundTag genes = getGenes();
+            if (genes == null)
+            {
+                genes = new CompoundTag();
+                createGenes(genes, this);
+            }
+            applyGenes(genes, baby);
+        }
+        return mob;
     }
 }

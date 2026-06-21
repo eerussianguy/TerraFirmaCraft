@@ -347,7 +347,7 @@ public final class InteractionManager
         registerBlock(Ingredient.of(TFCTags.Items.USABLE_IN_MOLD_TABLE), (stack, context) -> {
 
             final Player player = context.getPlayer();
-            if (player != null && player.mayBuild() && !player.isShiftKeyDown()) 
+            if (player != null && player.mayBuild())
             {
                 final Level level = context.getLevel();
                 final BlockPos posClicked = context.getClickedPos();

@@ -23,7 +23,6 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 import net.dries007.tfc.common.blockentities.IPotInventory;
-import net.dries007.tfc.common.blockentities.PotBlockEntity;
 import net.dries007.tfc.common.recipes.outputs.PotOutput;
 import net.dries007.tfc.util.Helpers;
 

@@ -1,5 +1,6 @@
 {
   "values": [
-    "tfc:metal/zinc"
+    "tfc:metal/zinc",
+    "tfc:metal/flowing_zinc"
   ]
 }

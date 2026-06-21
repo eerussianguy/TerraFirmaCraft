@@ -1,0 +1,70 @@
+{
+  "type": "tfc:heating",
+  "ingredient": [
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/acacia"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/ash"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/aspen"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/birch"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/blackwood"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/chestnut"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/douglas_fir"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/hickory"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/kapok"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/mangrove"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/maple"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/oak"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/palm"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/pine"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/rosewood"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/sequoia"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/spruce"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/sycamore"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/white_cedar"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/black_bronze/willow"
+    }
+  ],
+  "result_fluid": {
+    "amount": 4,
+    "id": "tfc:metal/black_bronze"
+  },
+  "temperature": 1070.0
+}

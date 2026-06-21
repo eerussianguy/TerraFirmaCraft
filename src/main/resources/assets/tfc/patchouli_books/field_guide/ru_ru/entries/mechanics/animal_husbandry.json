@@ -2,7 +2,7 @@
   "__comment__": "This file was automatically created by mcresources",
   "name": "Животноводство",
   "category": "tfc:mechanics",
-  "icon": "minecraft:egg",
+  "icon": "minecraft:textures/item/egg.png",
   "pages": [
     {
       "type": "patchouli:text",
@@ -110,7 +110,7 @@
     {
       "type": "patchouli:text",
       "anchor": "rabbit",
-      "text": "$(thing)Кролики$() обитают во всём мире при $(l:the_world/climate#temperature)температурах$() выше -16°C и при $(l:the_world/climate#rainfall)осадках$() более 15 мм. Они 0— $(l:mechanics/animal_husbandry#mammals)млекопитающие$() без особых способностей. Кролики едят любую пищу, даже если она испорчена. Крольчихи могут родить от 1 до 6 крольчат за беременность, она длится всего 19 дней, и крольчата становятся взрослыми уже через 20 дней. Крольчихи могут рожать до 6 раз.",
+      "text": "$(thing)Rabbits$() spawn in $(l:the_world/climate#temperature)temperatures$() above -16°C, and at least 15mm of $(l:the_world/climate#rainfall)rainfall$(), changing their coat based on climate. They are $(l:mechanics/animal_husbandry#mammals)Mammals$() with no special abilities, aside from being known for chewing on carrots and cabbage. They will eat any food, even if it is rotten. They have 1-6 children, are pregnant for just 19 days, and reach adulthood in 20 days. They can have children 6 times.",
       "title": "Кролики"
     },
     {

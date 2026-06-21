@@ -12,7 +12,6 @@ import java.util.function.Predicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
@@ -34,7 +33,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 
 import net.dries007.tfc.common.TFCTags;
-import net.dries007.tfc.common.blocks.RiverWaterBlock;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
 import net.dries007.tfc.common.blocks.wood.BranchDirection;
 import net.dries007.tfc.common.fluids.FluidHelpers;

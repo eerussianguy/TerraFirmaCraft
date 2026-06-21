@@ -9,8 +9,6 @@ package net.dries007.tfc.common.blocks.plant;
 import java.util.Locale;
 
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockGetter;
 
 public interface ITallPlant
 {

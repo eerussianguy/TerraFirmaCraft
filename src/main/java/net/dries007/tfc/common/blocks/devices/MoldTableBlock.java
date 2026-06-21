@@ -150,7 +150,7 @@ public class MoldTableBlock extends ExtendedBlock implements EntityBlockExtensio
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
     {
-        if (newState.getBlock() != state.getBlock())
+        if (newState.getBlock() != state.getBlock() && !isMoving)
         {
             level.getBlockEntity(pos, TFCBlockEntities.MOLD_TABLE.get()).ifPresent(
                 mold -> {

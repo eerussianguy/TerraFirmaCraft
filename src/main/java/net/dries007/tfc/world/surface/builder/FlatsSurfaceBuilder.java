@@ -8,7 +8,6 @@ package net.dries007.tfc.world.surface.builder;
 
 import net.dries007.tfc.world.surface.SurfaceBuilderContext;
 import net.dries007.tfc.world.surface.SurfaceState;
-import net.dries007.tfc.world.surface.SurfaceStates;
 
 import static net.dries007.tfc.world.surface.SurfaceStates.*;
 

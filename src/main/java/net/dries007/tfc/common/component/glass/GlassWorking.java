@@ -12,6 +12,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 import net.dries007.tfc.common.component.TFCComponents;
+import net.dries007.tfc.common.component.heat.HeatCapability;
+import net.dries007.tfc.common.recipes.HeatingRecipe;
 
 public final class GlassWorking
 {
@@ -28,6 +30,12 @@ public final class GlassWorking
                 {
                     tooltips.add(Component.literal("- ").append(Component.translatable(operation.getTranslationId())));
                 }
+            }
+            final HeatingRecipe recipe = HeatingRecipe.getRecipe(stack);
+            final float temp = HeatCapability.getTemperature(stack);
+            if (recipe != null && temp / 0.8f > recipe.getTemperature())
+            {
+                tooltips.add(Component.translatable("tfc.tooltip.danger"));
             }
         }
     }
@@ -50,5 +58,11 @@ public final class GlassWorking
     public static void createNewBatch(ItemStack stack, ItemStack glass)
     {
         if (!stack.isEmpty()) stack.set(TFCComponents.GLASS, get(stack).with(glass));
+    }
+
+    public static ItemStack createWithBatch(ItemStack stack, ItemStack glass)
+    {
+        createNewBatch(stack, glass);
+        return stack;
     }
 }

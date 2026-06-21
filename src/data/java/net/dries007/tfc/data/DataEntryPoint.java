@@ -99,7 +99,6 @@ public final class DataEntryPoint
         ));
         tags(event, Registries.DAMAGE_TYPE, lookup, (provider, tags) -> {
             tags.tag(DamageTypeTags.NO_KNOCKBACK).add(
-                TFCDamageTypes.CORAL,
                 TFCDamageTypes.DEHYDRATION,
                 TFCDamageTypes.GRILL,
                 TFCDamageTypes.PLUCK,

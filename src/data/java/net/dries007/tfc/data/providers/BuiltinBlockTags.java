@@ -139,7 +139,9 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
             TFCBlocks.PLANTS.get(Plant.SPANISH_MOSS).get(),
             TFCBlocks.PLANTS.get(Plant.SPANISH_MOSS_PLANT).get(),
             TFCBlocks.PLANTS.get(Plant.LIANA).get(),
-            TFCBlocks.PLANTS.get(Plant.LIANA_PLANT).get()
+            TFCBlocks.PLANTS.get(Plant.LIANA_PLANT).get(),
+            TFCBlocks.ROPE.get(),
+            TFCBlocks.HANGING_ROPE.get()
         );
         tag(BlockTags.INFINIBURN_OVERWORLD).add(TFCBlocks.PIT_KILN);
         tag(BlockTags.INFINIBURN_END).add(TFCBlocks.PIT_KILN);
@@ -222,7 +224,9 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
                 TFCBlocks.DEAD_CANE,
                 TFCBlocks.THATCH,
                 TFCBlocks.THATCH_BED,
-                TFCBlocks.TREE_ROOTS
+                TFCBlocks.TREE_ROOTS,
+                TFCBlocks.ROPE,
+                TFCBlocks.HANGING_ROPE
             );
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .add2(TFCBlocks.SANDSTONE)
@@ -285,7 +289,8 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
                 TFCBlocks.HATCH,
                 TFCBlocks.BRONZE_BELL,
                 TFCBlocks.BRASS_BELL,
-                TFCBlocks.LARGE_VESSEL
+                TFCBlocks.LARGE_VESSEL,
+                TFCBlocks.STEEL_ROPE_ANCHOR
             )
             .add(TFCBlocks.MOLD_TABLE)
             .add(TFCBlocks.CHANNEL)

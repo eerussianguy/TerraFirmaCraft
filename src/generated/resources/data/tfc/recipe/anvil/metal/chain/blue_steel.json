@@ -8,8 +8,8 @@
     "id": "tfc:metal/chain/blue_steel"
   },
   "rules": [
-    "draw_not_last",
-    "hit_any"
+    "hit_any",
+    "draw_not_last"
   ],
   "tier": 6
 }

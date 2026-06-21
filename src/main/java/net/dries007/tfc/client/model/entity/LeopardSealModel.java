@@ -22,44 +22,47 @@ import net.dries007.tfc.common.entities.aquatic.LeopardSeal;
 
 public class LeopardSealModel extends HierarchicalAnimatedModel<LeopardSeal>
 {
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
+    public static LayerDefinition createBodyLayer()
+    {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition whole_body_1 = partdefinition.addOrReplaceChild("whole_body_1", CubeListBuilder.create(), PartPose.offset(0.0F, 18.0F, 0.0F));
+        PartDefinition whole_body_1 = partdefinition.addOrReplaceChild("whole_body_1", CubeListBuilder.create(), PartPose.offset(0.0F, 18.0F, 0.0F));
 
-		PartDefinition whole_body = whole_body_1.addOrReplaceChild("whole_body", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 1.5708F, 0.0F, 0.0F));
+        PartDefinition whole_body = whole_body_1.addOrReplaceChild("whole_body", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 1.5708F, 0.0F, 0.0F));
 
-		PartDefinition body = whole_body.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -8.0F, -6.0F, 12.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition body = whole_body.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -8.0F, -6.0F, 12.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition body_2 = body.addOrReplaceChild("body_2", CubeListBuilder.create().texOffs(0, 26).addBox(-5.0F, 0.0F, -4.0F, 10.0F, 9.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 8.0F, -2.0F));
+        PartDefinition body_2 = body.addOrReplaceChild("body_2", CubeListBuilder.create().texOffs(0, 26).addBox(-5.0F, 0.0F, -4.0F, 10.0F, 9.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 8.0F, -2.0F));
 
-		PartDefinition whole_tail = whole_body.addOrReplaceChild("whole_tail", CubeListBuilder.create().texOffs(38, 26).addBox(-4.0F, -1.0F, -3.0F, 8.0F, 10.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 16.0F, -2.0F));
+        PartDefinition whole_tail = whole_body.addOrReplaceChild("whole_tail", CubeListBuilder.create().texOffs(38, 26).addBox(-4.0F, -1.0F, -3.0F, 8.0F, 10.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 16.0F, -2.0F));
 
-		PartDefinition tail_1 = whole_tail.addOrReplaceChild("tail_1", CubeListBuilder.create().texOffs(0, 44).addBox(-3.0F, -2.0F, -2.0F, 6.0F, 6.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 9.0F, 0.0F));
+        PartDefinition tail_1 = whole_tail.addOrReplaceChild("tail_1", CubeListBuilder.create().texOffs(0, 44).addBox(-3.0F, -2.0F, -2.0F, 6.0F, 6.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 9.0F, 0.0F));
 
-		PartDefinition tail = tail_1.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(44, 21).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 4.0F, 3.0F));
+        PartDefinition tail = tail_1.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(44, 21).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 4.0F, 3.0F));
 
-		PartDefinition fin_3 = tail_1.addOrReplaceChild("fin_3", CubeListBuilder.create().texOffs(0, 55).addBox(0.0F, 0.0F, -3.0F, 1.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, 4.0F, 1.0F));
+        PartDefinition fin_3 = tail_1.addOrReplaceChild("fin_3", CubeListBuilder.create().texOffs(0, 55).addBox(0.0F, 0.0F, -3.0F, 1.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, 4.0F, 1.0F));
 
-		PartDefinition fin_4 = tail_1.addOrReplaceChild("fin_4", CubeListBuilder.create().texOffs(22, 51).addBox(-1.0F, 0.0F, -3.0F, 1.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, 4.0F, 1.0F));
+        PartDefinition fin_4 = tail_1.addOrReplaceChild("fin_4", CubeListBuilder.create().texOffs(22, 51).addBox(-1.0F, 0.0F, -3.0F, 1.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, 4.0F, 1.0F));
 
-		PartDefinition fin_1 = whole_body.addOrReplaceChild("fin_1", CubeListBuilder.create().texOffs(44, 7).addBox(-10.0F, -2.0F, -1.0F, 10.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-7.0F, -5.0F, -3.0F, 1.5708F, 0.0F, -1.5708F));
+        PartDefinition fin_1 = whole_body.addOrReplaceChild("fin_1", CubeListBuilder.create().texOffs(44, 7).addBox(-10.0F, -2.0F, -1.0F, 10.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-7.0F, -5.0F, -3.0F, 1.5708F, 0.0F, -1.5708F));
 
-		PartDefinition fin_2 = whole_body.addOrReplaceChild("fin_2", CubeListBuilder.create().texOffs(44, 0).addBox(0.0F, -2.0F, -1.0F, 10.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, -5.0F, -3.0F, 1.5708F, 0.0F, 1.5708F));
+        PartDefinition fin_2 = whole_body.addOrReplaceChild("fin_2", CubeListBuilder.create().texOffs(44, 0).addBox(0.0F, -2.0F, -1.0F, 10.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, -5.0F, -3.0F, 1.5708F, 0.0F, 1.5708F));
 
-		PartDefinition muzzle = whole_body.addOrReplaceChild("muzzle", CubeListBuilder.create().texOffs(38, 43).addBox(-4.0F, -7.0F, -3.0F, 8.0F, 8.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -7.0F, 1.0F));
+        PartDefinition muzzle = whole_body.addOrReplaceChild("muzzle", CubeListBuilder.create(), PartPose.offset(0.0F, -7.0F, 1.0F));
 
-		PartDefinition jaw = muzzle.addOrReplaceChild("jaw", CubeListBuilder.create().texOffs(44, 14).addBox(-3.0F, -3.0F, 1.0F, 6.0F, 4.0F, 3.0F, new CubeDeformation(0.01F)), PartPose.offset(0.0F, -8.0F, -1.0F));
+        PartDefinition muzzle_r1 = muzzle.addOrReplaceChild("muzzle_r1", CubeListBuilder.create().texOffs(37, 43).addBox(-4.0F, -25.0F, -2.0F, 8.0F, 7.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -5.0F, -21.0F, -1.5708F, 0.0F, 0.0F));
 
-		PartDefinition muzzle_r1 = jaw.addOrReplaceChild("muzzle_r1", CubeListBuilder.create().texOffs(34, 58).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -3.0F, 1.0F, 0.2182F, 0.0F, 0.0F));
+        PartDefinition jaw = muzzle.addOrReplaceChild("jaw", CubeListBuilder.create().texOffs(44, 14).addBox(-3.0F, -3.0F, 1.0F, 6.0F, 4.0F, 3.0F, new CubeDeformation(0.01F)), PartPose.offset(0.0F, -8.0F, -1.0F));
 
-		PartDefinition jaw_2 = jaw.addOrReplaceChild("jaw_2", CubeListBuilder.create().texOffs(22, 44).addBox(-3.0F, -5.0F, -2.0F, 6.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 2.0F, 1.0F));
+        PartDefinition muzzle_r2 = jaw.addOrReplaceChild("muzzle_r2", CubeListBuilder.create().texOffs(34, 58).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -3.0F, 1.0F, 0.2182F, 0.0F, 0.0F));
 
-		PartDefinition muzzle_r2 = jaw_2.addOrReplaceChild("muzzle_r2", CubeListBuilder.create().texOffs(46, 58).addBox(-2.0F, 0.0F, 0.0F, 4.0F, 4.0F, 2.0F, new CubeDeformation(0.01F)), PartPose.offsetAndRotation(0.0F, -5.0F, 0.0F, -0.2182F, 0.0F, 0.0F));
+        PartDefinition jaw_2 = jaw.addOrReplaceChild("jaw_2", CubeListBuilder.create().texOffs(22, 44).addBox(-3.0F, -5.0F, -2.0F, 6.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 2.0F, 1.0F));
 
-		return LayerDefinition.create(meshdefinition, 128, 128);
-	}
+        PartDefinition muzzle_r3 = jaw_2.addOrReplaceChild("muzzle_r3", CubeListBuilder.create().texOffs(46, 58).addBox(-2.0F, 0.0F, 0.0F, 4.0F, 4.0F, 2.0F, new CubeDeformation(0.01F)), PartPose.offsetAndRotation(0.0F, -5.0F, 0.0F, -0.2182F, 0.0F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 128, 128);
+    }
 
     public static final AnimationDefinition FLOP = AnimationDefinition.Builder.withLength(1.1261F).looping()
         .addAnimation("whole_body_1", new AnimationChannel(AnimationChannel.Targets.ROTATION,
@@ -257,7 +260,8 @@ public class LeopardSealModel extends HierarchicalAnimatedModel<LeopardSeal>
     private final ModelPart jaw;
     private final ModelPart jaw_2;
 
-    public LeopardSealModel(ModelPart root) {
+    public LeopardSealModel(ModelPart root)
+    {
         super(root);
         this.whole_body_1 = root.getChild("whole_body_1");
         this.whole_body = this.whole_body_1.getChild("whole_body");

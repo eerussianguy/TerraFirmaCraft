@@ -10,7 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
 
-import net.dries007.tfc.util.Helpers;
 
 /**
  * {@link MenuProvider} for static screen / container pairs that are not attached to a block entity or other object which makes sense to implement this on.

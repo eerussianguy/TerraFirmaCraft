@@ -1,0 +1,12 @@
+{
+  "values": [
+    "#c:alcohols/beer",
+    "#c:alcohols/cider",
+    "#c:alcohols/rum",
+    "#c:alcohols/sake",
+    "#c:alcohols/vodka",
+    "#c:alcohols/whiskey",
+    "#c:alcohols/corn_whiskey",
+    "#c:alcohols/rye_whiskey"
+  ]
+}

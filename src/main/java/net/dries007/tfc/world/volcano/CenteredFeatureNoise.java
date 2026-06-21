@@ -11,7 +11,6 @@ import net.minecraft.core.QuartPos;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 
-import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.ChunkHeightFiller;
 import net.dries007.tfc.world.Seed;
 import net.dries007.tfc.world.biome.BiomeExtension;

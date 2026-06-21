@@ -166,7 +166,7 @@ public enum ChooseBiomes implements RegionTask
             final byte age = point.hotSpotAge;
             if (age > 0)
             {
-                if (age == 4 && point.biome == OCEAN || point.biome == DEEP_OCEAN || point.biome == OCEAN_REEF || point.biome == DEEP_OCEAN_TRENCH)
+                if (age == 4 && (point.biome == OCEAN || point.biome == DEEP_OCEAN || point.biome == OCEAN_REEF || point.biome == DEEP_OCEAN_TRENCH))
                 {
                     point.biome = SUNKEN_SHIELD_VOLCANO;
                 }

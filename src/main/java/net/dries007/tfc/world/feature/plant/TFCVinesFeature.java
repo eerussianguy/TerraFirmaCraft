@@ -17,7 +17,6 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 
-import net.dries007.tfc.util.Helpers;
 
 public class TFCVinesFeature extends Feature<BlockStateConfiguration>
 {

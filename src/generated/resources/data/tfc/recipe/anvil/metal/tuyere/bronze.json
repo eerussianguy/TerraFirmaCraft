@@ -8,8 +8,8 @@
     "id": "tfc:metal/tuyere/bronze"
   },
   "rules": [
-    "bend_second_last",
-    "bend_last"
+    "bend_last",
+    "bend_second_last"
   ],
   "tier": 2
 }

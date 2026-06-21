@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.dries007.tfc.world.Seed;
 import net.dries007.tfc.world.biome.BiomeNoise;
 import net.dries007.tfc.world.noise.Noise2D;
-import net.dries007.tfc.world.noise.OpenSimplex2D;
 import net.dries007.tfc.world.surface.SurfaceBuilderContext;
 import net.dries007.tfc.world.surface.SurfaceState;
 import net.dries007.tfc.world.surface.SurfaceStates;

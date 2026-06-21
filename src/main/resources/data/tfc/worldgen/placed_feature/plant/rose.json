@@ -9,7 +9,7 @@
     {
       "type": "block_predicate_filter",
       "predicate": {
-        "type": "tfc:replaceable"
+        "type": "tfc:air_or_empty_fluid"
       }
     },
     {
@@ -25,6 +25,14 @@
           }
         }
       }
+    },
+    {
+      "type": "tfc:no_solid_neighbors"
+    },
+    {
+      "type": "tfc:intertidal",
+      "min_elevation": 1,
+      "max_elevation": 512
     }
   ]
 }

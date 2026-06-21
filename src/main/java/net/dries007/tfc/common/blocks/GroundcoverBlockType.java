@@ -7,7 +7,6 @@
 package net.dries007.tfc.common.blocks;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import net.dries007.tfc.common.items.Powder;
 import net.dries007.tfc.common.items.TFCItems;

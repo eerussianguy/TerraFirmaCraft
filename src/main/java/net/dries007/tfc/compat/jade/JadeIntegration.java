@@ -54,6 +54,9 @@ public class JadeIntegration implements IWailaPlugin
         HarvestToolProvider.registerHandler(SimpleToolHandler.create(JadeIds.JADE("sword"), List.of(
             TFCItems.ROCK_TOOLS.get(RockCategory.SEDIMENTARY).get(RockCategory.ItemType.KNIFE).asItem()
         )));
+        HarvestToolProvider.registerHandler(SimpleToolHandler.create(JadeIds.JADE("glass_saw"), List.of(
+            TFCItems.GEM_SAW.asItem()
+        )));
     }
 
     private static void register(String name, RockCategory.ItemType stoneType, Metal.ItemType metalType)

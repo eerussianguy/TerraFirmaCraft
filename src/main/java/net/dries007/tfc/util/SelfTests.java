@@ -73,6 +73,7 @@ import net.dries007.tfc.common.blocks.plant.Plant;
 import net.dries007.tfc.common.blocks.plant.PlantBlock;
 import net.dries007.tfc.common.blocks.plant.TopPlantBlock;
 import net.dries007.tfc.common.blocks.plant.fruit.GrowingFruitTreeBranchBlock;
+import net.dries007.tfc.common.blocks.rock.Rock;
 import net.dries007.tfc.common.blocks.rock.RockDisplayCategory;
 import net.dries007.tfc.common.component.food.Nutrient;
 import net.dries007.tfc.common.component.forge.ForgeStep;

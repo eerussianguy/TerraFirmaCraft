@@ -111,6 +111,96 @@
           }
         ]
       }
+    },
+    "arctic_char": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:food/arctic_char"
+          }
+        ]
+      }
+    },
+    "burbot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:food/burbot"
+          }
+        ]
+      }
+    },
+    "muksun": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:food/muksun"
+          }
+        ]
+      }
+    },
+    "northern_pike": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:food/northern_pike"
+          }
+        ]
+      }
+    },
+    "spotted_gudgeon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:food/spotted_gudgeon"
+          }
+        ]
+      }
+    },
+    "tilapia": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:food/tilapia"
+          }
+        ]
+      }
+    },
+    "peacock_bass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:food/peacock_bass"
+          }
+        ]
+      }
+    },
+    "pacu": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:food/pacu"
+          }
+        ]
+      }
+    },
+    "red_piranha": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:food/red_piranha"
+          }
+        ]
+      }
     }
   },
   "display": {
@@ -167,6 +257,33 @@
     ],
     [
       "smallmouth_bass"
+    ],
+    [
+      "arctic_char"
+    ],
+    [
+      "burbot"
+    ],
+    [
+      "muksun"
+    ],
+    [
+      "northern_pike"
+    ],
+    [
+      "spotted_gudgeon"
+    ],
+    [
+      "tilapia"
+    ],
+    [
+      "peacock_bass"
+    ],
+    [
+      "pacu"
+    ],
+    [
+      "red_piranha"
     ]
   ]
 }

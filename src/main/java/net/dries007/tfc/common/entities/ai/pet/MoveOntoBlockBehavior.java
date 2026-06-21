@@ -15,7 +15,6 @@ import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
-import net.minecraft.world.entity.ai.memory.WalkTarget;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class MoveOntoBlockBehavior<T extends PathfinderMob> extends Behavior<T>

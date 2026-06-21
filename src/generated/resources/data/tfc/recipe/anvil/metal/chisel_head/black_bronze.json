@@ -9,9 +9,9 @@
     "id": "tfc:metal/chisel_head/black_bronze"
   },
   "rules": [
-    "hit_not_last",
+    "hit_last",
     "draw_not_last",
-    "hit_last"
+    "hit_not_last"
   ],
   "tier": 2
 }

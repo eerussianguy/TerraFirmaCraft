@@ -9,9 +9,7 @@ package net.dries007.tfc.client.overworld;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 
-import net.dries007.tfc.common.TFCAttachments;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
 import net.dries007.tfc.util.climate.Climate;

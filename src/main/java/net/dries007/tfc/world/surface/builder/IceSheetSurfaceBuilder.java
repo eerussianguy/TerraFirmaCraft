@@ -9,7 +9,6 @@ package net.dries007.tfc.world.surface.builder;
 
 import net.minecraft.world.level.block.state.BlockState;
 
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.world.Seed;
 import net.dries007.tfc.world.biome.BiomeNoise;
 import net.dries007.tfc.world.noise.Noise2D;

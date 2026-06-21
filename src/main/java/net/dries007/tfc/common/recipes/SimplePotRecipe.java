@@ -21,7 +21,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 import net.dries007.tfc.common.blockentities.IPotInventory;
-import net.dries007.tfc.common.blockentities.PotBlockEntity;
 import net.dries007.tfc.common.recipes.outputs.ItemStackProvider;
 import net.dries007.tfc.common.recipes.outputs.PotOutput;
 

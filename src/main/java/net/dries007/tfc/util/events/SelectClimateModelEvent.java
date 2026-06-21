@@ -11,7 +11,6 @@ import net.neoforged.bus.api.Event;
 
 import net.dries007.tfc.util.climate.BiomeBasedClimateModel;
 import net.dries007.tfc.util.climate.ClimateModel;
-import net.dries007.tfc.util.climate.ClimateModels;
 
 /**
  * An event which is posted while a world is loading or selecting its climate model. This provides access to the level, and

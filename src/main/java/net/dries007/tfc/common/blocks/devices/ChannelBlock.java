@@ -8,15 +8,6 @@ package net.dries007.tfc.common.blocks.devices;
 
 import java.util.Map;
 import java.util.Optional;
-
-import net.dries007.tfc.common.blockentities.CrucibleBlockEntity;
-import net.dries007.tfc.common.blockentities.TFCBlockEntities;
-import net.dries007.tfc.common.blocks.DirectionPropertyBlock;
-import net.dries007.tfc.common.blocks.EntityBlockExtension;
-import net.dries007.tfc.common.blocks.ExtendedBlock;
-import net.dries007.tfc.common.blocks.ExtendedProperties;
-import net.dries007.tfc.util.ChannelFlow;
-import net.dries007.tfc.util.Helpers;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -41,17 +32,26 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import net.dries007.tfc.common.blockentities.CrucibleBlockEntity;
+import net.dries007.tfc.common.blockentities.TFCBlockEntities;
+import net.dries007.tfc.common.blocks.DirectionPropertyBlock;
+import net.dries007.tfc.common.blocks.EntityBlockExtension;
+import net.dries007.tfc.common.blocks.ExtendedBlock;
+import net.dries007.tfc.common.blocks.ExtendedProperties;
+import net.dries007.tfc.util.ChannelFlow;
+import net.dries007.tfc.util.Helpers;
+
 public class ChannelBlock extends ExtendedBlock implements EntityBlockExtension
 {
-    public static final VoxelShape CHANNEL_FLOW_CENTER_SHAPE = Block.box(6.0f,  1.0f, 6.0f,  10.0f, 4.0f, 10.0f);
-    public static final VoxelShape CHANNEL_FLOW_UP_SHAPE = Block.box(6.0f,  4.0f, 6.0f,  10.0f, 16.0f, 10.0f);
+    public static final VoxelShape CHANNEL_FLOW_CENTER_SHAPE = Block.box(6.0f, 1.0f, 6.0f, 10.0f, 4.0f, 10.0f);
+    public static final VoxelShape CHANNEL_FLOW_UP_SHAPE = Block.box(6.0f, 4.0f, 6.0f, 10.0f, 16.0f, 10.0f);
     public static final VoxelShape CHANNEL_FLOW_EAST_SHAPE = Block.box(10.0f, 1.0f, 6.0f, 17.0f, 4.0f, 10.0f);
     public static final VoxelShape CHANNEL_FLOW_EAST_SHAPE_LONG = Block.box(10.0f, 1.0f, 6.0f, 22.0f, 4.0f, 10.0f);
-    public static final VoxelShape CHANNEL_FLOW_LONG_FALL_SHAPE = Block.box(6.0f,  0.0f, 6.0f,  10.0f, 16.0f, 10.0f);
+    public static final VoxelShape CHANNEL_FLOW_LONG_FALL_SHAPE = Block.box(6.0f, 0.0f, 6.0f, 10.0f, 16.0f, 10.0f);
 
     public static final Map<Direction, BooleanProperty> PROPERTY_BY_DIRECTION = PipeBlock.PROPERTY_BY_DIRECTION
-            .entrySet().stream()
-            .filter(facing -> facing.getKey() != Direction.UP).collect(Util.toMap());
+        .entrySet().stream()
+        .filter(facing -> facing.getKey() != Direction.UP).collect(Util.toMap());
 
     public static final BooleanProperty NORTH = PipeBlock.NORTH;
     public static final BooleanProperty EAST = PipeBlock.EAST;
@@ -64,7 +64,8 @@ public class ChannelBlock extends ExtendedBlock implements EntityBlockExtension
 
     private static final VoxelShape[] SHAPES = new VoxelShape[16];
 
-    static {
+    static
+    {
         final VoxelShape base = box(5.0D, 0.0D, 5.0D, 11.0D, 5.0D, 11.0D);
 
         final VoxelShape east = box(11.0D, 0.0D, 5.0D, 16.0D, 5.0D, 11.0D);
@@ -72,12 +73,15 @@ public class ChannelBlock extends ExtendedBlock implements EntityBlockExtension
         final VoxelShape west = box(0.0D, 0.0D, 5.0D, 5.0D, 5.0D, 11.0D);
         final VoxelShape north = box(5.0D, 0.0D, 0.0D, 11.0D, 5.0D, 10.0D);
 
-        final VoxelShape[] directions = new VoxelShape[] { south, west, north, east };
+        final VoxelShape[] directions = new VoxelShape[] {south, west, north, east};
 
-        for (int i = 0; i < SHAPES.length; i++) {
+        for (int i = 0; i < SHAPES.length; i++)
+        {
             VoxelShape shape = base;
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                if (((i >> direction.get2DDataValue()) & 1) == 1) {
+            for (Direction direction : Direction.Plane.HORIZONTAL)
+            {
+                if (((i >> direction.get2DDataValue()) & 1) == 1)
+                {
                     shape = Shapes.or(shape, directions[direction.get2DDataValue()]);
                 }
             }
@@ -86,15 +90,14 @@ public class ChannelBlock extends ExtendedBlock implements EntityBlockExtension
     }
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest,
-            FluidState fluid)
-        {
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
+    {
         // On destroy, notify source channel that all flows going through this
         // channel have been broken
         if (!level.isClientSide())
         {
             level.getBlockEntity(pos, TFCBlockEntities.CHANNEL.get()).ifPresent(
-                    channel -> channel.notifyBrokenLink(channel.getNumberOfFlows()));
+                channel -> channel.notifyBrokenLink(channel.getNumberOfFlows()));
         }
 
         return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
@@ -108,7 +111,7 @@ public class ChannelBlock extends ExtendedBlock implements EntityBlockExtension
         if (!level.isClientSide())
         {
             level.getBlockEntity(pos, TFCBlockEntities.CHANNEL.get()).ifPresent(
-                    channel -> channel.notifyBrokenLink(channel.getNumberOfFlows()));
+                channel -> channel.notifyBrokenLink(channel.getNumberOfFlows()));
         }
 
         super.onBlockExploded(state, level, pos, explosion);
@@ -118,28 +121,27 @@ public class ChannelBlock extends ExtendedBlock implements EntityBlockExtension
     {
         super(properties);
         this.registerDefaultState(
-                this.defaultBlockState()
-                        .setValue(EAST, false)
-                        .setValue(SOUTH, false)
-                        .setValue(WEST, false)
-                        .setValue(NORTH, false)
-                        .setValue(DOWN, false)
-                        .setValue(TRIGGERED, false)
-                        .setValue(WITH_METAL, false));
+            this.defaultBlockState()
+                .setValue(EAST, false)
+                .setValue(SOUTH, false)
+                .setValue(WEST, false)
+                .setValue(NORTH, false)
+                .setValue(DOWN, false)
+                .setValue(TRIGGERED, false)
+                .setValue(WITH_METAL, false));
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
         return SHAPES[(state.getValue(NORTH) ? 1 << Direction.NORTH.get2DDataValue() : 0) |
-                (state.getValue(EAST) ? 1 << Direction.EAST.get2DDataValue() : 0) |
-                (state.getValue(SOUTH) ? 1 << Direction.SOUTH.get2DDataValue() : 0) |
-                (state.getValue(WEST) ? 1 << Direction.WEST.get2DDataValue() : 0)];
+            (state.getValue(EAST) ? 1 << Direction.EAST.get2DDataValue() : 0) |
+            (state.getValue(SOUTH) ? 1 << Direction.SOUTH.get2DDataValue() : 0) |
+            (state.getValue(WEST) ? 1 << Direction.WEST.get2DDataValue() : 0)];
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState adjacentState, LevelAccessor level,
-            BlockPos pos, BlockPos adjacentPos)
+    public BlockState updateShape(BlockState state, Direction direction, BlockState adjacentState, LevelAccessor level, BlockPos pos, BlockPos adjacentPos)
     {
         for (Direction dir : Helpers.DIRECTIONS)
         {
@@ -175,19 +177,18 @@ public class ChannelBlock extends ExtendedBlock implements EntityBlockExtension
     }
 
     @Override
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos,
-            boolean movedByPiston)
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
     {
         boolean isLocationPowered = level.hasNeighborSignal(pos) || level.hasNeighborSignal(pos.above());
         boolean isChannelPowered = state.getValue(TRIGGERED);
         if (isLocationPowered && !isChannelPowered)
         {
             activate(level, pos);
-            level.setBlock(pos, state.setValue(TRIGGERED, true), 4);
+            level.setBlockAndUpdate(pos, state.setValue(TRIGGERED, true));
         }
         else if (!isLocationPowered && isChannelPowered)
         {
-            level.setBlock(pos, state.setValue(TRIGGERED, false), 4);
+            level.setBlockAndUpdate(pos, state.setValue(TRIGGERED, false));
         }
     }
 
@@ -202,8 +203,7 @@ public class ChannelBlock extends ExtendedBlock implements EntityBlockExtension
      * adjacent to it and start a flow if appropriate.
      */
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
-            Player player, InteractionHand hand, BlockHitResult hitResult)
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
         if (player instanceof ServerPlayer)
         {
@@ -217,7 +217,7 @@ public class ChannelBlock extends ExtendedBlock implements EntityBlockExtension
         for (Direction dir : Direction.Plane.HORIZONTAL)
         {
             Optional<CrucibleBlockEntity> crucible = level.getBlockEntity(pos.relative(dir),
-                    TFCBlockEntities.CRUCIBLE.get());
+                TFCBlockEntities.CRUCIBLE.get());
             if (crucible.isPresent())
             {
                 ChannelFlow.fromCrucible(level, crucible.get(), pos);

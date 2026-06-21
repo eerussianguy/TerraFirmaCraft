@@ -16,7 +16,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -160,16 +159,14 @@ public class AnvilBlock extends DeviceBlock implements Tiered
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     protected BlockState rotate(BlockState state, Rotation rot)
     {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     protected BlockState mirror(BlockState state, Mirror mirror)
     {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+        return rotate(state, mirror.getRotation(state.getValue(FACING)));
     }
 }

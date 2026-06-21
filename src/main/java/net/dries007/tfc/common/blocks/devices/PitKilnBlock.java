@@ -38,7 +38,6 @@ import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blockentities.PitKilnBlockEntity;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
-import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.util.Helpers;
 
 public class PitKilnBlock extends DeviceBlock

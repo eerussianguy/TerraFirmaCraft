@@ -1,0 +1,16 @@
+{
+  "type": "tfc:anvil",
+  "ingredient": {
+    "tag": "c:sheets/copper"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:copper_door"
+  },
+  "rules": [
+    "hit_last",
+    "punch_not_last",
+    "draw_not_last"
+  ],
+  "tier": 1
+}

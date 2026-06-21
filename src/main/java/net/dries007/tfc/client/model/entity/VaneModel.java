@@ -19,7 +19,6 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 
 import net.dries007.tfc.common.blockentities.VaneBlockEntity;
-import net.dries007.tfc.common.blockentities.rotation.WaterWheelBlockEntity;
 
 public class VaneModel extends Model
 {

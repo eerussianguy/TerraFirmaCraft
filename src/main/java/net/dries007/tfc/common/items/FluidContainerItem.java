@@ -21,7 +21,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.common.ModConfigSpec.IntValue;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +29,6 @@ import net.dries007.tfc.common.component.TFCComponents;
 import net.dries007.tfc.common.component.fluid.FluidComponent;
 import net.dries007.tfc.common.component.fluid.FluidContainerInfo;
 import net.dries007.tfc.common.fluids.FluidHelpers;
-import net.dries007.tfc.config.TFCConfig;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.tooltip.Tooltips;
 

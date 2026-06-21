@@ -8,9 +8,9 @@
     "id": "tfc:metal/unfinished_lamp/black_bronze"
   },
   "rules": [
-    "draw_third_last",
+    "bend_last",
     "bend_second_last",
-    "bend_last"
+    "draw_third_last"
   ],
   "tier": 2
 }

@@ -6,7 +6,6 @@
 
 package net.dries007.tfc.network;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -17,7 +16,6 @@ import net.dries007.tfc.client.ClientHelpers;
 import net.dries007.tfc.common.component.food.FoodData;
 import net.dries007.tfc.common.player.ChiselMode;
 import net.dries007.tfc.common.player.IPlayerInfo;
-import net.dries007.tfc.common.recipes.ChiselRecipe;
 
 public record PlayerInfoPacket(
     long lastDrinkTick,

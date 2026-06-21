@@ -9,9 +9,9 @@
     "id": "tfc:metal/shield/black_bronze"
   },
   "rules": [
-    "bend_third_last",
+    "upset_last",
     "bend_second_last",
-    "upset_last"
+    "bend_third_last"
   ],
   "tier": 2
 }

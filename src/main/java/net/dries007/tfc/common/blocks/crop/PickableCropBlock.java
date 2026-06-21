@@ -24,7 +24,6 @@ import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.blockentities.CropBlockEntity;
-import net.dries007.tfc.common.blockentities.FarmlandBlockEntity;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
 import net.dries007.tfc.common.blocks.TFCBlocks;

@@ -26,7 +26,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -100,7 +99,6 @@ import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
-import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.BonemealEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerContainerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -176,7 +174,6 @@ import net.dries007.tfc.common.recipes.CollapseRecipe;
 import net.dries007.tfc.common.recipes.LandslideRecipe;
 import net.dries007.tfc.config.TFCConfig;
 import net.dries007.tfc.network.DataManagerSyncPacket;
-import net.dries007.tfc.network.EffectExpirePacket;
 import net.dries007.tfc.network.PlayerDrinkPacket;
 import net.dries007.tfc.network.UpdateClimateModelPacket;
 import net.dries007.tfc.util.AxeLoggingHelper;
@@ -227,8 +224,6 @@ public final class ForgeEventHandler
         bus.addListener(ForgeEventHandler::onFireStop);
         bus.addListener(ForgeEventHandler::onProjectileImpact);
         bus.addListener(ForgeEventHandler::onPlayerTick);
-        bus.addListener(ForgeEventHandler::onEffectRemove);
-        bus.addListener(ForgeEventHandler::onEffectExpire);
         bus.addListener(ForgeEventHandler::onLivingJump);
         bus.addListener(ForgeEventHandler::onLivingHurt);
         bus.addListener(ForgeEventHandler::onShieldBlock);
@@ -788,36 +783,10 @@ public final class ForgeEventHandler
         }
     }
 
-    public static void onEffectRemove(MobEffectEvent.Remove event)
-    {
-        final MobEffectInstance inst = event.getEffectInstance();
-        if (event.getEntity() instanceof ServerPlayer player && inst != null)
-        {
-            PacketDistributor.sendToPlayer(player, new EffectExpirePacket(inst.getEffect()));
-            if (inst.getEffect() == TFCEffects.PINNED.get())
-            {
-                player.setForcedPose(null);
-            }
-        }
-    }
-
-    public static void onEffectExpire(MobEffectEvent.Expired event)
-    {
-        final MobEffectInstance instance = event.getEffectInstance();
-        if (instance != null && event.getEntity() instanceof ServerPlayer player)
-        {
-            PacketDistributor.sendToPlayer(player, new EffectExpirePacket(instance.getEffect()));
-            if (instance.getEffect() == TFCEffects.PINNED.get())
-            {
-                player.setForcedPose(null);
-            }
-        }
-    }
-
     public static void onLivingJump(LivingEvent.LivingJumpEvent event)
     {
         LivingEntity entity = event.getEntity();
-        if (entity.hasEffect(TFCEffects.PINNED.holder()) || entity.hasEffect(TFCEffects.OVERBURDENED.holder()))
+        if (entity.hasEffect(TFCEffects.OVERBURDENED.holder()))
         {
             entity.setDeltaMovement(0, 0, 0);
             entity.hasImpulse = false;

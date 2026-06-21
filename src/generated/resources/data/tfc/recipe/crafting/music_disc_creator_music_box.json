@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "tfc:blank_disc"
+    },
+    "N": {
+      "item": "tfc:powder/native_copper"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "NDN",
+    "NNN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:music_disc_creator_music_box"
+  }
+}

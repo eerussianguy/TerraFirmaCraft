@@ -200,6 +200,11 @@ def generate(rm: ResourceManager):
 
             block.with_lang(lang('%s %s', *rock_lang(block_type, rock)))
 
+        rm.blockstate(('rock', 'rope_anchor', rock), variants={
+            **four_rotations('tfc:block/rock/rope_anchor/%s' % rock, (90, None, 180, 270)),
+        }).with_lang(lang('%s rope anchor', rock)).with_block_loot('tfc:rock/loose/%s' % rock)
+        rm.block_model(('rock', 'rope_anchor', rock), parent='tfc:block/horizontal_rope_anchored', textures={'texture': 'tfc:block/rock/raw/%s' % rock})
+
         # Decorations
         for block_type in ROCK_DECORATIONS:
             type_name = block_type.replace('bricks', 'brick')
@@ -455,6 +460,20 @@ def generate(rm: ResourceManager):
         {'name': 'minecraft:stick', 'conditions': [loot_tables.block_state_property('tfc:wattle/unstained[right=true]')]}
     )
 
+    rm.blockstate('rope', variants={
+        **four_rotations('tfc:block/horizontal_rope', (90, None, 180, 270), prefix='ascending=false,'),
+        **four_rotations('tfc:block/slope_rope', (90, None, 180, 270), prefix='ascending=true,'),
+    }).with_lang(lang('rope')).with_block_loot('tfc:rope')
+
+    rm.blockstate('hanging_rope', variants=four_rotations('tfc:block/vertical_rope_side', (90, None, 180, 270))).with_lang(lang('rope')).with_block_loot('tfc:rope')
+
+    rm.blockstate('steel_rope_anchor', variants={
+        **four_rotations('tfc:block/steel_rope_anchor', (None, None, None, None), prefix='has_rope=false,'),
+        **four_rotations('tfc:block/steel_rope_anchor_rope', (90, None, 180, 270), prefix='has_rope=true,'),
+    }).with_lang(lang('steel rope anchor')).with_item_model().with_block_loot('tfc:steel_rope_anchor')
+    rm.block_model('steel_rope_anchor', parent='tfc:block/rope_anchor', textures={'texture': 'tfc:block/metal/smooth/steel'})
+    rm.block_model('steel_rope_anchor_rope', parent='tfc:block/horizontal_rope_anchored', textures={'texture': 'tfc:block/metal/smooth/steel'})
+
     for color in COLORS:
         wattle = 'tfc:wattle/%s' % color
         rm.block_model('tfc:wattle/stained/%s' % color, {
@@ -481,10 +500,14 @@ def generate(rm: ResourceManager):
 
     # Fired large undyed vessel
     block = rm.blockstate('tfc:ceramic/large_vessel', variants={
-        'sealed=true,axis=x': {'model': 'tfc:block/ceramic/large_vessel_sealed'},
-        'sealed=true,axis=z': {'model': 'tfc:block/ceramic/large_vessel_sealed', 'y': 90},
-        'sealed=false,axis=x': {'model': 'tfc:block/ceramic/large_vessel_opened'},
-        'sealed=false,axis=z': {'model': 'tfc:block/ceramic/large_vessel_opened', 'y': 90}
+        'sealed=true,facing=north': {'model': 'tfc:block/ceramic/large_vessel_sealed', 'y': 180},
+        'sealed=true,facing=east': {'model': 'tfc:block/ceramic/large_vessel_sealed', 'y': 270},
+        'sealed=true,facing=south': {'model': 'tfc:block/ceramic/large_vessel_sealed'},
+        'sealed=true,facing=west': {'model': 'tfc:block/ceramic/large_vessel_sealed', 'y': 90},
+        'sealed=false,facing=north': {'model': 'tfc:block/ceramic/large_vessel_opened', 'y': 180},
+        'sealed=false,facing=east': {'model': 'tfc:block/ceramic/large_vessel_opened', 'y': 270},
+        'sealed=false,facing=south': {'model': 'tfc:block/ceramic/large_vessel_opened'},
+        'sealed=false,facing=west': {'model': 'tfc:block/ceramic/large_vessel_opened', 'y': 90}
     })
     block.with_lang(lang('large vessel'))
     block.with_block_loot(({
@@ -511,10 +534,14 @@ def generate(rm: ResourceManager):
     for color in COLORS:
         vessel = 'tfc:ceramic/large_vessel/%s' % color
         block = rm.blockstate(vessel, variants={
-            'sealed=true,axis=x': {'model': 'tfc:block/ceramic/%s_large_vessel_sealed' % color},
-            'sealed=true,axis=z': {'model': 'tfc:block/ceramic/%s_large_vessel_sealed' % color, 'y': 90},
-            'sealed=false,axis=x': {'model': 'tfc:block/ceramic/%s_large_vessel_opened' % color},
-            'sealed=false,axis=z': {'model': 'tfc:block/ceramic/%s_large_vessel_opened' % color, 'y': 90}
+            'sealed=true,facing=north': {'model': 'tfc:block/ceramic/%s_large_vessel_sealed' % color, 'y': 180},
+            'sealed=true,facing=east': {'model': 'tfc:block/ceramic/%s_large_vessel_sealed' % color, 'y': 270},
+            'sealed=true,facing=south': {'model': 'tfc:block/ceramic/%s_large_vessel_sealed' % color},
+            'sealed=true,facing=west': {'model': 'tfc:block/ceramic/%s_large_vessel_sealed' % color, 'y': 90},
+            'sealed=false,facing=north': {'model': 'tfc:block/ceramic/%s_large_vessel_opened' % color, 'y': 180},
+            'sealed=false,facing=east': {'model': 'tfc:block/ceramic/%s_large_vessel_opened' % color, 'y': 270},
+            'sealed=false,facing=south': {'model': 'tfc:block/ceramic/%s_large_vessel_opened' % color},
+            'sealed=false,facing=west': {'model': 'tfc:block/ceramic/%s_large_vessel_opened' % color, 'y': 90}
         })
         block.with_lang(lang('%s large vessel', color))
         block.with_block_loot(({

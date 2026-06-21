@@ -9,7 +9,6 @@ package net.dries007.tfc.common.entities.ai.amphibian;
 import java.util.Optional;
 import java.util.function.Function;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -17,9 +16,7 @@ import net.minecraft.world.entity.ai.behavior.OneShot;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
-import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
-import net.minecraft.world.entity.ai.util.RandomPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 

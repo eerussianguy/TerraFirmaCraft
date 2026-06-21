@@ -9,9 +9,9 @@
     "id": "tfc:metal/knife_blade/black_bronze"
   },
   "rules": [
-    "draw_third_last",
+    "hit_last",
     "draw_second_last",
-    "hit_last"
+    "draw_third_last"
   ],
   "tier": 2
 }

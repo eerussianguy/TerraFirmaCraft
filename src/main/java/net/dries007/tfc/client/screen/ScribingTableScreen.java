@@ -29,7 +29,6 @@ import org.lwjgl.glfw.GLFW;
 
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.container.ScribingTableContainer;
-import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.network.ScribingTablePacket;
 import net.dries007.tfc.util.Helpers;
 

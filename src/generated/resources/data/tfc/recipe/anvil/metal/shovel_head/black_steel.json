@@ -9,8 +9,8 @@
     "id": "tfc:metal/shovel_head/black_steel"
   },
   "rules": [
-    "hit_not_last",
-    "punch_last"
+    "punch_last",
+    "hit_not_last"
   ],
   "tier": 5
 }

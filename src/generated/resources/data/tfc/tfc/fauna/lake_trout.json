@@ -1,6 +1,8 @@
 {
-  "max_temperature": 23.0,
+  "ignore_rivers": true,
+  "max_temperature": 15.0,
   "min_groundwater": 250.0,
+  "min_temperature": -5.0,
   "months": [
     "may",
     "june",

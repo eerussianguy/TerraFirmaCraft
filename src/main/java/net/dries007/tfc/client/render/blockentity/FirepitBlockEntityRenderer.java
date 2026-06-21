@@ -27,7 +27,6 @@ import net.dries007.tfc.client.RenderHelpers;
 import net.dries007.tfc.common.blockentities.AbstractFirepitBlockEntity;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.devices.FirepitBlock;
-import net.dries007.tfc.common.blocks.devices.StoveBlock;
 import net.dries007.tfc.util.Helpers;
 
 public class FirepitBlockEntityRenderer<T extends AbstractFirepitBlockEntity<?>> implements BlockEntityRenderer<T>

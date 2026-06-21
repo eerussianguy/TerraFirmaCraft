@@ -28,7 +28,6 @@ import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.devices.FirepitBlock;
-import net.dries007.tfc.common.capabilities.DelegateFluidHandler;
 import net.dries007.tfc.common.capabilities.InventoryItemHandler;
 import net.dries007.tfc.common.capabilities.PartialFluidHandler;
 import net.dries007.tfc.common.capabilities.PartialItemHandler;

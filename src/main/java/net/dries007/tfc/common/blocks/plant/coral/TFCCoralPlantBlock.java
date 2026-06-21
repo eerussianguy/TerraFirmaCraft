@@ -8,12 +8,8 @@ package net.dries007.tfc.common.blocks.plant.coral;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -26,11 +22,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-import net.dries007.tfc.common.TFCDamageTypes;
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
-import net.dries007.tfc.common.entities.aquatic.AmphibiousAnimal;
-import net.dries007.tfc.common.entities.aquatic.AquaticMob;
 import net.dries007.tfc.common.fluids.FluidHelpers;
 import net.dries007.tfc.common.fluids.FluidProperty;
 import net.dries007.tfc.common.fluids.IFluidLoggable;
@@ -100,15 +93,6 @@ public class TFCCoralPlantBlock extends Block implements IFluidLoggable
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
         return shape;
-    }
-
-    @Override
-    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity)
-    {
-        if ((entity instanceof LivingEntity || entity instanceof VehicleEntity) && !(entity instanceof AquaticMob || entity instanceof AmphibiousAnimal))
-        {
-            TFCDamageTypes.coral(entity, 0.5f);
-        }
     }
 
     @Override

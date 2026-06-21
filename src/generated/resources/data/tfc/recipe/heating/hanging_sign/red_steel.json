@@ -1,0 +1,70 @@
+{
+  "type": "tfc:heating",
+  "ingredient": [
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/acacia"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/ash"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/aspen"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/birch"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/blackwood"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/chestnut"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/douglas_fir"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/hickory"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/kapok"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/mangrove"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/maple"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/oak"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/palm"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/pine"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/rosewood"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/sequoia"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/spruce"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/sycamore"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/white_cedar"
+    },
+    {
+      "item": "tfc:wood/hanging_sign/red_steel/willow"
+    }
+  ],
+  "result_fluid": {
+    "amount": 4,
+    "id": "tfc:metal/red_steel"
+  },
+  "temperature": 1540.0
+}

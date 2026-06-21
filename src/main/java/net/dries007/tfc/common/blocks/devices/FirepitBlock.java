@@ -245,8 +245,7 @@ public class FirepitBlock extends BottomSupportedDeviceBlock implements IGhostBl
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public BlockState rotate(BlockState state, Rotation rot)
+    protected BlockState rotate(BlockState state, Rotation rot)
     {
         return rot == Rotation.COUNTERCLOCKWISE_90 || rot == Rotation.CLOCKWISE_90 ? state.cycle(AXIS) : state;
     }

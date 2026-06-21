@@ -99,19 +99,12 @@ public abstract class ClimbingCropBlock extends DoubleCropBlock implements IGhos
     {
         final BlockPos posAbove = pos.above();
         final BlockState stateAbove = level.getBlockState(posAbove);
-        final boolean hasTop = stateAbove.getBlock() == this;
-
         final BlockState deadState = dead.get().defaultBlockState().setValue(DeadCropBlock.MATURE, fullyGrown).setValue(STICK, state.getValue(STICK));
-        level.setBlockAndUpdate(pos, deadState.setValue(DeadDoubleCropBlock.PART, Part.BOTTOM));
-
-        if (hasTop)
+        if (stateAbove.getBlock() == this)
         {
             level.setBlock(posAbove, deadState.setValue(DeadDoubleCropBlock.PART, Part.TOP), Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE);
         }
-        else
-        {
-            level.destroyBlock(posAbove, false);
-        }
+        level.setBlockAndUpdate(pos, deadState.setValue(DeadDoubleCropBlock.PART, Part.BOTTOM));
     }
 
     @Nullable

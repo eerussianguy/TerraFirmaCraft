@@ -8,9 +8,9 @@
     "id": "tfc:metal/bars/blue_steel"
   },
   "rules": [
-    "punch_third_last",
+    "upset_last",
     "punch_second_last",
-    "upset_last"
+    "punch_third_last"
   ],
   "tier": 6
 }

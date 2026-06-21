@@ -215,7 +215,7 @@ public class AnvilBlockEntity extends InventoryBlockEntity<AnvilBlockEntity.Anvi
                 }
             }
         }
-        setChanged();
+        markForSync();
     }
 
     @Override

@@ -136,7 +136,7 @@ public class CrucibleBlock extends DeviceBlock implements EntityBlockExtension, 
     @Override
     public Size getSize(ItemStack stack)
     {
-        return Size.LARGE;
+        return Size.HUGE;
     }
 
     @Override

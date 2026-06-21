@@ -28,6 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -404,7 +405,7 @@ public final class WeatherHelpers
 
         // Otherwise, try placing an ice pile
         // First, since we want to handle water with a single block above, if we find no water, but we find one below, we choose that instead
-        // However, we have to also exclude ice here, since we don't intend to freeze two layers down
+        // However, we have to also exclude ice here, since we don't intend to freeze two layers down, or under other fluids like rivers
         BlockState groundState = level.getBlockState(groundPos);
         if (isIce(groundState))
         {
@@ -412,6 +413,10 @@ public final class WeatherHelpers
         }
         if (groundState.getFluidState().getType() != Fluids.WATER)
         {
+            if (groundState.getBlock() instanceof LiquidBlock)
+            {
+                return;
+            }
             groundPos = belowGroundPos;
             groundState = level.getBlockState(groundPos);
         }
@@ -427,7 +432,7 @@ public final class WeatherHelpers
             {
                 BlockPos posAbove = iciclePos.above();
                 BlockState stateAbove = level.getBlockState(posAbove);
-                if (Helpers.isBlock(stateAbove, BlockTags.ICE))
+                if (Helpers.isBlock(stateAbove, BlockTags.ICE) || Helpers.isBlock(stateAbove, TFCTags.Blocks.NO_ICICLE_GENERATION))
                 {
                     return;
                 }

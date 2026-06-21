@@ -9,19 +9,16 @@ package net.dries007.tfc.common.component.block;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 import net.dries007.tfc.common.blockentities.BarrelBlockEntity;
 import net.dries007.tfc.common.component.item.ItemComponent;
-import net.dries007.tfc.common.component.item.ItemContainer;
 import net.dries007.tfc.util.Helpers;
 
 public record BarrelComponent(

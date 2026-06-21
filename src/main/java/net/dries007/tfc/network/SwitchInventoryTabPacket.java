@@ -11,7 +11,6 @@ import net.dries007.tfc.common.container.TFCContainerProviders;
 import net.dries007.tfc.compat.patchouli.PatchouliIntegration;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;

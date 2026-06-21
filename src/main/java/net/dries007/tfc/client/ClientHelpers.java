@@ -13,7 +13,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
@@ -77,6 +76,16 @@ public final class ClientHelpers
         if (mc.level != null && mc.hitResult instanceof BlockHitResult block)
         {
             return block.getBlockPos();
+        }
+        return null;
+    }
+    @Nullable
+    public static Direction getTargetedFace()
+    {
+        final Minecraft mc = Minecraft.getInstance();
+        if (mc.level != null && mc.hitResult instanceof BlockHitResult block)
+        {
+            return block.getDirection();
         }
         return null;
     }

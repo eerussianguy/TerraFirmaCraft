@@ -6,7 +6,6 @@
 
 package net.dries007.tfc.client.model.entity;
 import com.mojang.math.Constants;
-import java.util.stream.Stream;
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.Keyframe;
@@ -18,8 +17,6 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 
 import net.dries007.tfc.common.entities.prey.RammingPrey;
 

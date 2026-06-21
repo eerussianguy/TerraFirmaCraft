@@ -15,6 +15,8 @@ import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.client.ClientHelpers;
 import net.dries007.tfc.common.blocks.plant.fruit.Lifecycle;
+import net.dries007.tfc.config.TFCConfig;
+import net.dries007.tfc.config.TemperatureDisplayStyle;
 import net.dries007.tfc.util.calendar.Calendars;
 import net.dries007.tfc.util.calendar.Month;
 import net.dries007.tfc.util.climate.ClimateRange;
@@ -34,10 +36,11 @@ public interface PlantableInfo
 
             // Climate info
             ClimateRange climate = plantable.getClimateRangeInfo();
+            final TemperatureDisplayStyle style = TFCConfig.CLIENT.climateTooltipStyle.get();
             if (climate != null)
             {
                 tooltip.accept(Component.translatable("tfc.tooltip.plantable.climate").withStyle(ChatFormatting.GRAY));
-                tooltip.accept(indent(Component.translatable("tfc.tooltip.plantable.climate.temperature", climate.minTemperature(), climate.maxTemperature()), 1));
+                tooltip.accept(indent(Component.translatable("tfc.tooltip.plantable.climate.temperature_range", style.formatRange(climate.minTemperature()), style.formatRange(climate.maxTemperature())), 1));
                 tooltip.accept(indent(Component.translatable("tfc.tooltip.plantable.climate.hydration", climate.minHydration(), climate.maxHydration()), 1));
                 addedText = true;
             }

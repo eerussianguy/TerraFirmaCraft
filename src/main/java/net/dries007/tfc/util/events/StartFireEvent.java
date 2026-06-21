@@ -6,13 +6,8 @@
 
 package net.dries007.tfc.util.events;
 
-import net.dries007.tfc.common.TFCTags;
-import net.dries007.tfc.common.blockentities.AbstractFirepitBlockEntity;
-import net.dries007.tfc.common.blockentities.TFCBlockEntities;
-import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.blocks.devices.FirepitBlock;
-import net.dries007.tfc.util.Helpers;
-
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -28,18 +23,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.ICancellableEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import org.jetbrains.annotations.Nullable;
 
+import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.blockentities.TFCBlockEntities;
+import net.dries007.tfc.common.blocks.TFCBlocks;
+import net.dries007.tfc.common.blocks.devices.FirepitBlock;
+import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.InteractionManager;
 import net.dries007.tfc.util.advancements.TFCAdvancements;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This event is used for lighting things with fire. It can be cancelled to handle lighting of an external device or source.
@@ -101,7 +97,7 @@ public final class StartFireEvent extends Event implements ICancellableEvent
                 final List<ItemEntity> usableItems = new ArrayList<>();
 
                 int sticks = 0, kindling = 0;
-                ItemEntity logEntity = null;
+                final List<ItemStack> initialLogs = new ArrayList<>();
 
                 for (ItemEntity entity : items)
                 {
@@ -118,21 +114,23 @@ public final class StartFireEvent extends Event implements ICancellableEvent
                         kindling += itemCount;
                         usableItems.add(entity);
                     }
-                    else if (logEntity == null && Helpers.isItem(foundItem, TFCTags.Items.FIREPIT_LOGS))
+                    // 4 is the amount of fuel slots in AbstractFirepitBlockEntity, from 0 to 3
+                    else if (initialLogs.size() < 4 && Helpers.isItem(foundItem, TFCTags.Items.FIREPIT_LOGS))
                     {
-                        logEntity = entity;
+                        for (int i = 0; i < itemCount; i++)
+                        {
+                            if (initialLogs.size() >= 4) break;
+                            initialLogs.add(foundItem.getDefaultInstance());
+                        }
+                        usableItems.add(entity);
                     }
                 }
-                if (sticks >= 3 && logEntity != null)
+                if (sticks >= 3 && !initialLogs.isEmpty())
                 {
                     final float kindlingModifier = Math.min(0.1F * (float) kindling, 0.5F);
                     if (level.random.nextFloat() < firepitBaseChance + kindlingModifier)
                     {
                         usableItems.forEach(Entity::kill);
-                        logEntity.kill();
-
-                        ItemStack initialLog = logEntity.getItem().copy();
-                        initialLog.setCount(1);
 
                         final BlockState firepitState;
                         if (player != null)
@@ -145,7 +143,10 @@ public final class StartFireEvent extends Event implements ICancellableEvent
                         }
                         level.setBlock(relativePos, firepitState, 3);
                         level.getBlockEntity(relativePos, TFCBlockEntities.FIREPIT.get()).ifPresent(firepit -> {
-                            firepit.getInventory().setStackInSlot(AbstractFirepitBlockEntity.SLOT_FUEL_CONSUME, initialLog);
+                            for (int slot = 0; slot < initialLogs.size(); slot++)
+                            {
+                                firepit.getInventory().setStackInSlot(slot, initialLogs.get(slot));
+                            }
                             firepit.light(firepitState);
                         });
                         if (player instanceof ServerPlayer serverPlayer)

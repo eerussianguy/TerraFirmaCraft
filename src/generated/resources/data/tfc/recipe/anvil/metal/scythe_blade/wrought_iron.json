@@ -9,9 +9,9 @@
     "id": "tfc:metal/scythe_blade/wrought_iron"
   },
   "rules": [
-    "bend_third_last",
+    "hit_last",
     "draw_second_last",
-    "hit_last"
+    "bend_third_last"
   ],
   "tier": 3
 }

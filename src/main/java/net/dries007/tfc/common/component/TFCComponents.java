@@ -35,7 +35,6 @@ import net.dries007.tfc.common.component.fluid.FluidComponent;
 import net.dries007.tfc.common.component.food.FoodCapability;
 import net.dries007.tfc.common.component.food.FoodComponent;
 import net.dries007.tfc.common.component.food.FoodDefinition;
-import net.dries007.tfc.common.component.forge.ForgingBonus;
 import net.dries007.tfc.common.component.forge.ForgingBonusComponent;
 import net.dries007.tfc.common.component.forge.ForgingComponent;
 import net.dries007.tfc.common.component.glass.GlassOperations;

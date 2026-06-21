@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "tfc:blank_disc"
+    },
+    "M": {
+      "item": "tfc:powder/malachite"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "MDM",
+    "MMM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:music_disc_creator"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "tfc:heating",
+  "ingredient": {
+    "item": "tfc:blast_furnace"
+  },
+  "result_fluid": {
+    "amount": 3200,
+    "id": "tfc:metal/cast_iron"
+  },
+  "temperature": 1535.0
+}

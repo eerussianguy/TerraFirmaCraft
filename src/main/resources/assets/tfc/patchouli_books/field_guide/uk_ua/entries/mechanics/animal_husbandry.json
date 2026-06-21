@@ -2,7 +2,7 @@
   "__comment__": "This file was automatically created by mcresources",
   "name": "Тваринництво",
   "category": "tfc:mechanics",
-  "icon": "minecraft:egg",
+  "icon": "minecraft:textures/item/egg.png",
   "pages": [
     {
       "type": "patchouli:text",
@@ -110,7 +110,7 @@
     {
       "type": "patchouli:text",
       "anchor": "rabbit",
-      "text": "$(thing)Rabbits$() spawn in $(l:the_world/climate#temperature)temperatures$() above -16°C, and at least 15mm of $(l:the_world/climate#rainfall)rainfall$(). They are $(l:mechanics/animal_husbandry#mammals)Mammals$() with no special abilities. They will eat any food, even if it is rotten. They have 1-6 children, are pregnant for just 19 days, and reach adulthood in 20 days. They can have children 6 times.",
+      "text": "$(thing)Rabbits$() spawn in $(l:the_world/climate#temperature)temperatures$() above -16°C, and at least 15mm of $(l:the_world/climate#rainfall)rainfall$(), changing their coat based on climate. They are $(l:mechanics/animal_husbandry#mammals)Mammals$() with no special abilities, aside from being known for chewing on carrots and cabbage. They will eat any food, even if it is rotten. They have 1-6 children, are pregnant for just 19 days, and reach adulthood in 20 days. They can have children 6 times.",
       "title": "Rabbits"
     },
     {

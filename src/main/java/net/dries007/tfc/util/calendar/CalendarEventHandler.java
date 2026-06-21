@@ -25,7 +25,6 @@ import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import org.slf4j.Logger;
 
-import net.dries007.tfc.common.player.IPlayerInfo;
 import net.dries007.tfc.common.player.PlayerInfo;
 import net.dries007.tfc.config.TFCConfig;
 

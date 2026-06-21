@@ -6,7 +6,6 @@
 
 package net.dries007.tfc.util.registry;
 
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 

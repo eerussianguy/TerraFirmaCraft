@@ -68,6 +68,7 @@ public interface CraftingRecipes extends Recipes
             "bricks",
             "bucket",
             "campfire",
+            "copper_door",
             "chest",
             "minecart",
             "chest_minecart",
@@ -795,6 +796,57 @@ public interface CraftingRecipes extends Recipes
             .input(TFCTags.Items.ROCK_KNAPPING)
             .input(TFCItems.BLANK_DISC)
             .shapeless(Items.MUSIC_DISC_11);
+        recipe()
+            .input(FluidContentIngredient.of(Fluids.LAVA, 1000))
+            .input(TFCItems.BLANK_DISC)
+            .input(TFCItems.ORE_POWDERS.get(Ore.NATIVE_GOLD))
+            .shapeless(Items.MUSIC_DISC_PIGSTEP);
+        recipe()
+            .input(TFCTags.Items.ROCK_KNAPPING)
+            .input(Items.MUSIC_DISC_11)
+            .shapeless(Items.DISC_FRAGMENT_5, 8);
+        replace("music_disc_5")
+            .input('D', TFCItems.BLANK_DISC)
+            .input('F', Items.DISC_FRAGMENT_5)
+            .pattern("FFF", "FDF", "FFF")
+            .shaped(Items.MUSIC_DISC_5);
+        recipe()
+            .input('D', TFCItems.BLANK_DISC)
+            .input('M', TFCItems.ORE_POWDERS.get(Ore.MALACHITE))
+            .pattern("MMM", "MDM", "MMM")
+            .shaped(Items.MUSIC_DISC_CREATOR);
+        recipe()
+            .input('D', TFCItems.BLANK_DISC)
+            .input('N', TFCItems.ORE_POWDERS.get(Ore.NATIVE_COPPER))
+            .pattern("NNN", "NDN", "NNN")
+            .shaped(Items.MUSIC_DISC_CREATOR_MUSIC_BOX);
+        recipe()
+            .input('D', TFCItems.BLANK_DISC)
+            .input('O', TFCItems.ORE_POWDERS.get(Ore.OPAL))
+            .pattern("OOO", "ODO", "OOO")
+            .shaped(Items.MUSIC_DISC_PRECIPICE);
+        recipe()
+            .input('D', TFCItems.BLANK_DISC)
+            .input('S', TFCItems.ORE_POWDERS.get(Ore.SAPPHIRE))
+            .pattern("SSS", "SDS", "SSS")
+            .shaped(Items.MUSIC_DISC_RELIC);
+        // For the future
+        //recipe()
+        //    .input('D', TFCItems.BLANK_DISC)
+        //    .input('L', TFCItems.ORE_POWDERS.get(Ore.LAPIS_LAZULI))
+        //    .pattern("LLL", "LDL", "LLL")
+        //    .shaped(Items.MUSIC_DISC_TEARS);
+        //recipe()
+        //    .input(FluidContentIngredient.of(Fluids.LAVA, 1000))
+        //    .input(TFCItems.BLANK_DISC)
+        //    .input(TFCItems.FOOD.get(Food.CHICKEN))
+        //    .shapeless(Items.MUSIC_DISC_LAVA_CHICKEN);
+        // Longer Future
+        //recipe()
+        //    .input('D', TFCItems.BLANK_DISC)
+        //    .input('G', TFCItems.GLUE)
+        //    .pattern("GGG", "GDG", "GGG")
+        //    .shaped(Items.MUSIC_DISC_BOUNCE);
         replace("fire_charge")
             .input(Items.GUNPOWDER)
             .input(ItemTags.COALS)
@@ -1002,9 +1054,13 @@ public interface CraftingRecipes extends Recipes
             .input(Items.CLAY_BALL)
             .shapeless(TFCItems.DAUB, 2);
         recipe().bricksWithMortar(TFCItems.FIRE_BRICK, TFCBlocks.FIRE_BRICKS, 4);
-        recipe()
+        recipe("from_iron")
             .input(TFCBlocks.FIRE_BRICKS)
             .input(ingredientOf(Metal.WROUGHT_IRON, Metal.ItemType.SHEET))
+            .shapeless(TFCBlocks.REINFORCED_FIRE_BRICKS);
+        recipe("from_steel")
+            .input(TFCBlocks.FIRE_BRICKS)
+            .input(ingredientOf(Metal.STEEL, Metal.ItemType.SHEET))
             .shapeless(TFCBlocks.REINFORCED_FIRE_BRICKS);
         recipe()
             .input(TFCItems.POWDERS.get(Powder.KAOLINITE), 4)
@@ -1056,6 +1112,10 @@ public interface CraftingRecipes extends Recipes
             .input('X', TFCItems.JUTE_FIBER)
             .pattern("X X", " X ", "X X")
             .shaped(TFCItems.JUTE_NET);
+        recipe()
+            .input('X', TFCItems.JUTE_FIBER)
+            .pattern("X ", " X")
+            .shaped(TFCItems.ROPE, 2);
         replace("lead")
             .input('X', TFCItems.JUTE_FIBER)
             .pattern(" XX", " XX", "X  ")
@@ -1160,6 +1220,11 @@ public interface CraftingRecipes extends Recipes
             .input('M', TFCItems.BRASS_MECHANISMS)
             .pattern("PGM", " P ")
             .shaped(TFCBlocks.STEEL_PUMP);
+        recipe()
+            .input('S', commonTagOf(Metal.STEEL, Metal.ItemType.ROD))
+            .input('G', TFCItems.GLUE)
+            .pattern("S ", "SG")
+            .shaped(TFCBlocks.STEEL_ROPE_ANCHOR);
         recipe()
             .input('X', Tags.Items.RODS_WOODEN)
             .pattern("XXX", "XXX", "XXX")

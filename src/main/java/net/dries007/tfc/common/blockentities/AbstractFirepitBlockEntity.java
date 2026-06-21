@@ -455,7 +455,7 @@ public abstract class AbstractFirepitBlockEntity<C extends IItemHandlerModifiabl
 
     public void addAsh(int ash)
     {
-        this.ash = Math.min(8, ash);
+        this.ash = Math.min(8, this.ash + ash);
     }
 
     @Override

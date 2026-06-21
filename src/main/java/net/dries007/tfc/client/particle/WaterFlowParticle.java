@@ -15,7 +15,6 @@ import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.util.Mth;
 import net.minecraft.world.level.material.FluidState;
 
 import net.dries007.tfc.common.blocks.RiverWaterBlock;

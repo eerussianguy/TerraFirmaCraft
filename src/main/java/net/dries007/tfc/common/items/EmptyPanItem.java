@@ -8,7 +8,6 @@ package net.dries007.tfc.common.items;
 
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
