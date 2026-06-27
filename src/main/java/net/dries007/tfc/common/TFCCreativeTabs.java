@@ -507,6 +507,7 @@ public final class TFCCreativeTabs
         out.accept(TFCItems.GEM_SAW);
         out.accept(TFCItems.JACKS);
         out.accept(TFCItems.PADDLE);
+        out.accept(TFCItems.MARVER);
         out.accept(TFCItems.SILICA_GLASS_BATCH);
         out.accept(TFCItems.HEMATITIC_GLASS_BATCH);
         out.accept(TFCItems.OLIVINE_GLASS_BATCH);
@@ -565,6 +566,7 @@ public final class TFCCreativeTabs
         out.accept(TFCBlocks.POWER_LOOM);
         out.accept(TFCBlocks.GLASSWORKING_WHEEL);
         out.accept(TFCBlocks.HATCH);
+        out.accept(TFCBlocks.GLASSWORKING_STATION);
         out.accept(TFCBlocks.CRUCIBLE);
         out.accept(TFCBlocks.COMPOSTER);
         out.accept(TFCBlocks.BLOOMERY);

@@ -1082,6 +1082,10 @@ public interface CraftingRecipes extends Recipes
             .input(TFCTags.Items.GEM_POWDERS)
             .shapeless(TFCItems.GEM_SAW);
         recipe()
+            .input(commonTagOf(Metal.STEEL, Metal.ItemType.SHEET))
+            .input(TFCTags.Items.TOOLS_HAMMER)
+            .shapeless(TFCItems.MARVER);
+        recipe()
             .input('G', Items.GLOW_INK_SAC)
             .input('A', Items.ARROW)
             .pattern("AAA", "AGA", "AAA")

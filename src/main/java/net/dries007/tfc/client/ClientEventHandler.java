@@ -190,6 +190,7 @@ import net.dries007.tfc.client.render.blockentity.CrankshaftBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.CrucibleBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.FirepitBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.GlassBasinBlockEntityRenderer;
+import net.dries007.tfc.client.render.blockentity.GlassworkingStationBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.GlassworkingWheelBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.GrillBlockEntityRenderer;
 import net.dries007.tfc.client.render.blockentity.HotPouredGlassBlockEntityRenderer;
@@ -511,6 +512,8 @@ public final class ClientEventHandler
         ItemBlockRenderTypes.setRenderLayer(TFCBlocks.ROPE.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(TFCBlocks.HANGING_ROPE.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(TFCBlocks.STEEL_ROPE_ANCHOR.get(), cutout);
+        ItemBlockRenderTypes.setRenderLayer(TFCBlocks.GLASSWORKING_STATION.get(), cutout);
+        ItemBlockRenderTypes.setRenderLayer(TFCBlocks.HATCH.get(), cutout);
 
         ItemBlockRenderTypes.setRenderLayer(TFCBlocks.COMPOSTER.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(TFCBlocks.BLOOMERY.get(), cutout);
@@ -700,6 +703,7 @@ public final class ClientEventHandler
         event.registerBlockEntityRenderer(TFCBlockEntities.LOOM.get(), ctx -> new LoomBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.POWER_LOOM.get(), ctx -> new PowerLoomBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.GLASSWORKING_WHEEL.get(), ctx -> new GlassworkingWheelBlockEntityRenderer());
+        event.registerBlockEntityRenderer(TFCBlockEntities.GLASSWORKING_STATION.get(), ctx -> new GlassworkingStationBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.SLUICE.get(), ctx -> new SluiceBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.BELLOWS.get(), ctx -> new BellowsBlockEntityRenderer());
         event.registerBlockEntityRenderer(TFCBlockEntities.TOOL_RACK.get(), ctx -> new ToolRackBlockEntityRenderer());

@@ -287,6 +287,7 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
                 TFCBlocks.POWER_LOOM,
                 TFCBlocks.GLASSWORKING_WHEEL,
                 TFCBlocks.HATCH,
+                TFCBlocks.GLASSWORKING_STATION,
                 TFCBlocks.BRONZE_BELL,
                 TFCBlocks.BRASS_BELL,
                 TFCBlocks.LARGE_VESSEL,
@@ -490,7 +491,7 @@ public class BuiltinBlockTags extends TagsProvider<Block> implements Accessors
             .add(TFCBlocks.METALS, Metal.BlockType.OXIDIZED_GRATE)
             .add(TFCBlocks.METALS, Metal.BlockType.WEATHERED_GRATE);
         tag(SCRAPING_SURFACE).addTag(BlockTags.LOGS);
-        tag(GLASSWORKING_WHEEL_INVISIBLE).add(TFCBlocks.HATCH);
+        tag(GLASSWORKING_WHEEL_INVISIBLE).add(TFCBlocks.HATCH, TFCBlocks.GLASSWORKING_STATION);
         tag(GLASS_POURING_TABLE)
             .add(TFCBlocks.METALS.get(Metal.BRASS).get(Metal.BlockType.BLOCK))
             .add(TFCBlocks.METALS.get(Metal.BRASS).get(Metal.BlockType.EXPOSED_BLOCK))

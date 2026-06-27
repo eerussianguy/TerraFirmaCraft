@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -54,11 +53,17 @@ public class GlassworkingWheelBlockEntityRenderer implements BlockEntityRenderer
             {
                 stack.pushPose();
                 stack.translate(0.5f, 0.5f, 0.5f);
-                stack.mulPose(Axis.YP.rotation(angle + Mth.HALF_PI * i));
+                stack.mulPose(Axis.YP.rotation(wheel.getSlotRenderAngle(i, partialTick)));
 
                 stack.translate(0f, 0f, 0.25f);
 
-                stack.scale(1 / 1.6f, 1 / 1.6f, 1 / 1.6f);
+                // Spin the blowpipe about its own (radial) axis as its glass end sweeps over a device, as if the handle is
+                // being rolled to work the glass against the station's tool over its whole surface.
+                final float spin = wheel.getWorkingSpin(i, partialTick);
+                if (spin != 0f)
+                    stack.mulPose(Axis.ZP.rotation(spin));
+
+                stack.scale(1 / 1.8f, 1 / 1.8f, 1 / 1.8f);
                 Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.HEAD, packedLight, packedOverlay, stack, buffer, level, 0);
 
                 stack.popPose();

@@ -154,6 +154,7 @@ public final class TFCBlockEntities
     public static final Id<TripHammerBlockEntity> TRIP_HAMMER = register("trip_hammer", TripHammerBlockEntity::new, TFCBlocks.TRIP_HAMMER);
     public static final Id<PowerLoomBlockEntity> POWER_LOOM = register("power_loom", PowerLoomBlockEntity::new, TFCBlocks.POWER_LOOM);
     public static final Id<GlassworkingWheelBlockEntity> GLASSWORKING_WHEEL = register("glassworking_wheel", GlassworkingWheelBlockEntity::new, TFCBlocks.GLASSWORKING_WHEEL);
+    public static final Id<GlassworkingStationBlockEntity> GLASSWORKING_STATION = register("glassworking_station", GlassworkingStationBlockEntity::new, TFCBlocks.GLASSWORKING_STATION);
     public static final Id<VaneBlockEntity> VANE = register("vane", VaneBlockEntity::new, TFCBlocks.VANE);
     public static final Id<AnemometerBlockEntity> ANEMOMETER = register("anemometer", AnemometerBlockEntity::new, TFCBlocks.ANEMOMETER);
 

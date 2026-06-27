@@ -192,6 +192,7 @@ public final class TFCItems
     public static final ItemId JACKS = register("jacks", () -> new GlassworkingItem(new Properties(), GlassOperation.PINCH));
     public static final ItemId PADDLE = register("paddle", () -> new GlassworkingItem(new Properties(), GlassOperation.FLATTEN));
     public static final ItemId GEM_SAW = register("gem_saw", () -> new GemSawItem(TFCTiers.BRONZE, new Properties()));
+    public static final ItemId MARVER = register("marver", () -> new GlassworkingItem(new Properties(), GlassOperation.MARVING));
     public static final ItemId SILICA_GLASS_BATCH = register("silica_glass_batch", new Properties().component(Lore.TYPE, Lore.SILICA));
     public static final ItemId HEMATITIC_GLASS_BATCH = register("hematitic_glass_batch", new Properties().component(Lore.TYPE, Lore.HEMATITIC));
     public static final ItemId OLIVINE_GLASS_BATCH = register("olivine_glass_batch", new Properties().component(Lore.TYPE, Lore.OLIVINE));

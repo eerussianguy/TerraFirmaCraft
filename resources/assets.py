@@ -2473,6 +2473,9 @@ def generate(rm: ResourceManager):
 
     rm.blockstate('glassworking_wheel', model='tfc:block/empty').with_lang(lang('glassworking wheel')).with_item_model().with_block_loot('tfc:glassworking_wheel')
 
+    block = rm.blockstate('glassworking_station', variants=four_rotations('tfc:block/glassworking_station', (90, None, 180, 270)))
+    block.with_lang(lang('glassworking station')).with_item_model().with_block_loot('tfc:glassworking_station')
+
     rm.blockstate('hatch', variants={
         'powered=false': {'model': 'tfc:block/hatch'},
         'powered=true': {'model': 'tfc:block/hatch_open'}

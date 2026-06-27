@@ -52,7 +52,25 @@ public final class GlassWorking
 
     public static void apply(ItemStack stack, GlassOperation operation)
     {
-        if (!stack.isEmpty()) stack.set(TFCComponents.GLASS, get(stack).with(operation));
+        if (stack.isEmpty()) return;
+        if (operation.clearsSteps())
+        {
+            clearSteps(stack);
+            return;
+        }
+        stack.set(TFCComponents.GLASS, get(stack).with(operation));
+    }
+
+    /**
+     * Clears the operation steps from the glass on {@code stack}, keeping its batch.
+     */
+    public static void clearSteps(ItemStack stack)
+    {
+        final GlassOperations data = get(stack);
+        if (!data.isEmpty() && !data.steps().isEmpty())
+        {
+            stack.set(TFCComponents.GLASS, new GlassOperations(List.of(), data.batch()));
+        }
     }
 
     public static void createNewBatch(ItemStack stack, ItemStack glass)

@@ -1,0 +1,20 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "facing=east": {
+      "model": "tfc:block/glassworking_station",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfc:block/glassworking_station"
+    },
+    "facing=south": {
+      "model": "tfc:block/glassworking_station",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfc:block/glassworking_station",
+      "y": 270
+    }
+  }
+}

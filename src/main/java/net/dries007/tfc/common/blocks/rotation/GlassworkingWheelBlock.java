@@ -56,8 +56,18 @@ public class GlassworkingWheelBlock extends ExtendedRotatedPillarBlock implement
             final IItemHandler inv = wheel.getInventory();
             if (Helpers.isItem(stack, TFCTags.Items.BLOWPIPES))
             {
-                player.setItemInHand(hand, Helpers.insertAllSlots(inv, stack));
-                return ItemInteractionResult.sidedSuccess(level.isClientSide);
+                final int slot = wheel.getSlotForDirection(hitResult.getDirection());
+                if (slot == -1)
+                {
+                    player.setItemInHand(hand, Helpers.insertAllSlots(inv, stack));
+                    return ItemInteractionResult.sidedSuccess(level.isClientSide);
+                }
+                if (inv.getStackInSlot(slot).isEmpty())
+                {
+                    player.setItemInHand(hand, inv.insertItem(slot, stack, false));
+                    return ItemInteractionResult.sidedSuccess(level.isClientSide);
+                }
+                return ItemInteractionResult.FAIL;
             }
             else if (stack.isEmpty())
             {

@@ -420,7 +420,7 @@ public class BuiltinItemTags extends TagsProvider<Item> implements Accessors
             .add(TFCItems.METAL_ITEMS, Metal.ItemType.KNIFE)
             .add(TFCItems.ROCK_TOOLS, RockCategory.ItemType.KNIFE);
         tag(TOOLS_CHISEL).add(TFCItems.METAL_ITEMS, Metal.ItemType.CHISEL);
-        tag(TOOLS_GLASSWORKING).add(TFCItems.PADDLE, TFCItems.JACKS, TFCItems.GEM_SAW);
+        tag(TOOLS_GLASSWORKING).add(TFCItems.PADDLE, TFCItems.JACKS, TFCItems.GEM_SAW, TFCItems.MARVER);
         tag(TOOLS_BLOWPIPE).add(TFCItems.BLOWPIPE, TFCItems.CERAMIC_BLOWPIPE);
         tag(TOOLS_SHARP).addTags(
             ItemTags.HOES,

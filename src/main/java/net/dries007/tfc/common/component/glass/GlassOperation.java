@@ -63,6 +63,7 @@ public class GlassOperation
     public static final DeferredHolder<GlassOperation, GlassOperation> PINCH = register("pinch", TFCItems.JACKS);
     public static final DeferredHolder<GlassOperation, GlassOperation> FLATTEN = register("flatten", TFCItems.PADDLE);
     public static final DeferredHolder<GlassOperation, GlassOperation> SAW = OPERATIONS.register("saw", () -> new GlassOperation(Set.of(TFCItems.GEM_SAW.holder()), Holder.direct(SoundEvents.ANVIL_USE), 0, false));
+    public static final DeferredHolder<GlassOperation, GlassOperation> MARVING = OPERATIONS.register("marving", () -> new GlassOperation(Set.of(TFCItems.MARVER.holder()), Holder.direct(SoundEvents.GRINDSTONE_USE), 0, false, true));
     // Powder Bowl
     public static final DeferredHolder<GlassOperation, GlassOperation> AMETHYST = powder("amethyst", TFCItems.ORE_POWDERS.get(Ore.AMETHYST));
     public static final DeferredHolder<GlassOperation, GlassOperation> SODA_ASH = powder("soda_ash", TFCItems.POWDERS.get(Powder.SODA_ASH));
@@ -107,6 +108,7 @@ public class GlassOperation
     private final Holder<SoundEvent> sound;
     private final float minTemperature;
     private final boolean powder;
+    private final boolean clears;
     @Nullable
     private String translationId;
 
@@ -117,10 +119,16 @@ public class GlassOperation
 
     public GlassOperation(Set<Holder<Item>> items, Holder<SoundEvent> sound, float minTemperature, boolean isPowder)
     {
+        this(items, sound, minTemperature, isPowder, false);
+    }
+
+    public GlassOperation(Set<Holder<Item>> items, Holder<SoundEvent> sound, float minTemperature, boolean isPowder, boolean clearsSteps)
+    {
         this.items = items;
         this.sound = sound;
         this.minTemperature = minTemperature;
         powder = isPowder;
+        clears = clearsSteps;
     }
 
     public String getTranslationId()
@@ -145,6 +153,11 @@ public class GlassOperation
     public boolean hasRequiredTemperature(ItemStack stack)
     {
         return HeatCapability.getTemperature(stack) > minTemperature;
+    }
+
+    public boolean clearsSteps()
+    {
+        return clears;
     }
 
     private static DeferredHolder<GlassOperation, GlassOperation> powder(String name, TFCItems.ItemId item)

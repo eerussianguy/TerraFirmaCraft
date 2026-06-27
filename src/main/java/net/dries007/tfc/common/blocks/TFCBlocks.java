@@ -499,6 +499,7 @@ public final class TFCBlocks
     public static final Id<Block> POWER_LOOM = register("power_loom", () -> new PowerLoomBlock(ExtendedProperties.of().strength(5f).noOcclusion().sound(SoundType.METAL).blockEntity(TFCBlockEntities.POWER_LOOM).ticks(PowerLoomBlockEntity::powerLoomTick)));
     public static final Id<Block> GLASSWORKING_WHEEL = register("glassworking_wheel", () -> new GlassworkingWheelBlock(ExtendedProperties.of().sound(SoundType.METAL).noOcclusion().strength(2.5F).pushReaction(PushReaction.DESTROY).blockEntity(TFCBlockEntities.GLASSWORKING_WHEEL).serverTicks(GlassworkingWheelBlockEntity::serverTick)));
     public static final Id<Block> HATCH = register("hatch", () -> new HatchBlock(ExtendedProperties.of().strength(5f).sound(SoundType.METAL).noOcclusion()));
+    public static final Id<Block> GLASSWORKING_STATION = register("glassworking_station", () -> new GlassworkingStationBlock(ExtendedProperties.of().strength(2.5f).sound(SoundType.METAL).noOcclusion().blockEntity(TFCBlockEntities.GLASSWORKING_STATION)));
 
     public static final Id<Block> CHANNEL = register("channel", () -> new ChannelBlock(ExtendedProperties.of(MapColor.METAL).strength(3).sound(SoundType.METAL).blockEntity(TFCBlockEntities.CHANNEL).lightLevel(s -> s.getValue(ChannelBlock.WITH_METAL) ? 10 : 0)));
     public static final Id<Block> MOLD_TABLE = register("mold_table", () -> new MoldTableBlock(ExtendedProperties.of(MapColor.METAL).strength(3).sound(SoundType.METAL).blockEntity(TFCBlockEntities.MOLD_TABLE).serverTicks(MoldTableBlockEntity::serverTick)));

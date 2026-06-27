@@ -34,7 +34,7 @@ import net.dries007.tfc.common.fluids.FluidProperty;
 import net.dries007.tfc.common.fluids.IFluidLoggable;
 import net.dries007.tfc.util.Helpers;
 
-public class HatchBlock extends DeviceBlock implements IFluidLoggable
+public class HatchBlock extends DeviceBlock implements IFluidLoggable, IGlassworkingDevice
 {
     public static ItemStack dispense(Level level, BlockPos pos, boolean drop)
     {
@@ -59,7 +59,8 @@ public class HatchBlock extends DeviceBlock implements IFluidLoggable
         return ItemStack.EMPTY;
     }
 
-    public static boolean interactWithBlowpipe(Level level, BlockPos pos, ItemStack blowpipe)
+    @Override
+    public boolean interactWithBlowpipe(Level level, BlockPos pos, ItemStack blowpipe)
     {
         final BlockState state = level.getBlockState(pos);
         if (!state.hasProperty(POWERED) || state.getValue(POWERED))
